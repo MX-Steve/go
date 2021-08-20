@@ -1,5 +1,0 @@
-1. bminer-crater-rx580.tar.xz
-    - start.sh
-    - bminer
-2. crater-userland.tar.xz
-    - userland各目录信息    

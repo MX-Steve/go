@@ -1,5 +1,0 @@
-mypagerduty:
-    user: mx_steve
-    password: memeda5201314
-developer API key:
-    u+-1jHzQZRXnqR5FffJw

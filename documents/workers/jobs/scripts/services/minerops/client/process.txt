@@ -1,2 +1,0 @@
-/bminer-current/bminer -managed
-/bminer-current/bminer -api 0.0.0.0:1880 -logfile bminer.log -uri ethproxy://0xDf78CF4B51367328483f53b5Dda9101D181ee452.r0614m5@eth-us.sparkpool.com:3333 -max-temperature 75 -devices 0,2,3,4,5,6,7 -ethash-allocation=5800

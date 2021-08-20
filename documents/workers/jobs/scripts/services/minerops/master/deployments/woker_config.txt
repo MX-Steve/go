@@ -1,5 +1,0 @@
-[env]
-DC="yul01"
-POWER_BUDGET="100"
-CLOCK="1100"
-VOLTAGE="875"

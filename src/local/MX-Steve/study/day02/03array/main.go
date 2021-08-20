@@ -2,10 +2,10 @@ package main
 
 import "fmt"
 
-func main(){
-	// a1 := [...]int{11,21,23,34,556,775,3}
-	// fmt.Println(a1)
-	// fmt.Printf("%T",a1)
+func main() {
+	a1 := [...]int{11, 21, 23, 34, 556, 775, 3}
+	fmt.Println(a1)
+	fmt.Printf("%T", a1)
 
 	// a2 := [...]int{1,3,5,7,8}
 	// sum :=0
@@ -27,17 +27,17 @@ func main(){
 	// for _,v:=range a{
 	// 	fmt.Println(v)
 	// }
-	
+
 	// a1 := [...]int{1, 3, 5, 7, 8}
 	// fmt.Println(a1)
 	// // sum :=0
 	// // for _,v := range a1 {
-	// // 	sum += v 
+	// // 	sum += v
 	// // }
 	// // fmt.Println(sum)
-	
+
 	// for k1,v := range a1 {
-	// 	other := 8 - v 
+	// 	other := 8 - v
 	// 	// for k2,j := range a1 {
 	// 	// 	if j == other {
 	// 	// 		fmt.Printf("%d : %d\n",k1,k2)
@@ -50,7 +50,4 @@ func main(){
 	// 	}
 	// }
 
-	
 }
-
-

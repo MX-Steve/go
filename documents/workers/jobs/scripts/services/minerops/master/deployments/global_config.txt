@@ -1,9 +1,0 @@
-[env]
-DC="yul01"
-CLOCK="200"
-VOLTAGE="875"
-FANSPEED="150"
-POWER_BUDGET="180"
-MAX_TEMPERATURES="70"
-MINER_URI="-uri ethproxy://altchainyul.$WORKER@eth.f2pool.com:6688 -uri2 ckb://altchainyul.$WORKER@ckb.f2pool.com:4300 -dual-subsolver 0  -dual-intensity 15"
-ENABLE_ETHPILL="0"

@@ -1,4 +1,4 @@
-package main 
+package main
 
 import (
 	"fmt"
@@ -6,29 +6,29 @@ import (
 
 // 接口嵌套
 
-type speaker interface{
+type speaker interface {
 	speak()
 }
-type mover interface{
+type mover interface {
 	move()
 }
-type animal interface{
+type animal interface {
 	speaker
 	mover
 }
-type cat struct{
-	name string 
+type cat struct {
+	name string
 }
-func (c cat)move(){
+
+func (c cat) move() {
 	fmt.Println("移动")
 }
-func (c cat)speak(){
+func (c cat) speak() {
 	fmt.Println("说话")
 }
-type cat struct{}
 
 // 类型断言
-func justifyType(x interface{}){
+func justifyType(x interface{}) {
 	// 类型断言：这个函数可以接收任意类型的参数
 	// _, ok := x.(int)
 	// if !ok {
@@ -40,19 +40,19 @@ func justifyType(x interface{}){
 	case string:
 		fmt.Printf("x is a string, value is %v\n", v)
 	case int:
-		fmt.Printf("x is a int, is %v\n",v)
+		fmt.Printf("x is a int, is %v\n", v)
 	case bool:
-		fmt.Printf("x is a bool,is %v\n",v)
+		fmt.Printf("x is a bool,is %v\n", v)
 	case struct{}:
-		fmt.Printf("x is a struct{},is %v\n",v)
+		fmt.Printf("x is a struct{},is %v\n", v)
 	case cat:
-		fmt.Printf("x is a cat,is %v\n",v)
+		fmt.Printf("x is a cat,is %v\n", v)
 	default:
 		fmt.Println("未知类型")
 	}
 }
 
-func main(){
+func main() {
 	// var x animal
 	// x = cat{name:"花花"}
 	// x.move()
