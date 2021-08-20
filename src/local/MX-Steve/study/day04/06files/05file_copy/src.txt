@@ -1,0 +1,12 @@
+afunc (b *Reader) Peek(n int) ([]byte, error)
+func (b *Reader) Read(p []byte) (n int, err error)
+func (b *Reader) ReadByte() (c byte, err error)
+func (b *Reader) UnreadByte() error
+func (b *Reader) ReadRune() (r rune, size int, err error)
+func (b *Reader) UnreadRune() error
+func (b *Reader) ReadLine() (line []byte, isPrefix bool, err error)
+func (b *Reader) ReadSlice(delim byte) (line []byte, err error)
+func (b *Reader) ReadBytes(delim byte) (line []byte, err error)
+func (b *Reader) ReadString(delim byte) (line string, err error)
+func (b *Reader) WriteTo(w io.Writer) (n int64, err error)
+type Writer
