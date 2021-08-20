@@ -1,0 +1,48 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"bminer-operation-webserver-madminer","namespace":"bminer"},"spec":{"ports":[{"port":80,"protocol":"TCP","targetPort":80}],"selector":{"app":"bminer-operation-webserver-madminer"},"type":"ClusterIP"}}
+  creationTimestamp: "2021-05-24T08:55:28Z"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:annotations:
+          .: {}
+          f:kubectl.kubernetes.io/last-applied-configuration: {}
+      f:spec:
+        f:ports:
+          .: {}
+          k:{"port":80,"protocol":"TCP"}:
+            .: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+        f:selector:
+          .: {}
+          f:app: {}
+        f:sessionAffinity: {}
+        f:type: {}
+    manager: kubectl
+    operation: Update
+    time: "2021-05-24T08:55:28Z"
+  name: bminer-operation-webserver-madminer
+  namespace: bminer
+  resourceVersion: "202775584"
+  selfLink: /api/v1/namespaces/bminer/services/bminer-operation-webserver-madminer
+  uid: 80acdf9a-260a-4685-9c67-1ef61976fc72
+spec:
+  clusterIP: 100.68.235.204
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: bminer-operation-webserver-madminer
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: flink-bminer-overview-job-config
+  namespace: default
+data:
+  flink-bminer-overview-job.config: |-
+    {
+      "topic": "remote_miner_stats_protobuf",
+      "bootstrap_server": "kafka.kafka:9092",
+      "consumer_backoff_time_in_minutes": 60,
+      "window_size_in_seconds": 30,
+      "jdbc_driver_class": "org.mariadb.jdbc.Driver",
+      "jdbc_connection": "jdbc:mariadb://mariadb.default:3306/bminer?user=bminer&password=2WHvybnS5vHsrMJ2",
+      "jdbc_query_template": "REPLACE INTO bminer.miner_overview SET site_key=?, worker=?, algorithm=?, updated_at=?, h1_rate=?, h24_rate=?",
+      "jdbc_flush_threshold": 10
+    }
+

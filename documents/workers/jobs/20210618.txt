@@ -1,0 +1,38 @@
+2021.06.15
+    1. madminer iso 镜像制作
+2021.06.16
+    1. madminer iso 镜像问题修复，制作新镜像
+    2. 新增接口编写
+2021.06.17
+    1. userland 制作
+    2. 接口增改
+        1. 添加一个功能
+            token 刷新,过期token 返回 
+            {"code": "10009", "msg": "Token has expired", "data": {"new_token": "xxxooo"}}
+        2. 更新一个接口
+            /api/user/addressBook/getAddressBookListWithWithdrawPercent   添加 percent 百分比数值
+        3. 添加两个接口
+            api/user/addressBook/getAddressBookList
+            api/user/addressBook/modifyExtData
+2021.06.18:
+  1. 接口修改
+  2. 鉴权中间件编写 
+  3. 尝试把项目移入 k8s 集群
+  4. 调试 k8s 控制器
+2021.06.21:
+    1. madminer 需求实现
+
+总结：
+    1. 开发项目前后端已迁移到 k8s 机器
+    2. madminer 镜像制作优化
+    3. 后端接口增改，token,鉴权接口实现
+    4. k8s controller 问题修复，1. docker , 2. 反向代理， 3.吉星的一些服务上集群
+    5. userland 制作，后续这部分功能接入
+
+create table group_project_bindings( 
+    `uuid` binary(16) NOT NULL, PRIMARY KEY (`uuid`), 
+    group_uuid binary(16) NOT NULL, 
+    project_uuid binary(16) NOT NULL, 
+    CONSTRAINT `fk_groups_1` FOREIGN KEY (`group_uuid`) REFERENCES `groups` (`uuid`), 
+    CONSTRAINT `fk_projects_1` FOREIGN KEY (`project_uuid`) REFERENCES `projects` (`uuid`) 
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

@@ -1,0 +1,5 @@
+miningops.corp.alt-chain.io
+minerops.corp.alt-chain.io
+
+bytom
+irisd

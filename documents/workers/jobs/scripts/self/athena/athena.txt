@@ -1,0 +1,8 @@
+1. 倒序 100 条
+```
+SELECT * FROM dwh.fact_bminer_revenue order by date desc limit 100;
+```
+2. 前一天日期 
+```
+current_date - interval '1' day
+```

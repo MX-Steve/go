@@ -1,0 +1,16 @@
+1. athena-to-clickhouse-algorithm-reward-job        
+  15 */2 * * * 
+2. code:
+  https://code.corp.alt-chain.io/source/chord/browse/adding_clickhouse_job/golang/cmd/athena-to-clickhouse-job/main.go
+3. algorithm-reward.conf
+    {
+      "athena_region": "us-west-2",
+      "athena_database": "dwh",
+      "athena_query": "select timestamp, name, nethash,price,reward,reward_per_unit_hashrate from dwh.fact_algorithm_reward WHERE date_diff('hour', from_unixtime(timestamp) , current_timestamp) <= 2 AND price>0 AND reward>0 AND reward_per_unit_hashrate>0 order by timestamp",
+      "clickhouse_uri": "tcp://clickhouse-miner-stats.data:9000?username=bminer&password=2WHvybnS5vHsrMJ2&database=miner_stats",
+      "clickhouse_query": "INSERT INTO algorithm_reward (time, name, nethash, price, reward, reward_per_unit_hashrate) VALUES (?, ?, ?, ?, ?, ?)",
+      "append_timestamp": false
+    }
+4. 梳理说明
+  1. 这个 job 从 athena.us-west-2.dwh.fact_algorithm_reward 表中获取 timestamp, name, nethash,price,reward,reward_per_unit_hashrate 这几列数据。价格和收益大于0，每个 hash算力收益大于0，按照时间排序
+  2. 将这些数据存入到 clickhouse.clickhouse-miner-stats.data.algorithm_reward 表中

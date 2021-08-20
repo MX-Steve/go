@@ -1,0 +1,15 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: minerops
+  namespace: default
+spec:
+  rules:
+  - host: minerops-oem.corp.alt-chain.io
+    http:
+      paths:
+      - backend:
+          serviceName: bminer-operation-webserver-staging
+          servicePort: 80
+        path: /
+        pathType: ImplementationSpecific

@@ -1,0 +1,19 @@
+1. zone/type: us-west-2c/a1.medium
+2. resources: m1/c2
+3. security:
+    in:
+        18883	TCP	    0.0.0.0/0	czz-fullnode	
+        18883	TCP	    ::/0	    czz-fullnode	
+        22	    TCP	    0.0.0.0/0	ipsec-tunnel-gw		
+        22	    TCP	    ::/0	    ipsec-tunnel-gw		
+        全部	50	    0.0.0.0/0	ipsec-tunnel-gw
+    out:
+        全部	全部	0.0.0.0/0	czz-fullnode, ipsec-tunnel-gw	
+        全部	全部	::/0	    czz-fullnode, ipsec-tunnel-gw
+4. storage:
+    /dev/xvda: vol-03906c613bf05a2c5: 8G
+5. AMI:
+    ami-03920bf5f903e90d4
+    amzn2-ami-hvm-2.0.20190823.1-arm64-gp2
+6. Auto Scaling
+    none   

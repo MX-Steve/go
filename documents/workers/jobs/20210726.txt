@@ -1,0 +1,22 @@
+20210726-20210801:
+  1. Set alerts for all Ingestion job
+  2. 南京master文档更新
+  3. kernel and userland
+20210726：
+  1. 在线卡数统计
+  2. Set alerts for all Ingestion job
+  3. etl 数据流入 total
+20210727:  
+  1. 南京master文档更新
+  2. eth devfee 查询，编写功能函数
+  3. 写 go程序，连接athena，将数据写入 clickhouse
+20210728:
+  1. 导入 1 个月数据到 clickhouse: bminer_revenue 
+  2. 编写 Cronjob: athena-to-clickhouse-bminer-revenue-job
+  3. 5.4.0-71 内核驱动编译 - 打了三个版本还不行
+20210729:
+  1. 内核驱动编译
+20210730:
+  1. 内核驱动编译
+  2. 清算电费，在线卡数
+

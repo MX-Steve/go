@@ -1,0 +1,19 @@
+apiVersion: v1
+data:
+  miner-pool-reward.conf: |-
+    {
+      "athena_region": "us-west-2",
+      "athena_database": "dwh",
+      "athena_query": "SELECT timestamp,normalized_uri,amount FROM rawdata.pbtb_mining_pool_reward WHERE date_diff('minute', from_unixtime(timestamp), date_trunc('day',current_timestamp  AT TIME ZONE 'Asia/Shanghai')) >= 0 AND date_diff('minute', from_unixtime(timestamp), date_trunc('day',current_timestamp  AT TIME ZONE 'Asia/Shanghai')) < 1440",
+      "clickhouse_uri": "tcp://clickhouse-miner-stats.data:9000?username=bminer&password=2WHvybnS5vHsrMJ2&database=miner_stats",
+      "clickhouse_query": "INSERT INTO miner_pool_reward (time, normalized_uri, amount) VALUES (?, ?, ?)",
+      "append_timestamp": false
+    }
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2020-09-25T02:43:45Z"
+  name: athena-to-clickhouse-miner-pool-reward-config
+  namespace: data
+  resourceVersion: "107172159"
+  selfLink: /api/v1/namespaces/data/configmaps/athena-to-clickhouse-miner-pool-reward-config
+  uid: dceb650c-8271-4991-bad8-b19d4e0b38b7

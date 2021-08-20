@@ -1,0 +1,24 @@
+apiVersion: v1
+data:
+  flink-miner-speed-to-clickhouse-job.config: |-
+    {
+      "topic": "remote_miner_stats_protobuf",
+      "bootstrap_server": "kafka.kafka:9092",
+      "consumer_backoff_time_in_minutes": 5,
+      "process_function_class": "io.altchain.data.jobs.functions.MinerSpeedFunction",
+      "jdbc_driver_class": "com.github.housepower.jdbc.ClickHouseDriver",
+      "jdbc_connection": "jdbc:clickhouse://clickhouse-miner-stats.data:9000/miner_stats?user=bminer&password=2WHvybnS5vHsrMJ2",
+      "jdbc_query_template": "INSERT INTO miner_speed VALUES(?, ?, ?, ?, ?, ?)",
+      "jdbc_flush_threshold": 5000
+    }
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"flink-miner-speed-to-clickhouse-job.config":"{\n  \"topic\": \"remote_miner_stats_protobuf\",\n  \"bootstrap_server\": \"kafka.kafka:9092\",\n  \"consumer_backoff_time_in_minutes\": 60,\n  \"process_function_class\": \"io.altchain.data.jobs.functions.MinerSpeedFunction\",\n  \"jdbc_driver_class\": \"com.github.housepower.jdbc.ClickHouseDriver\",\n  \"jdbc_connection\": \"jdbc:clickhouse://clickhouse-miner-stats.data:9000/miner_stats?user=bminer\u0026password=2WHvybnS5vHsrMJ2\",\n  \"jdbc_query_template\": \"INSERT INTO miner_speed VALUES(?, ?, ?, ?, ?, ?)\",\n  \"jdbc_flush_threshold\": 10\n}"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"flink-miner-speed-to-clickhouse-job-config","namespace":"data"}}
+  creationTimestamp: "2020-07-30T22:33:35Z"
+  name: flink-miner-speed-to-clickhouse-job-config
+  namespace: data
+  resourceVersion: "101582481"
+  selfLink: /api/v1/namespaces/data/configmaps/flink-miner-speed-to-clickhouse-job-config
+  uid: 8958cfe4-532a-442a-b68d-802e651823a4

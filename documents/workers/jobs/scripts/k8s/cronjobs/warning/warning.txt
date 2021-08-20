@@ -1,0 +1,23 @@
+1. 'errList': 
+  1. pool-network-reporter-job
+    - 代码位置
+      - chord
+      - pool-network-reporter
+      - chord/golang/cmd/pool-network-reporter
+    - 问题：
+  2. etl-fact-bminer-market-share-prod
+    - 问题：java 
+      - 一堆报错 
+  3. pool-share-v2-rawdata-rewriter
+    - 问题： java
+      - Path does not exist: s3a://data.alt-chain.io/rawdata/streams/pool_share_v2/yyyy=2021/mm=7/dd=21
+    - 原因：进入 s3 后发现7月份的没有相应的数据
+    - 猜测：pool_share_v2 kafka topic没有收到数据
+2. 'warningList': 
+  1. bee-pool-reporter-job
+    - 代码位置
+      - chord 
+      - bee-pool-reporter
+      - chord/golang/cmd/bee-pool-reporter
+  2. conflux-pool-hashrate24h-reporter-job
+    - java

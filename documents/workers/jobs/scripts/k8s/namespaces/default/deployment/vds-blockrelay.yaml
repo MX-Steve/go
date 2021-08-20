@@ -1,0 +1,72 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"vds-blockrelay","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"vds-blockrelay"}},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"vds-blockrelay"}},"spec":{"containers":[{"command":["/app/blockrelay","-p2p_seed_endpoints","35.167.25.158:6533,52.34.19.222:6533,47.244.38.35:6533,47.110.11.192:6533,47.52.235.146:48502,27.54.252.68:48116,101.37.245.78:6533,27.54.252.10:6533,101.132.121.221:6533,47.90.77.73:6533,218.95.39.2:53510,47.103.53.86:6533"],"image":"313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/vdspool:latest","imagePullPolicy":"Always","name":"vds-blockrelay","ports":[{"containerPort":16534,"protocol":"TCP"}],"resources":{"limits":{"cpu":"200m"}}}],"nodeSelector":{"usedBy":"online"}}}}}
+  creationTimestamp: "2019-06-06T07:56:37Z"
+  generation: 13
+  labels:
+    app: vds-blockrelay
+  name: vds-blockrelay
+  namespace: default
+  resourceVersion: "28577071"
+  selfLink: /apis/apps/v1/namespaces/default/deployments/vds-blockrelay
+  uid: 9c543665-8830-11e9-a05a-021598fc403c
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 0
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: vds-blockrelay
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: vds-blockrelay
+    spec:
+      containers:
+      - command:
+        - /app/blockrelay
+        - -p2p_seed_endpoints
+        - 35.167.25.158:6533,52.34.19.222:6533,47.244.38.35:6533,47.110.11.192:6533,47.52.235.146:48502,27.54.252.68:48116,101.37.245.78:6533,27.54.252.10:6533,101.132.121.221:6533,47.90.77.73:6533,218.95.39.2:53510,47.103.53.86:6533
+        image: 313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/vdspool:latest
+        imagePullPolicy: Always
+        name: vds-blockrelay
+        ports:
+        - containerPort: 16534
+          protocol: TCP
+        resources:
+          limits:
+            cpu: 200m
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        usedBy: online
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  conditions:
+  - lastTransitionTime: "2019-07-20T09:00:34Z"
+    lastUpdateTime: "2019-07-20T09:00:34Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2019-06-06T07:56:37Z"
+    lastUpdateTime: "2019-11-15T05:11:34Z"
+    message: ReplicaSet "vds-blockrelay-784b5b7459" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 13

@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: vds-stratum-devfee
+  namespace: default
+spec:
+  ports:
+  - port: 4010
+    protocol: TCP
+    targetPort: 6536
+  selector:
+    app: vds-stratum-devfee
+  sessionAffinity: None
+  type: ClusterIP

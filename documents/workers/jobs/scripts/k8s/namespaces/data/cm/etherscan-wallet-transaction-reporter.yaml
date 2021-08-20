@@ -1,0 +1,25 @@
+apiVersion: v1
+data:
+  addresses.yaml: |
+    - address: 0xDf78CF4B51367328483f53b5Dda9101D181ee452
+      annotation: yul02_amd
+    - address: 0x8488C7fbB70921a3ec35Da4539e63562e4B7a8a5
+      annotation: icn01
+    - address: 0x5Bd50347E86412bae3c37998D5E25696eD2ad47B
+      annotation: kwj01
+    - address: 0x3ca1a99Abf377769e9d9A65cE3FAf19034Ca8d13
+      annotation: urumqi_p104
+    - address: 0x2991728c82587C3E86A3bA47F204F11aB875D22b
+      annotation: urumqi_p102
+    - address: 0x3ca1a99abf377769e9d9a65ce3faf19034ca8d13
+      annotation: urumqi_1070
+    - address: 0x96F8628103339E56d38CF4DF9042b5673Cb31f12
+      annotation: yul02
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2020-07-17T09:29:26Z"
+  name: etherscan-wallet-transaction-reporter
+  namespace: data
+  resourceVersion: "151340954"
+  selfLink: /api/v1/namespaces/data/configmaps/etherscan-wallet-transaction-reporter
+  uid: 108a00f2-5ccb-45b8-a246-09ad700ab516

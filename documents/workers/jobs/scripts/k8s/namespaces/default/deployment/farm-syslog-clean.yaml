@@ -1,0 +1,91 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "4"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"extensions/v1beta1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"farm-syslog-clean"},"name":"farm-syslog-clean","namespace":"default"},"spec":{"replicas":0,"selector":{"matchLabels":{"app":"farm-syslog-clean"}},"template":{"metadata":{"labels":{"app":"farm-syslog-clean"}},"spec":{"affinity":{"nodeAffinity":{"preferredDuringSchedulingIgnoredDuringExecution":[{"preference":{"matchExpressions":[{"key":"kops.k8s.io/instancegroup","operator":"In","values":["spot-nodes"]}]},"weight":1}]}},"containers":[{"command":["/app/run.sh","io.altchain.data.etl.FactFarmSyslogClean","s3a://data.alt-chain.io/deployment/etl-prod.json","rawdata/streams/syslog/","2020-01-01","2020-01-01"],"env":[{"name":"AWS_ACCESS_KEY","valueFrom":{"secretKeyRef":{"key":"AWS_ACCESS_KEY","name":"aws-ingestion-credential"}}},{"name":"AWS_SECRET_KEY","valueFrom":{"secretKeyRef":{"key":"AWS_SECRET_KEY","name":"aws-ingestion-credential"}}},{"name":"AWS_REGION","value":"us-west-2"},{"name":"JAVA_OPTS","value":"-Xmx1G -Xms1G"}],"image":"313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/data-analytics:clean_syslog","imagePullPolicy":"Always","name":"farm-syslog-clean","resources":{"limits":{"memory":"2Gi"},"requests":{"memory":"2Gi"}}}]}}}}
+  creationTimestamp: "2020-06-18T05:59:10Z"
+  generation: 10
+  labels:
+    app: farm-syslog-clean
+  name: farm-syslog-clean
+  namespace: default
+  resourceVersion: "74467959"
+  selfLink: /apis/apps/v1/namespaces/default/deployments/farm-syslog-clean
+  uid: 09aa4235-9b71-4f96-98d9-63d834d20acc
+spec:
+  progressDeadlineSeconds: 2147483647
+  replicas: 0
+  revisionHistoryLimit: 2147483647
+  selector:
+    matchLabels:
+      app: farm-syslog-clean
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: farm-syslog-clean
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - preference:
+              matchExpressions:
+              - key: kops.k8s.io/instancegroup
+                operator: In
+                values:
+                - spot-nodes
+            weight: 1
+      containers:
+      - command:
+        - /app/run.sh
+        - io.altchain.data.etl.FactFarmSyslogClean
+        - s3a://data.alt-chain.io/deployment/etl-prod.json
+        - rawdata/streams/syslog
+        - "2020-01-01"
+        - "2020-01-01"
+        env:
+        - name: AWS_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: AWS_ACCESS_KEY
+              name: aws-ingestion-credential
+        - name: AWS_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: AWS_SECRET_KEY
+              name: aws-ingestion-credential
+        - name: AWS_REGION
+          value: us-west-2
+        - name: JAVA_OPTS
+          value: -Xmx1G -Xms1G
+        image: 313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/data-analytics:clean_syslog
+        imagePullPolicy: Always
+        name: farm-syslog-clean
+        resources:
+          limits:
+            memory: 2Gi
+          requests:
+            memory: 2Gi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  conditions:
+  - lastTransitionTime: "2020-06-18T05:59:10Z"
+    lastUpdateTime: "2020-06-18T05:59:10Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 10

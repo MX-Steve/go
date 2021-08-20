@@ -1,0 +1,18 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: altchain
+    traefik.frontend.priority: "2"
+  name: grafana
+  namespace: default
+spec:
+  rules:
+  - host: grafana.corp.alt-chain.io
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: grafana
+          servicePort: 3000
+        

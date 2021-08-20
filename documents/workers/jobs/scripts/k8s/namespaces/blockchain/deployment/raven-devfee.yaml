@@ -1,0 +1,75 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "6"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"extensions/v1beta1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"raven-devfee"},"name":"raven-devfee","namespace":"blockchain"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"raven-devfee"}},"template":{"metadata":{"labels":{"app":"raven-devfee"}},"spec":{"affinity":{"nodeAffinity":{"preferredDuringSchedulingIgnoredDuringExecution":[{"preference":{"matchExpressions":[{"key":"kops.k8s.io/instancegroup","operator":"In","values":["online-svc"]}]},"weight":1}]}},"containers":[{"args":["tcp-listen:3636,fork,reuseaddr","tcp-connect:rvnt.minermore.com:4505"],"image":"alpine/socat","imagePullPolicy":"Always","name":"raven-devfee","ports":[{"containerPort":3636,"protocol":"TCP"}]}]}}}}
+  creationTimestamp: "2020-05-04T22:42:33Z"
+  generation: 6
+  labels:
+    app: raven-devfee
+  name: raven-devfee
+  namespace: blockchain
+  resourceVersion: "182434312"
+  selfLink: /apis/apps/v1/namespaces/blockchain/deployments/raven-devfee
+  uid: b07ff0e7-ed1c-4808-86b9-861e1a501974
+spec:
+  progressDeadlineSeconds: 2147483647
+  replicas: 1
+  revisionHistoryLimit: 2147483647
+  selector:
+    matchLabels:
+      app: raven-devfee
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: raven-devfee
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - preference:
+              matchExpressions:
+              - key: kops.k8s.io/instancegroup
+                operator: In
+                values:
+                - online-svc
+            weight: 1
+      containers:
+      - args:
+        - tcp-listen:3636,fork,reuseaddr
+        - tcp-connect:rvn-us-west1.nanopool.org:12222
+        image: alpine/socat
+        imagePullPolicy: Always
+        name: raven-devfee
+        ports:
+        - containerPort: 3636
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2020-05-04T22:42:33Z"
+    lastUpdateTime: "2020-05-04T22:42:33Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 6
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

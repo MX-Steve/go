@@ -1,0 +1,25 @@
+1. zone/type: us-west-2a/m1.xlarge
+2. resources: m16/c4
+3. security:
+    in:
+        0 - 65535	TCP	    sg-0b68b02a10835f9b5	nodes.k8s-prod.aws.prod.alt-chain.net
+        30706	    TCP	    172.20.0.0/16	        nodes.k8s-prod.aws.prod.alt-chain.net
+        30706	    TCP	    0.0.0.0/0	            nodes.k8s-prod.aws.prod.alt-chain.net
+        30828	    TCP	    172.20.0.0/16	        nodes.k8s-prod.aws.prod.alt-chain.net
+        30828	    TCP	    0.0.0.0/0	            nodes.k8s-prod.aws.prod.alt-chain.net
+    out:
+        全部	全部	0.0.0.0/0	nodes.k8s-prod.aws.prod.alt-chain.net
+4. storage:
+    vol-005013dafe02dbc15	/dev/sda1	128G
+    vol-0d18cf6dd137a690a	/dev/xvdbb	64G	
+    vol-05c0bc3878c3be320	/dev/xvdbj	8G
+    vol-0dcac7351867aee11	/dev/xvdbl	64G	
+    vol-0d2a54a0f6a74cb29	/dev/xvdct	32G
+5. AMI:
+    ami-07dd19a7900a1f049
+    099720109477/ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20201026
+6. Auto Scaling
+    group:
+        spot-nodes.k8s-prod.aws.prod.alt-chain.net
+7. spot request
+            

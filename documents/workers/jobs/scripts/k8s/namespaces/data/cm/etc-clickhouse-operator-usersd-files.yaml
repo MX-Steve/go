@@ -1,0 +1,49 @@
+apiVersion: v1
+data:
+  01-clickhouse-user.xml: |
+    <yandex>
+        <users>
+            <clickhouse_operator>
+                <networks>
+                    <ip>127.0.0.1</ip>
+                    <ip>0.0.0.0/0</ip>
+                    <ip>::/0</ip>
+                </networks>
+                <password_sha256_hex>716b36073a90c6fe1d445ac1af85f4777c5b7a155cea359961826a030513e448</password_sha256_hex>
+                <profile>clickhouse_operator</profile>
+                <quota>default</quota>
+            </clickhouse_operator>
+        </users>
+        <profiles>
+            <clickhouse_operator>
+                <log_queries>0</log_queries>
+                <skip_unavailable_shards>1</skip_unavailable_shards>
+            </clickhouse_operator>
+        </profiles>
+    </yandex>
+  02-clickhouse-default-profile.xml: |
+    <yandex>
+      <profiles>
+        <default>
+          <log_queries>1</log_queries>
+          <connect_timeout_with_failover_ms>1000</connect_timeout_with_failover_ms>
+          <optimize_move_to_prewhere>0</optimize_move_to_prewhere>
+          <distributed_aggregation_memory_efficient>1</distributed_aggregation_memory_efficient>
+          <parallel_view_processing>1</parallel_view_processing>
+          <http_connection_timeout>5</http_connection_timeout>
+        </default>
+      </profiles>
+    </yandex>
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"01-clickhouse-user.xml":"\u003cyandex\u003e\n    \u003cusers\u003e\n        \u003cclickhouse_operator\u003e\n            \u003cnetworks\u003e\n                \u003cip\u003e127.0.0.1\u003c/ip\u003e\n                \u003cip\u003e0.0.0.0/0\u003c/ip\u003e\n                \u003cip\u003e::/0\u003c/ip\u003e\n            \u003c/networks\u003e\n            \u003cpassword_sha256_hex\u003e716b36073a90c6fe1d445ac1af85f4777c5b7a155cea359961826a030513e448\u003c/password_sha256_hex\u003e\n            \u003cprofile\u003eclickhouse_operator\u003c/profile\u003e\n            \u003cquota\u003edefault\u003c/quota\u003e\n        \u003c/clickhouse_operator\u003e\n    \u003c/users\u003e\n    \u003cprofiles\u003e\n        \u003cclickhouse_operator\u003e\n            \u003clog_queries\u003e0\u003c/log_queries\u003e\n            \u003cskip_unavailable_shards\u003e1\u003c/skip_unavailable_shards\u003e\n        \u003c/clickhouse_operator\u003e\n    \u003c/profiles\u003e\n\u003c/yandex\u003e\n","02-clickhouse-default-profile.xml":"\u003cyandex\u003e\n  \u003cprofiles\u003e\n    \u003cdefault\u003e\n      \u003clog_queries\u003e1\u003c/log_queries\u003e\n      \u003cconnect_timeout_with_failover_ms\u003e1000\u003c/connect_timeout_with_failover_ms\u003e\n      \u003coptimize_move_to_prewhere\u003e0\u003c/optimize_move_to_prewhere\u003e\n      \u003cdistributed_aggregation_memory_efficient\u003e1\u003c/distributed_aggregation_memory_efficient\u003e\n      \u003cparallel_view_processing\u003e1\u003c/parallel_view_processing\u003e\n      \u003chttp_connection_timeout\u003e5\u003c/http_connection_timeout\u003e\n    \u003c/default\u003e\n  \u003c/profiles\u003e\n\u003c/yandex\u003e\n"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app":"clickhouse-operator"},"name":"etc-clickhouse-operator-usersd-files","namespace":"data"}}
+  creationTimestamp: "2020-07-30T08:15:34Z"
+  labels:
+    app: clickhouse-operator
+  name: etc-clickhouse-operator-usersd-files
+  namespace: data
+  resourceVersion: "86125380"
+  selfLink: /api/v1/namespaces/data/configmaps/etc-clickhouse-operator-usersd-files
+  uid: dec134ce-17db-42a0-abe2-bfc24ae9f892

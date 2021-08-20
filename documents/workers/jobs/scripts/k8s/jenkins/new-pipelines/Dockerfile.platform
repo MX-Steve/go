@@ -1,0 +1,11 @@
+FROM node:12.16.1-alpine3.11 as builder
+COPY . /home/mp
+RUN cd /home/mp/frontend \
+    && rm -rf dist \
+    && npm rebuild node-sass \
+    && npm install \
+    && npm run build
+                    
+FROM nginx
+MAINTAINER Han Li <han@alt-chain.io> 
+COPY --from=builder  /home/mp/frontend/dist /usr/share/nginx/html

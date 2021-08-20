@@ -1,0 +1,32 @@
+apiVersion: v1
+data:
+  mining-pool.toml: |+
+    [server]
+    endpoint = "0.0.0.0:8000"
+    aes_key = "AES256Key-32bminer1234567890oper"
+    redirect_url = "https://pool.corp.alt-chain.io/#/overview"
+    token_ttl = 43200
+    reset_token_ttl = 1800
+    reset_password_url = "https://pool.corp.alt-chain.io/#/reset_password"
+    mailgun_domain = "mg.alt-chain.io"
+    mailgun_api = "key-c13a2bdfe361d020d4a5ef25e9e620ff"
+
+    [datasources]
+    [datasources.mysql]
+    database_uri = "pool:guvdfzhiQejPmosi@tcp(mariadb.default:3306)/conflux_pool"
+
+    [datasources.dynamodb]
+    endpoint = ""
+    region = "us-west-2"
+
+    [datasources.clickhouse]
+    database_uri = "tcp://clickhouse-miner-stats.data:9000?username=bminer&password=2WHvybnS5vHsrMJ2&database=conflux_pool"
+
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2020-10-16T05:40:58Z"
+  name: mining-pool
+  namespace: bminer
+  resourceVersion: "132782044"
+  selfLink: /api/v1/namespaces/bminer/configmaps/mining-pool
+  uid: 7e44b9ef-9c24-422e-bdc6-ea1c17f5795d

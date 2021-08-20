@@ -1,0 +1,16 @@
+6.21
+    1. madminer 需求实现
+        1. 开机不要进入桌面，直接命令行打印 miner 日志, 收集 ip 传递给后台
+            - 已实现
+    2. 权限授予，gmail,aws,pagerduty,phabr
+6.22
+    1. dashboard kubeconfig 实现[admin]
+    2. arc land 问题调试
+    3. 下午请假
+6.23
+    1. kubernetes Prometheus 监控功能实现
+    2. arc land 问题调试
+6.24        
+    1. dashboard kubeconfig 实现[read]只读功能
+    2. dashboard kubeconfig 实现管理多namespace功能
+    3. 了解 xorg 和 amdgpu 概念等，熟悉 userland 驱动制作

@@ -1,0 +1,39 @@
+apiVersion: v1
+data:
+  chop-generated-macros.xml: |
+    <yandex>
+        <macros>
+            <installation>miner-stats</installation>
+            <all-sharded-shard>0</all-sharded-shard>
+            <cluster>clickhouse</cluster>
+            <shard>0</shard>
+            <replica>chi-miner-stats-clickhouse-0-0</replica>
+        </macros>
+    </yandex>
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2020-07-30T22:58:03Z"
+  labels:
+    clickhouse.altinity.com/ConfigMap: Host
+    clickhouse.altinity.com/app: chop
+    clickhouse.altinity.com/chi: miner-stats
+    clickhouse.altinity.com/chiScopeCycleIndex: "0"
+    clickhouse.altinity.com/chiScopeCycleOffset: "0"
+    clickhouse.altinity.com/chiScopeCycleSize: "0"
+    clickhouse.altinity.com/chiScopeIndex: "0"
+    clickhouse.altinity.com/chop: 0.10.0
+    clickhouse.altinity.com/cluster: clickhouse
+    clickhouse.altinity.com/clusterScopeCycleIndex: "0"
+    clickhouse.altinity.com/clusterScopeCycleOffset: "0"
+    clickhouse.altinity.com/clusterScopeCycleSize: "0"
+    clickhouse.altinity.com/clusterScopeIndex: "0"
+    clickhouse.altinity.com/namespace: data
+    clickhouse.altinity.com/replica: "0"
+    clickhouse.altinity.com/replicaScopeIndex: "0"
+    clickhouse.altinity.com/shard: "0"
+    clickhouse.altinity.com/shardScopeIndex: "0"
+  name: chi-miner-stats-deploy-confd-clickhouse-0-0
+  namespace: data
+  resourceVersion: "86381388"
+  selfLink: /api/v1/namespaces/data/configmaps/chi-miner-stats-deploy-confd-clickhouse-0-0
+  uid: bbd22023-f443-4185-80dc-e7ce6afa40cf

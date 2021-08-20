@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"flink-miner-card-stats-to-clickhouse-job"},"name":"flink-miner-card-stats-to-clickhouse-job","namespace":"data"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"flink-miner-card-stats-to-clickhouse-job"}},"template":{"metadata":{"labels":{"app":"flink-miner-card-stats-to-clickhouse-job"}},"spec":{"containers":[{"command":["/app/run.sh","io.altchain.data.jobs.MinerStatsReportFlinkJob","/config/flink-miner-card-stats-to-clickhouse-job.config"],"env":[{"name":"AWS_ACCESS_KEY","valueFrom":{"secretKeyRef":{"key":"AWS_ACCESS_KEY","name":"aws-ingestion-credential"}}},{"name":"AWS_SECRET_KEY","valueFrom":{"secretKeyRef":{"key":"AWS_SECRET_KEY","name":"aws-ingestion-credential"}}},{"name":"AWS_REGION","value":"us-west-2"},{"name":"JAVA_OPTS","value":"-Xms1G -Xmx1G -Dlog4j.configuration=/app/conf/log4j.properties"}],"image":"313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/data-analytics:adding_live_machine_card_flink_job","imagePullPolicy":"Always","name":"flink-miner-card-stats-to-clickhouse-job","resources":{"limits":{"memory":"1.1G"},"requests":{"memory":"1.1G"}},"volumeMounts":[{"mountPath":"/config","name":"config"}]}],"restartPolicy":"Always","volumes":[{"configMap":{"name":"flink-miner-card-stats-to-clickhouse-job-config"},"name":"config"}]}}}}
+  creationTimestamp: "2020-08-17T11:52:24Z"
+  generation: 1
+  labels:
+    app: flink-miner-card-stats-to-clickhouse-job
+  name: flink-miner-card-stats-to-clickhouse-job
+  namespace: data
+  resourceVersion: "204200775"
+  selfLink: /apis/apps/v1/namespaces/data/deployments/flink-miner-card-stats-to-clickhouse-job
+  uid: 18c1092d-b9a6-4a1e-b334-926381493854
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: flink-miner-card-stats-to-clickhouse-job
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: flink-miner-card-stats-to-clickhouse-job
+    spec:
+      containers:
+      - command:
+        - /app/run.sh
+        - io.altchain.data.jobs.MinerStatsReportFlinkJob
+        - /config/flink-miner-card-stats-to-clickhouse-job.config
+        env:
+        - name: AWS_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              key: AWS_ACCESS_KEY
+              name: aws-ingestion-credential
+        - name: AWS_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              key: AWS_SECRET_KEY
+              name: aws-ingestion-credential
+        - name: AWS_REGION
+          value: us-west-2
+        - name: JAVA_OPTS
+          value: -Xms1G -Xmx1G -Dlog4j.configuration=/app/conf/log4j.properties
+        image: 313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/data-analytics:adding_live_machine_card_flink_job
+        imagePullPolicy: Always
+        name: flink-miner-card-stats-to-clickhouse-job
+        resources:
+          limits:
+            memory: 1100M
+          requests:
+            memory: 1100M
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /config
+          name: config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: flink-miner-card-stats-to-clickhouse-job-config
+        name: config
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2020-08-17T11:52:24Z"
+    lastUpdateTime: "2020-08-17T11:52:42Z"
+    message: ReplicaSet "flink-miner-card-stats-to-clickhouse-job-76776f7c75" has
+      successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2021-05-27T21:27:14Z"
+    lastUpdateTime: "2021-05-27T21:27:14Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 1
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

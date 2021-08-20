@@ -1,0 +1,10 @@
+{
+  "hosts": {
+    "https://code.corp.alt-chain.io/api/": {
+      "token": "cli-vlmdphrqz53hagamwt3x536shgdj"
+    }
+  },
+  "config": {
+    "editor": "vim"
+  }
+}

@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2020-07-30T22:58:03Z"
+  labels:
+    clickhouse.altinity.com/Service: chi
+    clickhouse.altinity.com/app: chop
+    clickhouse.altinity.com/chi: miner-stats
+    clickhouse.altinity.com/chop: 0.10.0
+    clickhouse.altinity.com/namespace: data
+  name: clickhouse-miner-stats
+  namespace: data
+  resourceVersion: "185048510"
+  selfLink: /api/v1/namespaces/data/services/clickhouse-miner-stats
+  uid: 081e9752-bfc0-4824-8f95-8f071cd6c034
+spec:
+  clusterIP: 100.70.12.142
+  ports:
+  - name: http
+    port: 8123
+    protocol: TCP
+    targetPort: 8123
+  - name: tcp
+    port: 9000
+    protocol: TCP
+    targetPort: 9000
+  - name: interserver
+    port: 9009
+    protocol: TCP
+    targetPort: 9009
+  - name: mysql
+    port: 9004
+    protocol: TCP
+    targetPort: 9004
+  selector:
+    clickhouse.altinity.com/app: chop
+    clickhouse.altinity.com/chi: miner-stats
+    clickhouse.altinity.com/namespace: data
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

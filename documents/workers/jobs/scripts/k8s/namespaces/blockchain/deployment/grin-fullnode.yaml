@@ -1,0 +1,81 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "3"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"extensions/v1beta1","kind":"Deployment","metadata":{"annotations":{},"name":"grin-fullnode","namespace":"blockchain"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"grin-fullnode"}},"template":{"metadata":{"labels":{"app":"grin-fullnode"}},"spec":{"containers":[{"args":["server","-c","/home/grin/.grin/grin-server.toml","run"],"image":"313557088125.dkr.ecr.us-west-2.amazonaws.com/blockchain/grin:latest","imagePullPolicy":"Always","name":"grin-fullnode","ports":[{"containerPort":3413,"protocol":"TCP"},{"containerPort":3414,"protocol":"TCP"},{"containerPort":3415,"protocol":"TCP"},{"containerPort":3416,"protocol":"TCP"}],"resources":{"requests":{"cpu":"200m"}},"volumeMounts":[{"mountPath":"/home/grin/.grin","name":"grin-data"}]}],"securityContext":{"fsGroup":2000,"runAsNonRoot":true,"runAsUser":1000},"volumes":[{"name":"grin-data","persistentVolumeClaim":{"claimName":"grin-pvc"}}]}}}}
+  creationTimestamp: "2019-08-28T07:02:25Z"
+  generation: 4
+  labels:
+    app: grin-fullnode
+  name: grin-fullnode
+  namespace: blockchain
+  resourceVersion: "86115939"
+  selfLink: /apis/apps/v1/namespaces/blockchain/deployments/grin-fullnode
+  uid: ca39ac6e-c961-11e9-b4fb-028b91b570fe
+spec:
+  progressDeadlineSeconds: 2147483647
+  replicas: 0
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: grin-fullnode
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: grin-fullnode
+    spec:
+      containers:
+      - args:
+        - server
+        - -c
+        - /home/grin/.grin/grin-server.toml
+        - run
+        image: 313557088125.dkr.ecr.us-west-2.amazonaws.com/blockchain/grin:latest
+        imagePullPolicy: Always
+        name: grin-fullnode
+        ports:
+        - containerPort: 3413
+          protocol: TCP
+        - containerPort: 3414
+          protocol: TCP
+        - containerPort: 3415
+          protocol: TCP
+        - containerPort: 3416
+          protocol: TCP
+        resources:
+          requests:
+            cpu: 100m
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /home/grin/.grin
+          name: grin-data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext:
+        fsGroup: 2000
+        runAsNonRoot: true
+        runAsUser: 1000
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - name: grin-data
+        persistentVolumeClaim:
+          claimName: grin-pvc
+status:
+  conditions:
+  - lastTransitionTime: "2019-08-28T07:02:25Z"
+    lastUpdateTime: "2019-08-28T07:02:25Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 4

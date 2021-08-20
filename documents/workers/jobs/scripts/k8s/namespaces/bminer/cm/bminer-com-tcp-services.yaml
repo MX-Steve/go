@@ -1,0 +1,20 @@
+apiVersion: v1
+data:
+  "3333": blockchain/bfc-devfee:3333
+  "3636": blockchain/raven-devfee:3636
+  "4013": blockchain/ae-devfee-new:4013
+  "4200": blockchain/sero-devfee:4200
+  "16669": blockchain/grin-devfee:16669
+  "18118": blockchain/etc-devfee:18118
+  "32526": bminer/stratum-backend-prod:443
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"16669":"blockchain/grin-devfee:16669","3333":"blockchain/bfc-devfee:3333","3636":"blockchain/raven-devfee:3636","4013":"blockchain/ae-devfee-new:9505","4200":"blockchain/sero-devfee:4200","9766":"blockchain/pmeer-devfee:9766","9767":"blockchain/qitmeer-devfee:9767"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"bminer-com-tcp-services","namespace":"bminer"}}
+  creationTimestamp: "2020-03-30T05:51:06Z"
+  name: bminer-com-tcp-services
+  namespace: bminer
+  resourceVersion: "150702234"
+  selfLink: /api/v1/namespaces/bminer/configmaps/bminer-com-tcp-services
+  uid: ba9d788b-55e8-4709-8698-ebd928f16da6

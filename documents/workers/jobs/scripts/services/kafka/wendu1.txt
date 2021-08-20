@@ -1,0 +1,99 @@
+{
+  "aliasColors": {},
+  "bars": false,
+  "dashLength": 10,
+  "dashes": false,
+  "datasource": "clickhouse-miner-stats",
+  "fieldConfig": {
+    "defaults": {},
+    "overrides": []
+  },
+  "fill": 1,
+  "fillGradient": 0,
+  "gridPos": {
+    "h": 8,
+    "w": 7,
+    "x": 0,
+    "y": 29
+  },
+  "hiddenSeries": false,
+  "id": 113,
+  "legend": {
+    "avg": false,
+    "current": false,
+    "max": false,
+    "min": false,
+    "show": true,
+    "total": false,
+    "values": false
+  },
+  "lines": true,
+  "linewidth": 1,
+  "nullPointMode": "null",
+  "options": {
+    "alertThreshold": true
+  },
+  "percentage": false,
+  "pluginVersion": "7.5.2",
+  "pointradius": 2,
+  "points": false,
+  "renderer": "flot",
+  "seriesOverrides": [],
+  "spaceLength": 10,
+  "stack": false,
+  "steppedLine": false,
+  "targets": [
+    {
+      "database": "miner_stats",
+      "dateTimeType": "DATETIME",
+      "extrapolate": true,
+      "format": "time_series",
+      "formattedQuery": "SELECT $timeSeries as t, count() FROM $table WHERE $timeFilter GROUP BY t ORDER BY t",
+      "intervalFactor": 1,
+      "query": "SELECT\n    worker,\n    max(temperature) as temperature\nFROM\n(\n    SELECT\n        worker,\n        pci_id,\n        temperature\n    FROM miner_card_stats\n    WHERE\n        site_key = unhex('00DE6B6C73376743452CCE66EFAA1CB94F4BBC107B')\n        and temperature > 78\n        and isNotNull(temperature)\n        and $timeFilter\n    GROUP BY\n        worker,\n        pci_id,\n        temperature\n)\nGROUP BY worker\nORDER BY temperature desc",
+      "rawQuery": "SELECT     worker,     max(temperature) as temperature FROM (     SELECT         worker,         pci_id,         temperature     FROM miner_card_stats     WHERE         site_key = unhex('00DE6B6C73376743452CCE66EFAA1CB94F4BBC107B')         and temperature > 78         and isNotNull(temperature)         and undefined >= toDateTime(1628059282)     GROUP BY         worker,         pci_id,         temperature ) GROUP BY worker ORDER BY temperature desc",
+      "refId": "A",
+      "round": "0s"
+    }
+  ],
+  "thresholds": [],
+  "timeRegions": [],
+  "title": "Panel Title",
+  "tooltip": {
+    "shared": true,
+    "sort": 0,
+    "value_type": "individual"
+  },
+  "type": "graph",
+  "xaxis": {
+    "buckets": null,
+    "mode": "time",
+    "name": null,
+    "show": true,
+    "values": []
+  },
+  "yaxes": [
+    {
+      "format": "short",
+      "label": null,
+      "logBase": 1,
+      "max": null,
+      "min": null,
+      "show": true
+    },
+    {
+      "format": "short",
+      "label": null,
+      "logBase": 1,
+      "max": null,
+      "min": null,
+      "show": true
+    }
+  ],
+  "yaxis": {
+    "align": false,
+    "alignLevel": null
+  },
+  "timeFrom": null,
+  "timeShift": null
+}

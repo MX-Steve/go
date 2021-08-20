@@ -1,0 +1,96 @@
+apiVersion: v1
+data:
+  pool.toml: |
+    [pool]
+    [[pool.ethermine.eth]]
+    address="0xDf78CF4B51367328483f53b5Dda9101D181ee452"
+    duration=1
+    [[pool.f2pool.eth]]
+    address="0x369a6d32a45dcf14942043dad6d6f08b5ae41a4f"
+    duration=1
+    [[pool.sparkpool.ETH]]
+    address="0xDf78CF4B51367328483f53b5Dda9101D181ee452"
+    duration=1
+    [[pool.sparkpool.ETH]]
+    address="0x96F8628103339E56d38CF4DF9042b5673Cb31f12"
+    duration=1
+    [[pool.sparkpool.ETH]]
+    address="0x8488C7fbB70921a3ec35Da4539e63562e4B7a8a5"
+    duration=1
+    [[pool.sparkpool.ETH]]
+    address="0x5Bd50347E86412bae3c37998D5E25696eD2ad47B"
+    duration=1
+    [[pool.sparkpool.ETH]]
+    address="0x3ca1a99Abf377769e9d9A65cE3FAf19034Ca8d13"
+    duration=1
+    [[pool.sparkpool.ETH]]
+    address="0x2991728c82587C3E86A3bA47F204F11aB875D22b"
+    duration=1
+    [[pool.sparkpool.GRIN_32]]
+    address="thomasding915@gmail.com"
+    duration=1
+    [[pool.sparkpool.GRIN_32]]
+    address="yu@imo.vc"
+    duration=1
+    [[pool.sparkpool.GRIN_32]]
+    address="nikolaizeld@gmail.com"
+    duration=1
+    [[pool.sparkpool.GRIN_32]]
+    address="saberstayknight@gmail.com"
+    duration=1
+    [[pool.sparkpool.GRIN_32]]
+    address="paxoslamport@gmail.com"
+    duration=1
+    [[pool.nanopool.eth]]
+    address="0xc28849f1252ccadd6ae22400a3f6fdc082a4d02d"
+    duration=1
+    [[pool.nanopool.eth]]
+    address="0xd257f30d198a9ed4c3f867d9dc2fc84ad5b5f412"
+    duration=1
+    [[pool.nanopool.eth]]
+    address="0x9826688751fc27a1b01d02daef211aa2b32e6eb9"
+    duration=1
+    [[pool.nanopool.eth]]
+    address="0xe9be18182a3abda62abb78d96acafdc5b6ef3fdb"
+    duration=1
+    [[pool.nanopool.eth]]
+    address="0x3ca1a99abf377769e9d9a65ce3faf19034ca8d13"
+    duration=1
+    [[pool.nanopool.eth]]
+    address="0x369a6d32a45dcf14942043dad6d6f08b5ae41a4f"
+    duration=1
+    #YUL02
+    [[pool.nanopool.eth]]
+    address="0x96F8628103339E56d38CF4DF9042b5673Cb31f12"
+    duration=1
+    #P104
+    [[pool.nanopool.eth]]
+    address="0x3ca1a99Abf377769e9d9A65cE3FAf19034Ca8d13"
+    duration=1
+    #P102
+    [[pool.nanopool.eth]]
+    address="0x2991728c82587C3E86A3bA47F204F11aB875D22b"
+    duration=1
+    #ICN01
+    [[pool.nanopool.eth]]
+    address="0x8488C7fbB70921a3ec35Da4539e63562e4B7a8a5"
+    duration=1
+    #KWJ01
+    [[pool.nanopool.eth]]
+    address="0x5Bd50347E86412bae3c37998D5E25696eD2ad47B"
+    duration=1
+    #YUL02_AMD
+    [[pool.nanopool.eth]]
+    address="0xDf78CF4B51367328483f53b5Dda9101D181ee452"
+    duration=1
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"pool.toml":"[pool]\n[[pool.sparkpool.GRIN_32]]\naddress=\"thomasding915@gmail.com\"\nduration=1\n[[pool.sparkpool.GRIN_32]]\naddress=\"yu@imo.vc\"\nduration=1\n[[pool.sparkpool.GRIN_32]]\naddress=\"nikolaizeld@gmail.com\"\nduration=1\n[[pool.sparkpool.GRIN_32]]\naddress=\"saberstayknight@gmail.com\"\nduration=1\n[[pool.nanopool.eth]]\naddress=\"0xc28849f1252ccadd6ae22400a3f6fdc082a4d02d\"\nduration=1\n[[pool.nanopool.eth]]\naddress=\"0xd257f30d198a9ed4c3f867d9dc2fc84ad5b5f412\"\nduration=1\n#devfee\n[[pool.nanopool.zec]]\naddress=\"t1YmvsEuSkADkoYBqtwRt3aJ31GvZzF45fL\"\nduration=1\n[[pool.nanopool.zec]]\naddress=\"t1hA6mmAuPSjuHHuVScNMomy5ei28tPFoAq\"\nduration=1\n[[pool.f2pool.eth]]\naddress=\"bmienrgrin\"\nduration=1\n[[pool.f2pool.eth]]\naddress=\"0xee0e189dAA93c36e8BDd77487b23d3c1A42fa366\"\nduration=1\n[[pool.f2pool.btm]]\naddress=\"bm1qn7f2u495wwfag88j7mtc9ws4avy8pkaaqxvkud\"\nduration=1\n[[pool.f2pool.btm]]\naddress=\"bm1q0qhdqwpfx9k3xjzex2na86m38a3qkzhqp8df8p\"\nduration=1\n[[pool.f2pool.btm]]\naddress=\"bm1qqsg9j0c4gddd3pxx6jxxtfuxgkmm8464qfhxeq\"\nduration=1\n[[pool.f2pool.btm]]\naddress=\"bm1q72lvs8uf8h9gnfy5t6mhn5cc90n6n54mwqrd4l\"\nduration=1\n[[pool.f2pool.btm]]\naddress=\"bm1qwnlwc4qdl92pdk8h252zcgpv50r2z752pazcdf\"\nduration=1\n[[pool.f2pool.btm]]\naddress=\"bm1qgy26xlj3g9hqwls9rupqwrqu23g95p893smtny\"\nduration=1\n[[pool.f2pool.grin29]]\naddress=\"grin880f184c342\"\nduration=1\n[[pool.f2pool.grin29]]\naddress=\"grinc13e3eff063\"\nduration=1\n[[pool.f2pool.grin29]]\naddress=\"grin131e160913f\"\nduration=1\n[[pool.f2pool.grin29]]\naddress=\"grinf1b15c75539\"\nduration=1\n[[pool.f2pool.grin29]]\naddress=\"grin433529abca2\"\nduration=1\n[[pool.f2pool.grin29]]\naddress=\"grin2287001eed0\"\nduration=1\n[[pool.f2pool.grin31]]\naddress=\"grin880f184c342\"\nduration=1\n[[pool.f2pool.grin31]]\naddress=\"grinc13e3eff063\"\nduration=1\n[[pool.f2pool.grin31]]\naddress=\"grin131e160913f\"\nduration=1\n[[pool.f2pool.grin31]]\naddress=\"grinf1b15c75539\"\nduration=1\n[[pool.f2pool.grin31]]\naddress=\"grin433529abca2\"\nduration=1\n[[pool.f2pool.grin31]]\naddress=\"grin2287001eed0\"\nduration=1\n[[pool.f2pool.grin31]]\naddress=\"susugrin@gmail.com\"\nduration=1\n[[pool.f2pool.grin31]]\naddress=\"mendezmolly42@gmail.com\"\nduration=1\n[[pool.f2pool.grin31]]\naddress=\"thomasding915@gmail.com\"\nduration=1\n[[pool.f2pool.grin32]]\naddress=\"grin880f184c342\"\nduration=1\n[[pool.f2pool.grin32]]\naddress=\"grinc13e3eff063\"\nduration=1\n[[pool.f2pool.grin32]]\naddress=\"grin131e160913f\"\nduration=1\n[[pool.f2pool.grin32]]\naddress=\"grinf1b15c75539\"\nduration=1\n[[pool.f2pool.grin32]]\naddress=\"grin433529abca2\"\nduration=1\n[[pool.f2pool.grin32]]\naddress=\"grin2287001eed0\"\nduration=1\n[[pool.f2pool.grin32]]\naddress=\"susugrin@gmail.com\"\nduration=1\n[[pool.f2pool.grin32]]\naddress=\"mendezmolly42@gmail.com\"\nduration=1\n[[pool.f2pool.grin32]]\naddress=\"thomasding915@gmail.com\"\nduration=1\n[[pool.sparkpool.BEAM]]\naddress=\"42199c811b318cc4a6e1b17394cba5339c0b55efb471eac595cd40b54b45cdeb2\"\nduration=1\n"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"mining-pool-reward-reporter","namespace":"data"}}
+  creationTimestamp: "2020-06-10T09:04:50Z"
+  name: mining-pool-reward-reporter
+  namespace: data
+  resourceVersion: "155877403"
+  selfLink: /api/v1/namespaces/data/configmaps/mining-pool-reward-reporter
+  uid: 5e53f82d-8b56-433b-adeb-e0800d03ad43

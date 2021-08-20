@@ -1,0 +1,18 @@
+apiVersion: v1
+data:
+  "8443": default/waxen-worm-openvpn:8443
+  "10022": default/phabricator-service:10022
+  "50000": default/jenkins-master:50000
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"10022":"default/phabricator-service:10022","50000":"default/jenkins-master:50000","8889":"default/miningops:8889"},"kind":"ConfigMap","metadata":{"annotations":{},"creationTimestamp":"2019-06-09T06:32:05Z","labels":{"app":"ingress-controller"},"name":"tcp-services","namespace":"kube-system","resourceVersion":"899600","selfLink":"/api/v1/namespaces/kube-system/configmaps/tcp-services","uid":"4c44d29b-8a80-11e9-a2a3-02b94c1b9762"}}
+  creationTimestamp: "2019-06-09T06:32:05Z"
+  labels:
+    app: ingress-controller
+  name: tcp-services
+  namespace: kube-system
+  resourceVersion: "51015303"
+  selfLink: /api/v1/namespaces/kube-system/configmaps/tcp-services
+  uid: 4c44d29b-8a80-11e9-a2a3-02b94c1b9762

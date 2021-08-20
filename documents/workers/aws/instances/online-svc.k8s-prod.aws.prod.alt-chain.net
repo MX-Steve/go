@@ -1,0 +1,19 @@
+1. zone/type: us-west-2a/m5.large
+2. resources: m8/c2
+3. security:
+    in:
+        0 - 65535	TCP	    sg-0b68b02a10835f9b5	nodes.k8s-prod.aws.prod.alt-chain.net
+        30706	    TCP	    172.20.0.0/16	        nodes.k8s-prod.aws.prod.alt-chain.net
+        30706	    TCP	    0.0.0.0/0	            nodes.k8s-prod.aws.prod.alt-chain.net
+        30828	    TCP	    172.20.0.0/16	        nodes.k8s-prod.aws.prod.alt-chain.net
+        30828	    TCP	    0.0.0.0/0	            nodes.k8s-prod.aws.prod.alt-chain.net
+    out:
+        全部	全部	0.0.0.0/0	nodes.k8s-prod.aws.prod.alt-chain.net
+4. storage:
+    vol-002ba965dcc33cb7d	/dev/sda1	128	
+    vol-0b677c3e15dcf60b5	/dev/xvdcv	128
+5. AMI:
+    ami-07dd19a7900a1f049
+    099720109477/ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20201026
+6. Auto Scaling
+    online-svc.k8s-prod.aws.prod.alt-chain.net

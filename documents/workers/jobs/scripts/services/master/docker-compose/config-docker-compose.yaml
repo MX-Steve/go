@@ -1,0 +1,85 @@
+services:
+  etcd-grpc-proxy:
+    command:
+    - etcd
+    - grpc-proxy
+    - start
+    - --endpoints=127.0.0.1:2379
+    - --listen-addr=10.40.23.250:23790
+    dns:
+    - 8.8.8.8
+    environment:
+      ALLOW_NONE_AUTHENTICATION: "yes"
+    image: bitnami/etcd
+    network_mode: host
+    restart: always
+    user: 0:0
+  pxeserver:
+    cap_add:
+    - NET_ADMIN
+    dns:
+    - 8.8.8.8
+    image: 313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/farm/pxeserver
+    network_mode: host
+    restart: always
+    user: 0:0
+    volumes:
+    - /home/svc/config/dc/urc01/pxeserver:/config:rw
+    - /home/svc/services/pxeserver/data:/data:rw
+    - /home/svc/services/pxeserver/logs:/var/log:rw
+  shepherd:
+    command:
+    - -conf
+    - /config/shepherd.json
+    dns:
+    - 8.8.8.8
+    image: 313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/farm/shepherd
+    network_mode: host
+    restart: always
+    user: 0:0
+    volumes:
+    - /home/svc/config/dc/urc01/shepherd/shepherd.json:/config/shepherd.json:rw
+    - /home/svc/config/dc/urc01/pxeserver/dnsmasq.d/nodes.conf:/config/nodes.conf:rw
+    - /home/svc/services/pxeserver/data:/data:rw
+  syslog:
+    command:
+    - -dc
+    - urumqi
+    - -conf
+    - /config/nodes.conf
+    dns:
+    - 8.8.8.8
+    image: 313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/farm/syslog:latest
+    network_mode: host
+    restart: always
+    volumes:
+    - /home/svc/config/dc/urc01/pxeserver/dnsmasq.d:/config:rw
+    - /etc/hosts:/etc/hosts:rw
+  tunnels:
+    command:
+    - autossh
+    - -M
+    - '0'
+    - -o
+    - ExitOnForwardFailure=yes
+    - -o
+    - ServerAliveCountMax=3
+    - -o
+    - ServerAliveInterval=10
+    - -NT
+    - -L
+    - 127.0.0.1:9092:100.70.81.93:9092
+    - -L
+    - 10.40.23.250:8086:100.71.38.14:8086
+    - -L
+    - 127.0.0.1:2379:100.69.106.78:2379
+    - svc@edgegw01-a1.alt-chain.io
+    dns:
+    - 8.8.8.8
+    image: zhegao/autossh
+    network_mode: host
+    restart: always
+    user: 0:0
+    volumes:
+    - /home/svc/ssh-tunnel:/root:rw
+version: '3.0'

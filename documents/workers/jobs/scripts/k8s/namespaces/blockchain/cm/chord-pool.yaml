@@ -1,0 +1,100 @@
+apiVersion: v1
+data:
+  ca.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIDXjCCAkagAwIBAgIUCix7Bt8Rxkvv6xEUeg09rM+Ax+IwDQYJKoZIhvcNAQEL
+    BQAwNzELMAkGA1UEBhMCS1kxDzANBgNVBAoMBkJtaW5lcjEXMBUGA1UEAwwOQm1p
+    bmVyIFJvb3QgQ0EwHhcNMjAxMTAzMDI1NTAyWhcNMzAxMTAxMDI1NTAyWjA/MQsw
+    CQYDVQQGEwJLWTEPMA0GA1UECgwGQm1pbmVyMR8wHQYDVQQDDBZCbWluZXIgUm9v
+    dCBDQSBMZXZlbCAxMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAyzXK
+    yZ3G1bCV7FxGdn4S2LGM6a7HvYKqAS6ffqEylEDe18rMvBzj0VJf4BozgGnzBB2y
+    /2FWeBiIpxFcnqlynfCmftmDopOyvbmhaaoFuwTS/6O/AbjmdB/zoB4mPBkksBuF
+    6EO1gO6BGon0nPHnhCTz88EZe7Yizvlol0LQ8arlYPykNYH4YBKw7mA0P8kaH7pT
+    NGbfNETV+8RcUPWfBMNWO+sRSfktjgl7LWIKZAIisPwTaO3kQz3aDV/cOkObKKZJ
+    6DICjjT7bhsgbnBxvh4LDmUq20wnUvoZmRno3qbW7RJnhVc07MGmhl3h0tHqh3s7
+    yVoGx08ebri98rZwMwIDAQABo1owWDAPBgNVHRMBAf8EBTADAQH/MA4GA1UdDwEB
+    /wQEAwICBDA1BgNVHR8ELjAsMCqgKKAmhiRodHRwczovL3d3dy5ibWluZXIuY29t
+    L3RydXN0L2NybC5wZW0wDQYJKoZIhvcNAQELBQADggEBACI8V7v99XtqKAQTZTY0
+    Bo6qf5bC0tBa3QF6t84cUDuqmOs9htn9lhgl3A+cTiSFI7YmoXnmGhJAiM6a4k37
+    rf/1+qb2Hthvg4A2NsSKyFhyul0tAVaMbK+vTScGpH+Zt7EJ4KtqvW9u9jESFdWl
+    AgZOh656iZiOKIiz6u6bhQGMRO+kzKOmg/bUhLaAlcNXU+A+x9SihB7VM7npJPlP
+    GMWMkYFRLFs4nnrFGe4n9Uunlc+0C6Vl9pBUawxinWgXRRdZGaUn2kRodfPj/Pl5
+    +xhwVkun63FibnvV5LtwcV/T46v8P7tRuFqIaSI7EC1vqBl9Nu6hdnw2iM7g+1Y5
+    bDU=
+    -----END CERTIFICATE-----
+    -----BEGIN CERTIFICATE-----
+    MIIC9TCCAd0CFEiEmpkSWllIH61anaZWIS2xUEXkMA0GCSqGSIb3DQEBCwUAMDcx
+    CzAJBgNVBAYTAktZMQ8wDQYDVQQKDAZCbWluZXIxFzAVBgNVBAMMDkJtaW5lciBS
+    b290IENBMB4XDTIwMTEwMzAxMTYzM1oXDTMwMTEwMTAxMTYzM1owNzELMAkGA1UE
+    BhMCS1kxDzANBgNVBAoMBkJtaW5lcjEXMBUGA1UEAwwOQm1pbmVyIFJvb3QgQ0Ew
+    ggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQConpCLih8q0ZBcRLR2hg06
+    gfTDltqiyy+KIAb2zOl3ckKMnBck6bQi6lV0bJBK0McK7w3pHXe/h9dmpys6ZnDW
+    goe8wSj9tzgDMgFK0QQjZ/qSlyuzFzw32AirzZmJXIgRc3BWAUCKhkfes1F0uRyu
+    9eE9fOiMjuBkQ0nUlam5NF8TrDQo6CG3trQzYtdgSaIuCJQv3m5YTELBgveTZzps
+    6pshr9pawc0blZZdrATZqf27t5FO7Kx/u7s3eHDrvp49hy27XW895m2oXEWMDaPc
+    C/VnSxf1RqveLNh1+mFpfSa5JaAKyYPaWiqy0kCPeQWFQ+Y5muk+oHALfappiUol
+    AgMBAAEwDQYJKoZIhvcNAQELBQADggEBAFCSUhw1v4glDMf3VwEtAj1BGLeauAFj
+    fcB5qmhYR8y+zsf+pfDomPPUdz7lrL76fdc2vkn83VKD02tRs3FWYYQPkCKdnHm6
+    4NOJe9I1fkIZpn8AYol3g9l4RalOJ8qJb+EQaZbdOG2qf6rivyXQ/tgvxaFOXGzi
+    rLN/LBSzTktyONxCh8bV6LkkdNDeSVwjZO2QIq65x6jRiKCLWJ/eSKJRpvFD9Wdy
+    WTu2FddOFXv6wisj2sZ7i5hWSU+ZsCAgND4snQJssdhlgvEyCGpHEex7S0jnmjUL
+    WyxnHuTImtEyFaViySav/TfexnF6bxkS50T4vdT5JRRJdrw9C7Ilmfw=
+    -----END CERTIFICATE-----
+  config.toml: |
+    [[fullnodes]]
+    authority="chordpool"
+    host="106.14.205.86"
+    port=32525
+
+    [[fullnodes]]
+    authority="chordpool"
+    host="35.183.19.30"
+    port=32525
+
+    # ourself for verify
+    # [[fullnodes]]
+    # authority="chordpool"
+    # host="47.108.228.71"
+    # port=32523
+
+     [stratum]
+     frontend_id="k8s"
+     bind="0.0.0.0"
+     port=32525
+
+     [miner]
+     idle_timeout_ms=1800000
+
+     [backend]
+     client_cert="/config/stratum-frontend.crt"
+     client_key="/cred/stratum-frontend.key"
+     ca_cert="/config/ca.crt"
+  stratum-frontend.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIDTDCCAjSgAwIBAgIUK02gzCDLv1D6785hCTJEXCdY0q8wDQYJKoZIhvcNAQEL
+    BQAwPzELMAkGA1UEBhMCS1kxDzANBgNVBAoMBkJtaW5lcjEfMB0GA1UEAwwWQm1p
+    bmVyIFJvb3QgQ0EgTGV2ZWwgMTAeFw0yMDExMDMwMzE5MzBaFw0yMzEwMDQwMzE5
+    MzBaMEYxCzAJBgNVBAYTAktZMQ8wDQYDVQQKDAZCbWluZXIxJjAkBgNVBAMMHSou
+    c3RyYXR1bS1mcm9udGVuZC5ibWluZXIuY29tMIIBIjANBgkqhkiG9w0BAQEFAAOC
+    AQ8AMIIBCgKCAQEA3be61TTAOtX07enoEA/Sdqp8DwU4TnU6/kerp3Rtox7wr4aB
+    abKvgTwsVdL4lZFHp4a6CKQ5WvBIF0CuUF7n8qmog6UjdNMNFB0sStLGYiW5WotS
+    i0TnCh8WDW/Npd1BXuKcXnUMZ3OhWblfsD57kd24jgEKs6zUOfbzjD1olTlEsFXL
+    Q0qvzuWiUXVByD/5AQETcibmPE7iUvPsM7+5zYD7Eje19DXwUzewUa7OyJ2CcQmA
+    +W2tt+Q2moAcXmWbnjbgymfAGJLp4jT0/ER1jsViGXNC5YqUAX1bXIsxBytNJ4wl
+    xmvwn/wG7+Xywl2FWyQFutn3SW+g1+FA9zVSHwIDAQABozkwNzA1BgNVHR8ELjAs
+    MCqgKKAmhiRodHRwczovL3d3dy5ibWluZXIuY29tL3RydXN0L2NybC5wZW0wDQYJ
+    KoZIhvcNAQELBQADggEBACqcNmHkzw0HNSvK8p81swPdTHQUvqHBc2u5cRv2GhqQ
+    r/dX7qMcNXnr+ZxbO8NeRecH7/gin1gaBFuPXv1UCS/bj868/21cLk0vQg2jSo7X
+    HjJ12IDkOGJberWxcysY9VYu9DRiB82fB6/RchNia8B7a+mOlGHoynb35hhgLBur
+    r2ort2H6vkIhy9Xoo2fxhs6koJk7HQHCE30IPp8aAKN0RujR769HRdVUL/vZeNZ2
+    KcNf8SmkrAO6sZgHPkX8+78NOZw+RTv4ET24k2TYur6jV+oxw5MhuWjlH2nVSUal
+    cmdjgvcQj5uRecXVTg4CHkXv2XYtqkFDjpOZT2c5F5I=
+    -----END CERTIFICATE-----
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2020-10-28T09:06:06Z"
+  name: chord-pool
+  namespace: blockchain
+  resourceVersion: "201024207"
+  selfLink: /api/v1/namespaces/blockchain/configmaps/chord-pool
+  uid: 0a9e4da2-1ee0-4fa1-a917-76dfe4e187d9

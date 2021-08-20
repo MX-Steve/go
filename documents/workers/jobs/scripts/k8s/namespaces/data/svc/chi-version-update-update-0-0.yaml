@@ -1,0 +1,116 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2021-04-02T12:54:37Z"
+  labels:
+    clickhouse.altinity.com/Service: host
+    clickhouse.altinity.com/app: chop
+    clickhouse.altinity.com/chi: version-update
+    clickhouse.altinity.com/chiScopeCycleIndex: "0"
+    clickhouse.altinity.com/chiScopeCycleOffset: "0"
+    clickhouse.altinity.com/chiScopeCycleSize: "0"
+    clickhouse.altinity.com/chiScopeIndex: "0"
+    clickhouse.altinity.com/chop: 0.10.0
+    clickhouse.altinity.com/cluster: update
+    clickhouse.altinity.com/clusterScopeCycleIndex: "0"
+    clickhouse.altinity.com/clusterScopeCycleOffset: "0"
+    clickhouse.altinity.com/clusterScopeCycleSize: "0"
+    clickhouse.altinity.com/clusterScopeIndex: "0"
+    clickhouse.altinity.com/namespace: data
+    clickhouse.altinity.com/replica: "0"
+    clickhouse.altinity.com/replicaScopeIndex: "0"
+    clickhouse.altinity.com/shard: "0"
+    clickhouse.altinity.com/shardScopeIndex: "0"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:metadata:
+        f:labels:
+          .: {}
+          f:clickhouse.altinity.com/Service: {}
+          f:clickhouse.altinity.com/app: {}
+          f:clickhouse.altinity.com/chi: {}
+          f:clickhouse.altinity.com/chiScopeCycleIndex: {}
+          f:clickhouse.altinity.com/chiScopeCycleOffset: {}
+          f:clickhouse.altinity.com/chiScopeCycleSize: {}
+          f:clickhouse.altinity.com/chiScopeIndex: {}
+          f:clickhouse.altinity.com/chop: {}
+          f:clickhouse.altinity.com/cluster: {}
+          f:clickhouse.altinity.com/clusterScopeCycleIndex: {}
+          f:clickhouse.altinity.com/clusterScopeCycleOffset: {}
+          f:clickhouse.altinity.com/clusterScopeCycleSize: {}
+          f:clickhouse.altinity.com/clusterScopeIndex: {}
+          f:clickhouse.altinity.com/namespace: {}
+          f:clickhouse.altinity.com/replica: {}
+          f:clickhouse.altinity.com/replicaScopeIndex: {}
+          f:clickhouse.altinity.com/shard: {}
+          f:clickhouse.altinity.com/shardScopeIndex: {}
+      f:spec:
+        f:clusterIP: {}
+        f:ports:
+          .: {}
+          k:{"port":8123,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+          k:{"port":9000,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+          k:{"port":9009,"protocol":"TCP"}:
+            .: {}
+            f:name: {}
+            f:port: {}
+            f:protocol: {}
+            f:targetPort: {}
+        f:publishNotReadyAddresses: {}
+        f:selector:
+          .: {}
+          f:clickhouse.altinity.com/app: {}
+          f:clickhouse.altinity.com/chi: {}
+          f:clickhouse.altinity.com/cluster: {}
+          f:clickhouse.altinity.com/namespace: {}
+          f:clickhouse.altinity.com/replica: {}
+          f:clickhouse.altinity.com/shard: {}
+        f:sessionAffinity: {}
+        f:type: {}
+    manager: clickhouse-operator
+    operation: Update
+    time: "2021-04-02T12:54:37Z"
+  name: chi-version-update-update-0-0
+  namespace: data
+  resourceVersion: "181055357"
+  selfLink: /api/v1/namespaces/data/services/chi-version-update-update-0-0
+  uid: 399b3c9d-ea00-4976-8b46-415bf9164ef9
+spec:
+  clusterIP: None
+  ports:
+  - name: http
+    port: 8123
+    protocol: TCP
+    targetPort: http
+  - name: tcp
+    port: 9000
+    protocol: TCP
+    targetPort: tcp
+  - name: interserver
+    port: 9009
+    protocol: TCP
+    targetPort: interserver
+  publishNotReadyAddresses: true
+  selector:
+    clickhouse.altinity.com/app: chop
+    clickhouse.altinity.com/chi: version-update
+    clickhouse.altinity.com/cluster: update
+    clickhouse.altinity.com/namespace: data
+    clickhouse.altinity.com/replica: "0"
+    clickhouse.altinity.com/shard: "0"
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

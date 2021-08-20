@@ -1,0 +1,19 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    ingress.kubernetes.io/cors-allow-methods: POST,GET,OPTIONS
+    ingress.kubernetes.io/enable-cors: "true"
+    kubernetes.io/ingress.class: altchain
+    traefik.frontend.priority: "2"
+  name: phabricator
+  namespace: default
+spec:
+  rules:
+  - host: code.corp.alt-chain.io
+    http:
+      paths:
+      - backend:
+          serviceName: phabricator-service
+          servicePort: 10080
+        path: /

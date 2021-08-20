@@ -1,0 +1,8 @@
+SELECT 
+  timestamp,normalized_uri,amount 
+FROM 
+  rawdata.pbtb_mining_pool_reward 
+WHERE 
+  date_diff('minute', from_unixtime(timestamp), date_trunc('day',current_timestamp  AT TIME ZONE 'Asia/Shanghai')) >= 0 
+  AND 
+  date_diff('minute', from_unixtime(timestamp), date_trunc('day',current_timestamp  AT TIME ZONE 'Asia/Shanghai')) < 1440

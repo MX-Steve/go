@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  conflux-network-reporter.conf: |-
+    {
+      "athena_region": "us-west-2",
+      "athena_database": "dwh",
+      "athena_output_location": "s3://data.alt-chain.io/temp/athena_query_results",
+      "database_uri": "pool:guvdfzhiQejPmosi@tcp(mariadb.default:3306)/conflux_pool"
+    }
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2020-10-17T13:15:50Z"
+  name: conflux-network-reporter
+  namespace: data
+  resourceVersion: "115442198"
+  selfLink: /api/v1/namespaces/data/configmaps/conflux-network-reporter
+  uid: 327ed526-87b0-459e-b932-c807f6d81153

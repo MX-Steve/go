@@ -1,0 +1,13 @@
+apiVersion: v1
+data:
+  "8443": default/waxen-worm-openvpn:8443
+  "10022": default/phabricator-service:10022
+  "50000": default/jenkins-master:50000
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2020-05-21T21:25:45Z"
+  name: altchain-ingress-tcp-services
+  namespace: altchain
+  resourceVersion: "66720768"
+  selfLink: /api/v1/namespaces/altchain/configmaps/altchain-ingress-tcp-services
+  uid: a1af2b11-4ce7-453b-8613-ec4557d38491

@@ -1,0 +1,13 @@
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: my-app-hpa # 名称
+  namespace: default #k8s命名空间
+spec:
+  maxReplicas: 10  # 最大副本数
+  minReplicas: 3   # 最小副本数
+  scaleTargetRef:   
+    apiVersion: apps/v1beta1
+    kind: Deployment  
+    name: my-app-deploy   # 监控名为my-app-deploy的Deployment
+  targetCPUUtilizationPercentage: 20  # cpu 阈值

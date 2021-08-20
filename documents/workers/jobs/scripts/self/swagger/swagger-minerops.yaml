@@ -1,0 +1,966 @@
+swagger: "2.0"
+info:
+  description: "bminer-operation"
+  version: "1.0.0"
+  title: "Bminer Operation"
+host: "api.bminer.com"
+basePath: "/api"
+tags:
+- name: "overview"
+  description: "Overview information for machines belongs to user"
+schemes:
+- "http"
+paths:
+  /login:
+    get:
+      summary: login through oauth2 server
+      produces:
+      - "application/json"
+      responses:
+        '200':
+          description: login
+          schema:
+            properties:
+              access_token:
+                type: string
+                format: string
+        default:
+          description: error
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/auth/callback:
+    get:
+      summary: return access_token
+      produces:
+      - "application/json"
+      responses:
+        '200':
+          description: login
+          schema:
+            properties:
+              access_token:
+                type: string
+                format: string
+        default:
+          description: error
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/allsitesstatistics:
+    get:
+      tags:
+      - "allsites"
+      summary: "get all sites statistics"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/AllsitesStatistics"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        404:
+          description: statistics of this user not found.
+  /v1/site/workers/{apikey}:
+    get:
+      tags:
+      - "site"
+      summary: "get workers overview"
+      description: ""
+      produces:
+      - "application/json"
+      parameters:
+      - name: "apikey"
+        in: "path"
+        description: "apikey of the user"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ArrayOfWorkerOverview"
+        500:
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/summary/:
+    get:
+      tags:
+      - "summary"
+      summary: "summary"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "start"
+        in: "query"
+        description: "start timestamp"
+        required: true
+        type: "integer"
+        format: "int64"
+      - name: "end"
+        in: "query"
+        description: "end timestamp"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ArrayOfSummary"
+        400:
+          description: "Bad Request"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        404:
+          description: "Not Found"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+        500:
+          description: "Internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /bminer/remote/cmdline/v1/{apikey.worker}:
+    get:
+      tags:
+      - "parameters"
+      summary: "get bminer running parameters"
+      description: ""
+      produces:
+      - "application/octet-stream"
+      parameters:
+      - name: "apikey.worker"
+        in: "path"
+        description: "key of the user"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful"
+          schema:
+            type: "string"
+            format: "binary"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/series/hashrates/:
+    get:
+      tags:
+      - "series"
+      summary: "get hashrates"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "apikey"
+        in: "query"
+        description: "apikey of the user"
+        type: "string"
+      - name: "from"
+        in: "query"
+        description: "from unix timestamp (s)"
+        required: true
+        type: "integer"
+      - name: "to"
+        in: "query"
+        description: "to unix timestamp (s)"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ArrayOfHashRateSeries"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/series/profitability:
+    get:
+      tags:
+      - "series"
+      summary: get profitability for user
+      produces:
+      - "application/json"
+      parameters:
+      - name: "from"
+        in: "query"
+        description: "from unix timestamp (s)"
+        required: true
+        type: "integer"
+      - name: "to"
+        in: "query"
+        description: "to unix timestamp (s)"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/ProfitabilitySeries"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/site/overview/{apikey}:
+    get:
+      tags:
+      - "site"
+      summary: "get overview statistics infomation for one site"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "apikey"
+        in: "path"
+        description: "user api key"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/SiteOverview"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/config_group:
+    delete:
+      tags:
+      - "conf"
+      summary: "delete a config group for user"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json" 
+      parameters:
+      - name: "id"
+        in: "query"
+        description: "config group id"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "empty response"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+    post:
+      tags:
+      - "conf"
+      summary: "create/update a config group for user"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "name"
+        in: "query"
+        description: "config group name"
+        required: true
+        type: "string"
+      - name: "id"
+        in: "query"
+        description: "config group id"
+        type: "string"
+      responses:
+        200:
+          description: "empty response"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+    get:
+      tags:
+      - "conf"
+      summary: "get config group"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/ConfigGroup"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/cmdline/{mac}:
+    get:
+      tags:
+      - "cmdline"
+      summary: "get command line for miner"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "mac"
+        in: "path"
+        description: "mac address"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: object
+            properties:
+              blacklist_gpus:
+                type: object
+              cmdline:
+                type: object
+              gpu:
+                type: object
+              machine_fan_speed:
+                type: object
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/machine/detail/{mac}:
+    get:
+      tags:
+      - "machine"
+      summary: "get machine detail info"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "mac"
+        in: "path"
+        description: "mac address"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MachineDetail"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/machine/system_log/{mac}:
+    get:
+      tags:
+      - "machine"
+      summary: "get machine system log"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "mac"
+        in: "path"
+        description: "mac address"
+        required: true
+        type: "string"
+      - name: "start"
+        in: "query"
+        description: "start unix timestamp (s)"
+        required: true
+        type: "integer"
+      - name: "end"
+        in: "query"
+        description: "end unix timestamp (s)"
+        required: true
+        type: "integer"
+      - name: "keyword"
+        in: "query"
+        description: "logs must contain this word"
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              type: "string"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/machine/brief/{mac}:
+    get:
+      tags:
+      - "machine"
+      summary: "get machine brief"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "mac"
+        in: "path"
+        description: "mac address"
+        required: true
+        type: "string"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/MachineBrief"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/machine/total_hashrate_series/{mac}:
+    get:
+      tags:
+      - "machine"
+      summary: "get machine total hashrate series"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "mac"
+        in: "path"
+        description: "mac address"
+        required: true
+        type: "string"
+      - name: "from"
+        in: "query"
+        description: "from unix timestamp (s)"
+        required: true
+        type: "integer"
+      - name: "to"
+        in: "query"
+        description: "to unix timestamp (s)"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/ArrayOfHashRateSeries"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/machine/card_hashrate_series/{mac}:
+    get:
+      tags:
+      - "machine"
+      summary: "get card hashrate series"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "mac"
+        in: "path"
+        description: "mac address"
+        required: true
+        type: "string"
+      - name: "from"
+        in: "query"
+        description: "from unix timestamp (s)"
+        required: true
+        type: "integer"
+      - name: "to"
+        in: "query"
+        description: "to unix timestamp (s)"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: object
+            properties:
+              algorithm:
+                type: "string"
+              rates:
+                type: array
+                items:
+                  $ref: "#/definitions/CardHashrateSeries"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/machine/card_temperature_series/{mac}:
+    get:
+      tags:
+      - "machine"
+      summary: "get temperature series for cards"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "mac"
+        in: "path"
+        description: "mac address"
+        required: true
+        type: "string"
+      - name: "from"
+        in: "query"
+        description: "from unix timestamp (s)"
+        required: true
+        type: "integer"
+      - name: "to"
+        in: "query"
+        description: "to unix timestamp (s)"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/TemperatureSeries"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/machines/control:
+    post:
+      tags:
+      - "machines"
+      summary: "remote control machines"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json" 
+      parameters:
+      - name: "action"
+        in: "query"
+        required: true
+        description: "action type"
+        type: "string"
+      - name: "apikey"
+        in: "query"
+        required: true
+        description: "apikey of site"
+        type: "string"
+      responses:
+        200:
+          description: "empty response"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"       
+  /v1/machines/config:
+    post:
+      tags:
+      - "machines"
+      summary: "set config for machines"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "apikey"
+        in: "query"
+        required: true
+        description: "apikey of site"
+        type: "string"
+      - name: "id"
+        in: "query"
+        required: true
+        description: "config group id"
+        type: "string"      
+      responses:
+        200:
+          description: "empty response"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+  /v1/reward/reference:
+    get:
+      tags:
+      - "reward"
+      summary: "get reward reference for sites of user"
+      produces:
+      - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            type: array
+            items:
+              $ref: "#/definitions/RewardReference"
+        500:
+          description: "internal error"
+          schema:
+            $ref: "#/definitions/ApiResponse"
+definitions:
+  WorkerStatistics:
+    type: object
+    properties:
+      total:
+        type: "integer"
+      online:
+        type: "integer"
+      warning:
+        type: "integer"
+      offline:
+        type: "integer"
+  Reward:
+    type: object
+    properties:
+      date:
+        type: "string"
+      coin:
+        type: "string"
+      reward:
+        type: "number"
+        format: "double"
+      price:
+        type: "number"
+        format: "double"
+  RewardStatistics:
+    type: object
+    properties: 
+      rewards:
+        type: array
+        items:
+          $ref: "#/definitions/Reward"
+      best:
+        $ref: "#/definitions/Reward"
+  HashrateStatistics:
+    type: object
+    properties:
+      algorithm:
+        type: "string"
+      hashrate15m:
+        type: "number"
+        format: "double"     
+      hashrate24h:
+        type: "number"
+        format: "double"     
+  Hashrate:
+    type: object
+    properties:
+      algorithm:
+        type: "string"
+      hashrate:
+        type: "number"
+        format: "double"    
+  MachineDetail:
+    type: object
+    properties:
+      cards:
+        type: array
+        items:
+          $ref: "#/definitions/CardDetail"
+  CardDetail:
+    type: object
+    properties:
+      statistics:
+        $ref: "#/definitions/CardStatistics"
+      config:
+        $ref: "#/definitions/CardConfig"
+  CardStatistics:
+    type: object
+    properties:
+      id:
+        type: "string"
+      algorithm:
+        type: "string"
+      hashrate:
+        type: "number"
+        format: "double"
+      temperature:
+        type: "number"
+        format: "double"
+      fanSpeed:
+        type: "number"
+        format: "double"
+      power:
+        type: "number"
+        format: "double"
+  CardConfig:
+    type: object
+    properties:
+      setPower:
+        type: "number"
+        format: "double"
+      setFanSpeed:
+        type: "number"
+        format: "double"
+      setDisable:
+        type: "integer"
+  MachineBrief:
+    type: object
+    properties:
+      totalCards:
+        type: "number"
+        format: "integer"
+      onlineCards:
+        type: "number"
+        format: "integer"
+      algorithm:
+        type: "string"
+      hashrate15m:
+        type: number
+        format: "double"
+      hashrate24h:
+        type: number
+        format: "double"
+  ConfigGroup:
+    type: object
+    properties:
+      id: 
+        type: "string"
+      name:
+        type: "string"
+      coin:
+        type: "string"
+      pool:
+        type: "string"
+      address:
+        type: "string"
+      parameter:
+        type: "string"
+      used:
+        type: "number"
+        format: "integer"
+  CardHashrateSeries:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      value:
+        type: array
+        items:
+          type: array
+          items:
+            type: "object"
+  TemperatureSeries:
+    type: "object"
+    properties:
+      id:
+        type: "string"
+      value:
+        type: array
+        items:
+          type: array
+          items:
+            type: "object"  
+  SiteStatistics:
+    type: object
+    properties:
+      name:
+        type: "string"
+      apikey:
+        type: "string"
+      totalMachine:
+        type: "number"
+        format: "integer"
+      operationalMachine:
+        type: "number"
+        format: "integer"
+      totalCards:
+        type: "number"
+        format: "integer"
+      operationalCards:
+        type: "number"
+        format: "integer"
+      algorithms:
+        type: string
+  ArrayOfSiteStatistics:
+    type: array
+    items:
+      $ref: "#/definitions/SiteStatistics"
+  AllsitesStatistics:
+    type: object
+    properties:
+      workerStatistics:
+        $ref: '#/definitions/WorkerStatistics'
+      siteStatistics:
+        $ref: "#/definitions/ArrayOfSiteStatistics"
+      hashrateStatistics:
+        type: array
+        items:
+          $ref: "#/definitions/HashrateStatistics"
+      rewardStatistics:
+        $ref: "#/definitions/RewardStatistics"
+  WorkerOverview:
+    type: object
+    properties:
+      mac:
+        type: "string"
+      name: 
+        type: "string"
+        example: "worker1"
+      algorithm:
+        type: "string"
+        example: "ETH"
+      hashrate15m: 
+        type: "number"
+        format: "double"
+        example: "100.1"
+      hashrate24h:
+        type: "number"
+        format: "double"
+        example: "100.2"
+      status:
+        type: "integer"
+      timestamp:
+        type: "integer"
+      temperature:
+        type: array
+        items:
+          type: "integer"
+          format: "int32"
+      template:
+        type: "string"
+      lastShare:
+        type: "integer"
+  ArrayOfWorkerOverview:
+    type: array
+    items: 
+      $ref: "#/definitions/WorkerOverview"
+  WorkersInformation:
+    type: object
+    properties:
+      Statistics:
+        type: array
+        items: 
+          $ref: "#/definitions/WorkerOverview"
+      Hardware:
+        type: object
+        additionalProperties:
+          type: array
+          items:
+            type: "number"
+            format: "double"
+  Summary:
+    type: object
+    properties:
+      sitename: 
+        description: "name of site"
+        type: "string"
+        example: "yul01"
+      algorithm:
+        type: "array"
+        items:
+          type: "string"
+      cards_online:
+        type: array
+        items:
+          $ref: "#/definitions/SummaryRelatedWithAlgorithm"  
+      cards_online_rate:
+        type: "array"
+        items:
+          $ref: "#/definitions/SummaryRelatedWithAlgorithm"
+      efficiency:
+        type: "array"
+        items:
+          $ref: "#/definitions/SummaryRelatedWithAlgorithm"          
+      effectiveness:
+        type: "array"
+        items:
+          $ref: "#/definitions/SummaryRelatedWithAlgorithm"        
+      expected_revenue:
+        type: "number"
+        format: "double"
+        example: 1000.8
+      actual_revenue:
+        type: "number"
+        format: "double"
+        example: 1190.8
+      cost:
+        type: "number"
+        format: "double"
+        example: 500.3
+      profit:
+        type: "number"
+        format: "double"
+        example: 690.5
+  SummaryRelatedWithAlgorithm:
+    properties:
+      algorithm:
+        type: "string"
+      data:
+        type: "number"
+        format: "double"
+  ArrayOfSummary:
+    type: array
+    items: 
+      $ref: "#/definitions/Summary"   
+  HashRateSeries:
+    type: "object"
+    properties:
+      algorithm:
+        type: "string"
+      value:
+        type: array
+        items:
+          type: array
+          items:
+            type: "object"
+  ArrayOfHashRateSeries:
+    type: array
+    items:
+      $ref: "#/definitions/HashRateSeries"
+  ProfitabilitySeries:
+    type: "object"
+    properties:
+      data:
+        type: array
+        items:
+          type: array
+          items:
+            type: "object"
+  PoolStatistics:
+    type: object
+    properties: 
+      name:
+        type: "string"
+      coin:
+        type: "string"
+      online: 
+        type: "integer"
+        format: "int32"
+      hashrate:
+        type: "number"
+        format: "double"
+      reward:
+        $ref: '#/definitions/Reward'
+  SiteOverview:
+    type: object
+    properties:
+      workerStatistics:
+        $ref: '#/definitions/WorkerStatistics'
+      rewardStatistics:
+        $ref: "#/definitions/RewardStatistics"
+      hashrateStatistics:
+        type: array
+        items:
+          $ref: "#/definitions/HashrateStatistics"
+      powerConsumption:
+        type: "number"
+        format: "double"
+      poolStatistics:
+        $ref: '#/definitions/PoolStatistics'
+  ApiResponse:
+    type: "object"
+    properties:
+      code:
+        type: "integer"
+      message:
+        type: "string"
+  RewardReference:
+    type: "object"
+    properties:
+      site:
+        type: "string"
+      cardType:
+        type: "string"
+      coin:
+        type: "string"
+      price:
+        type: "number"
+        format: "double"
+      reward:
+        type: "number"
+        format: "double"
+      rewardInUSD:
+        type: "number"
+        format: "double"
+      poolReward:
+        type: "number"
+      poolRewardInUSD:
+        type: "number"
+        format: "double"

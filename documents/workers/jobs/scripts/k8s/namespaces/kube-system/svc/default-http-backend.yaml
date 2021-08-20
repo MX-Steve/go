@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: "2019-06-03T21:48:17Z"
+  labels:
+    k8s-app: default-http-backend
+  name: default-http-backend
+  namespace: kube-system
+  resourceVersion: "169"
+  selfLink: /api/v1/namespaces/kube-system/services/default-http-backend
+  uid: 4bf8cc97-8649-11e9-bd02-02b2ffdde8d8
+spec:
+  clusterIP: 100.64.39.255
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    k8s-app: default-http-backend
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

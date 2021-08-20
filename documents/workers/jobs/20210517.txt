@@ -1,0 +1,6 @@
+last week:
+    1. 开通 aws，熟悉ec2，熟悉 master 架构
+    2. workeragent 等联调
+    3. A 卡超频脚本修改
+this week:
+    新疆 master 部署

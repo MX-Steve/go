@@ -1,0 +1,18 @@
+apiVersion: v1
+data:
+  conflux-pool-hashrate15m-reporter-job.config: |
+    {
+      "topic_name": "pool_share_v2",
+      "bootstrap_servers": "kafka.kafka:9092",
+      "checkpoint_table": "conflux-pool-hashrate15m-checkpoint",
+      "data_table": "conflux-pool-hashrate15m-data",
+      "window_size_in_seconds": 900
+    }
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2020-10-30T07:33:45Z"
+  name: conflux-pool-hashrate15m-reporter-job-config
+  namespace: data
+  resourceVersion: "120262796"
+  selfLink: /api/v1/namespaces/data/configmaps/conflux-pool-hashrate15m-reporter-job-config
+  uid: 999a3987-7d57-41d9-8f60-1265464737ca

@@ -1,0 +1,58 @@
+#!/bin/sh
+
+ROOT=/tmp/workeragent
+mount --bind /dev $ROOT/dev
+mount --bind /proc $ROOT/proc
+mount --bind /sys $ROOT/sys
+
+ln -f /etc/resolv.conf $ROOT/etc/resolv.conf
+ln -f /usr/bin/workeragent $ROOT/usr/bin/workeragent
+ln -f /tmp/workeragent.conf $ROOT/workeragent.conf
+
+WORKER=$(hostname)
+if [ -z "$WORKER" ]; then
+    WORKER="w"
+fi
+
+ENV_FILE=$ROOT/worker.env
+wget -q -O $ENV_FILE http://shepherd-master-ha./api/v1/get-initial-config 
+if [ "$?" -ne 0 ];then
+    echo "get initial config error" > /tmp/error.log
+    exit 10
+fi
+source $ENV_FILE
+
+
+chroot $ROOT modprobe ipmi_msghandler
+chroot $ROOT modprobe nvidia NVreg_UsePageAttributeTable=1
+chroot $ROOT modprobe nvidia_uvm
+chroot $ROOT modprobe i2c_i801
+chroot $ROOT modprobe nct7802
+chroot $ROOT /usr/bin/nvidia-smi -pm 1
+
+TOTAL_GPU=$(chroot $ROOT /usr/bin/nvidia-smi -L|grep "^GPU "|wc -l)
+
+for h in $(ls /sys/class/hwmon);do 
+    for i in 1 2 3; do
+        echo $FANSPEED > /sys/class/hwmon/$h/pwm$i
+    done
+done
+
+i=0
+while [ $i -lt $TOTAL_GPU ]; do
+    chroot $ROOT /usr/bin/nvidia-smi -i $i -pm 1
+    chroot $ROOT /usr/bin/nvidia-smi -i $i -pl $POWER_BUDGET
+    i=$((i+1))
+done
+
+cd /tmp/workeragent/bin/ && wget http://shepherd-master-ha./deployments/noverclock && chmod +x /tmp/workeragent/bin/noverclock
+chroot /tmp/workeragent noverclock -DcUUID=$UUID -etcdIp=10.3.0.1 -etcdPort=23790  -eth=eth0 -method=get
+
+
+#chroot $ROOT /usr/bin/workeragent metrics -conf /workeragent.conf -dc $DC &
+chroot $ROOT /usr/bin/workeragent service -dc $DC &
+chroot $ROOT sh /bminer-current/start.sh 
+
+if [ "$ENABLE_ETHPILL" = 1 ];then
+    chroot $ROOT /bminer-current/OhGodAnETHlargementPill-r2 &
+fi

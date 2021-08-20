@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"name":"vds-stratum","namespace":"default"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"vds-stratum"}},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"vds-stratum"}},"spec":{"containers":[{"command":["/app/start-stratum-frontend.sh","-id","montreal"],"image":"313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/vdspool:latest","imagePullPolicy":"Always","livenessProbe":{"httpGet":{"path":"/api/v1/server_status","port":31537},"initialDelaySeconds":60,"periodSeconds":60},"name":"vds-stratum","ports":[{"containerPort":6536,"protocol":"TCP"},{"containerPort":31537,"protocol":"TCP"}]}]}}}}
+  creationTimestamp: "2019-06-06T07:57:48Z"
+  generation: 14
+  labels:
+    app: vds-stratum
+  name: vds-stratum
+  namespace: default
+  resourceVersion: "28577081"
+  selfLink: /apis/apps/v1/namespaces/default/deployments/vds-stratum
+  uid: c6c16674-8830-11e9-a05a-021598fc403c
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 0
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: vds-stratum
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: vds-stratum
+    spec:
+      containers:
+      - command:
+        - /app/start-stratum-frontend.sh
+        - -id
+        - montreal
+        image: 313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/vdspool:latest
+        imagePullPolicy: Always
+        livenessProbe:
+          failureThreshold: 3
+          httpGet:
+            path: /api/v1/server_status
+            port: 31537
+            scheme: HTTP
+          initialDelaySeconds: 60
+          periodSeconds: 60
+          successThreshold: 1
+          timeoutSeconds: 1
+        name: vds-stratum
+        ports:
+        - containerPort: 6536
+          protocol: TCP
+        - containerPort: 31537
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      nodeSelector:
+        usedBy: online
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status:
+  conditions:
+  - lastTransitionTime: "2019-07-12T07:59:56Z"
+    lastUpdateTime: "2019-07-12T07:59:56Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  - lastTransitionTime: "2019-06-14T05:51:02Z"
+    lastUpdateTime: "2019-11-15T05:11:35Z"
+    message: ReplicaSet "vds-stratum-7fc64c9845" has successfully progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  observedGeneration: 14

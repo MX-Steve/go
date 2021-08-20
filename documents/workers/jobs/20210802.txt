@@ -1,0 +1,44 @@
+20210802~20210808
+20210802:
+    1. 给高辙账号授权
+    2. pagerduty 监控代码合并
+    3. 常用 sql 编写
+    4. ./bminer -managed 问题排查
+20210803:
+    1. userland编译处理 -managed 问题
+    2. 排查数据上报问题
+    3. cfx收益计算
+20210804:
+    1. 编写 kafka 连接工具，查看topic，设置 Producer和Consumer等信息
+    2. 排查数据上报问题
+20210805:
+    1. 更换 bminer【d77cc9b】 版本，可以上报数据，minerops 可看，但 grafana 不行
+    2. 更换昨天刚打的包 bminer,进行测试【65ff93a】,经过测试，这个版本目前无法上报数据到kafka
+
+
+
+
+
+bminer-backend 会起一个 topic:miner_startup_info,然后kafka将这个数据发送到 athena/rawdata/pbtb_miner_startup_info
+./kafka-console-consumer.sh 
+    --topic metricData-gansu 
+    --bootstrap-server 这里写kafkatompicip及其端口
+    --new-consumer  --max-messages 2000 
+    --consumer.config /u01/apps/hadoopclient/Kafka/kafka/config/consumer.pro perties |egrep 
+
+remote_miner_stats_protobuf
+remote_miner_stats_protobuf_staging
+miner_stats_protobuf
+miner_stats_protobuf_staging
+
+004ACB63F8A4FFDFC7741C413E5BFC88FF4D7D65A6	yul02_p102	17pUf1vukAzLFavDWj34VBqfUAhALqJ4v5
+004EE205E0A0A6BDC3B08D2FC5E3D557908E55FD75	urumqi	18C6UKAprzSbR6R2FMFxpnak991cgjjuDb
+005A3EACA372534660BB7DDCF0CECCE6466B45744C	urumqi_1070	19EAtxTncfYRwcyVw3reNZmVdXspyfixoR
+007ACB68F8A4FFDFC7741C413E4BFC94FF4D7D85B1	yul02	1CCH7ahHUatLuiYdDEbn5n9RwZxNoD6D1n
+00AD3BAA7AE10BBAFD4C64B3413862A71825C362DE	nkg01	1GnyNrDxA8bKDBDZQhpRhWsr8LPp52s1YK
+00BF0EA4A4139A500817FF05FC5C2FA77A8448F017	kwj01	1JRDc4beMDCjjce1S6Xg8ubn5DN84fQNHw
+00C60198E81CBBA05916463195D69AD7D376E415E3	urumqi_p102	1K3xhxvZvKaj7EG4NAfw7rY65ghA4r1Qqr
+00DE6B6C73376743452CCE66EFAA1CB94F4BBC107B	icn01	1MH3hWen4ftgG7H3YrryMVR4oGzS1vquCB
+00E09723C5204789D8789AFB73D6F8BFA723924BD9	urumqi_3060	1MUXRLraQsK6bngmb2StdXuoEDcU7FEs44
+00F7A298416ACBA219C449D51878FDC20423CA8396	urumqi_2060	1PaNgfUFPTWPCHhXiLxUv9VADWVWqD3ztt
+05524764C0F3F80BBEBD051EB39BCB960D4A4117A5	yul02_amd	39C4rnYN4FpSE6tcnB7iaWGU3niDJGwvwn

@@ -1,0 +1,94 @@
+apiVersion: v1
+data:
+  01-clickhouse-user.xml: |
+    <yandex>
+        <users>
+            <clickhouse_operator>
+                <networks>
+                    <ip>127.0.0.1</ip>
+                    <ip>0.0.0.0/0</ip>
+                    <ip>::/0</ip>
+                </networks>
+                <password_sha256_hex>716b36073a90c6fe1d445ac1af85f4777c5b7a155cea359961826a030513e448</password_sha256_hex>
+                <profile>clickhouse_operator</profile>
+                <quota>default</quota>
+            </clickhouse_operator>
+        </users>
+        <profiles>
+            <clickhouse_operator>
+                <log_queries>0</log_queries>
+                <skip_unavailable_shards>1</skip_unavailable_shards>
+            </clickhouse_operator>
+        </profiles>
+    </yandex>
+  02-clickhouse-default-profile.xml: |
+    <yandex>
+      <profiles>
+        <default>
+          <log_queries>1</log_queries>
+          <connect_timeout_with_failover_ms>1000</connect_timeout_with_failover_ms>
+          <optimize_move_to_prewhere>0</optimize_move_to_prewhere>
+          <distributed_aggregation_memory_efficient>1</distributed_aggregation_memory_efficient>
+          <parallel_view_processing>1</parallel_view_processing>
+          <http_connection_timeout>5</http_connection_timeout>
+        </default>
+      </profiles>
+    </yandex>
+  chop-generated-users.xml: |
+    <yandex>
+        <users>
+            <bminer>
+                <networks>
+                    <host_regexp>(chi-miner-stats-[^.]+\d+-\d+|clickhouse\-miner-stats)\.data\.svc\.cluster\.local$</host_regexp>
+                    <ip>::/0</ip>
+                </networks>
+                <password_sha256_hex>c9bdc8a024f5a84394570accb29248204fdc3997aea564e5c1054bf49ea9b817</password_sha256_hex>
+                <profile>default</profile>
+                <quota>default</quota>
+                <quotas>default</quotas>
+            </bminer>
+            <default>
+                <networks>
+                    <host_regexp>(chi-miner-stats-[^.]+\d+-\d+|clickhouse\-miner-stats)\.data\.svc\.cluster\.local$</host_regexp>
+                    <ip>::1</ip>
+                    <ip>127.0.0.1</ip>
+                </networks>
+                <profile>default</profile>
+                <quota>default</quota>
+            </default>
+            <readonly>
+                <networks>
+                    <host_regexp>(chi-miner-stats-[^.]+\d+-\d+|clickhouse\-miner-stats)\.data\.svc\.cluster\.local$</host_regexp>
+                    <ip>::1</ip>
+                    <ip>127.0.0.1</ip>
+                </networks>
+                <password_sha256_hex>37a8eec1ce19687d132fe29051dca629d164e2c4958ba141d5f4133a33f0688f</password_sha256_hex>
+                <profile>readonly</profile>
+                <quota>default</quota>
+            </readonly>
+            <test>
+                <networks>
+                    <host_regexp>(chi-miner-stats-[^.]+\d+-\d+|clickhouse\-miner-stats)\.data\.svc\.cluster\.local$</host_regexp>
+                    <ip>::/0</ip>
+                </networks>
+                <password_sha256_hex>c9bdc8a024f5a84394570accb29248204fdc3997aea564e5c1054bf49ea9b817</password_sha256_hex>
+                <profile>default</profile>
+                <quota>default</quota>
+                <quotas>default</quotas>
+            </test>
+        </users>
+    </yandex>
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2020-07-30T22:58:03Z"
+  labels:
+    clickhouse.altinity.com/ConfigMap: ChiCommonUsers
+    clickhouse.altinity.com/app: chop
+    clickhouse.altinity.com/chi: miner-stats
+    clickhouse.altinity.com/chop: 0.10.0
+    clickhouse.altinity.com/namespace: data
+  name: chi-miner-stats-common-usersd
+  namespace: data
+  resourceVersion: "86381383"
+  selfLink: /api/v1/namespaces/data/configmaps/chi-miner-stats-common-usersd
+  uid: 8d6f339e-3c82-4d89-82cd-a636c4147437

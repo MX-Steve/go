@@ -1,0 +1,28 @@
+1.  Image:313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/reporters:clickhouse-query-insert
+    Command:
+      /app/clickhouse-query-insert
+      -conf
+      /config/site-estimation-reward.config
+2. site-estimation-reward.config
+database_uri = "tcp://clickhouse-miner-stats.data:9000?username=bminer&password=2WHvybnS5vHsrMJ2&database=miner_stats"
+column_number = 4
+insert_statement = "INSERT INTO site_estimation_reward(time, site_key, coin, estimation_reward) values (?,?,?,?)"
+query_statement = '''
+      SELECT  o.record_time as time,
+              o.site_key as site_key,
+              bminer_algorithm_info.coin as coin,
+              o.hashrate * bminer_algorithm_info.hashrate_factor * algorithm_reward.reward_per_unit_hashrate as estimated_daily_reward
+      FROM (
+          SELECT  site_key,
+                  algorithm,
+                  toStartOfHour(time) as record_time,
+                  sum(hashrate15m)/60000 AS hashrate
+          FROM miner_card_algorithm_hashrate_new
+              WHERE record_time = subtractHours(date_trunc('hour', now()),3)
+                  AND time<subtractHours(date_trunc('hour', now()),2)
+          GROUP BY site_key, algorithm, record_time
+      ) AS o
+      JOIN bminer_algorithm_info ON o.algorithm=bminer_algorithm_info.id
+      JOIN algorithm_reward ON bminer_algorithm_info.coin=algorithm_reward.name and record_time=algorithm_reward.time   
+'''   
+

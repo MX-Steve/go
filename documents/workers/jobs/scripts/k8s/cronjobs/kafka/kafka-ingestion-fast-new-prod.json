@@ -1,0 +1,14 @@
+{
+  "outputroot":"s3a://data.alt-chain.io/rawdata/streams",
+  "bootstrap_servers":"kafka.kafka:9092",
+  "checkpoint_table":"kafka-ingestion-new-checkpoint",
+  "ingesting":[
+    {"topic_name":"syslog","record_class":"io.altchain.data.idl.shepherd.SyslogOuterClass$Syslog"},
+    {"topic_name":"pool_posted_shares","record_class":"io.altchain.data.idl.stratum.StratumFrontend$SubmittedShare"},
+    {"topic_name":"pool_posted_blocks","record_class":"io.altchain.data.idl.stratum.StratumFrontend$SubmittedBlock"},
+    {"topic_name":"mining_pool_reward","record_class":"io.altchain.data.idl.MiningHashRateOuterClass$Reward"},
+    {"topic_name":"conflux_mined_blocks","record_class":"io.altchain.data.idl.Confluxscan$ConfluxBlock"},
+    {"topic_name":"mining_pool_worker","record_class":"io.altchain.data.idl.MiningHashRateOuterClass$Worker"},
+    {"topic_name":"conflux_mined_blocks_v2","record_class":"io.altchain.data.idl.Confluxscan$ConfluxBlock"}
+  ]
+}

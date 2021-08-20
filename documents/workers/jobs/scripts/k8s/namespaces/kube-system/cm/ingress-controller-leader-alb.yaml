@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  annotations:
+    control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"aws-alb-ingress-controller-656f6747d6-zvfhs_f254c069-d22c-11ea-a101-1e6397c329bf","leaseDurationSeconds":15,"acquireTime":"2020-07-30T06:22:07Z","renewTime":"2020-08-05T04:10:11Z","leaderTransitions":196}'
+  creationTimestamp: "2020-04-11T23:58:42Z"
+  name: ingress-controller-leader-alb
+  namespace: kube-system
+  resourceVersion: "88548109"
+  selfLink: /api/v1/namespaces/kube-system/configmaps/ingress-controller-leader-alb
+  uid: 694d0f54-b700-4832-be3a-3a34fa950db6

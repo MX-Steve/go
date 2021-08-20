@@ -1,0 +1,44 @@
+apiVersion: v1
+data:
+  mining-revenue-report.conf: |
+    {
+        "clickhouse_uri":"tcp://clickhouse-miner-stats.data:9000?username=bminer&password=2WHvybnS5vHsrMJ2&database=miner_stats",
+        "mailgun_domain":"mg.alt-chain.io",
+        "mailgun_api":"key-c13a2bdfe361d020d4a5ef25e9e620ff"
+    }
+  site-revenue-table.tmpl: "<!DOCTYPE html PUBLIC \"-//W3C//DTD XHTML 1.0 Transitional//EN\"
+    \"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd\">\n<html xmlns=\"http://www.w3.org/1999/xhtml\">\n
+    \ <head>\n    <meta name=\"viewport\" content=\"width=device-width\"/>\n    <meta
+    http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\" />\n    <title>Reward
+    Information</title>\n    <style type=\"text/css\">\n      table{\n        margin:
+    10px 0 10px 0;\n        border-collapse: collapse;\n      }\n      table, td,
+    th {\n        border: 1px solid gray;\n      }\n    </style>\n  </head>\n  <body>\n
+    \   <p>\n      Hi, Please review revenue information of {{.Date}}\n    </p>\n
+    \   <br />\n    <p>\n      Expected coins vs Pool actual income:\n    </p>\n    <table
+    class=\"table\" border=\"0\" style=\"width:100%\" align=\"center\">\n      <tr>\n
+    \       <td>Data center</td>\n        <td>Coin</td>\n        <td>Expected coins</td>\n
+    \       <td>Expected revenue(USD)</td>\n        <td>Pool income coins</td>\n        <td>Pool
+    income(USD)</td>\n    \t</tr>\n        <tbody>\n      \t{{ with .SiteList }}\n\t\t\t
+    \   {{ range . }}\n      \t\t\t<tr>\n              <td>{{ .Site }}</td>\n              <td>{{
+    .Coin }}</td>\n              <td>{{ .Reward }}</td>\n              <td>{{ .RewardInUSD
+    }}</td>\n              <td>{{ .PoolReward }}</td>\n              <td>{{ .PoolRewardInUSD
+    }}</td>\n      \t\t\t</tr>\n\t\t\t    {{ end }} \n      \t{{ end }}\n        </tbody>
+    \ \n    </table>\n\n    <p>\n      Expected coins in different algorithm:\n    </p>\n
+    \   <table class=\"table\" border=\"0\" style=\"width:100%\" align=\"center\">\n
+    \     <tr>\n        <td>Data center</td>\n        <td>Card type</td>\n        <td>Coin</td>\n
+    \       <td>Price</td>\n        <td>Expected coins</td>\n        <td>Expected
+    revenue(USD)</td>\n    \t</tr>\n        <tbody>\n      \t{{ with .CardList }}\n\t\t\t
+    \   {{ range . }}\n      \t\t\t<tr>\n              <td>{{ .Site }}</td>\n              <td>{{
+    .CardType }}</td>\n              <td>{{ .Coin }}</td>\n              <td>{{ .Price
+    }}</td>\n              <td>{{ .Reward }}</td>\n              <td>{{ .RewardInUSD
+    }}</td>\n      \t\t\t</tr>\n\t\t\t    {{ end }} \n      \t{{ end }}\n        </tbody>
+    \ \n    </table>\n    <p>\n      The email is sent automatically, please do not
+    reply.\n      Any problem, please contact jixing@alt-chain.io\n    </p>\n  </body>\n</html>"
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2020-09-26T13:33:45Z"
+  name: mining-site-revenue-reporter
+  namespace: data
+  resourceVersion: "107703167"
+  selfLink: /api/v1/namespaces/data/configmaps/mining-site-revenue-reporter
+  uid: 92ce41c5-3678-4958-b0b9-90beb4d03c52

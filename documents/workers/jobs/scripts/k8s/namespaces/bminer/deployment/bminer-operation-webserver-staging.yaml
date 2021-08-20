@@ -1,0 +1,77 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "2"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"bminer-operation-webserver-staging"},"name":"bminer-operation-webserver-staging","namespace":"bminer"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"bminer-operation-webserver-staging"}},"template":{"metadata":{"labels":{"app":"bminer-operation-webserver-staging"}},"spec":{"containers":[{"image":"313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/bminer-operation-webserver:latest","imagePullPolicy":"Always","name":"bminer-operation-webserver-staging","ports":[{"containerPort":80}],"volumeMounts":[{"mountPath":"/etc/nginx/conf.d/","name":"config"}]}],"volumes":[{"configMap":{"name":"bminer-operation-webserver-staging"},"name":"config"}]}}}}
+  creationTimestamp: "2020-09-02T06:50:50Z"
+  generation: 2
+  labels:
+    app: bminer-operation-webserver-staging
+  name: bminer-operation-webserver-staging
+  namespace: bminer
+  resourceVersion: "204200056"
+  selfLink: /apis/apps/v1/namespaces/bminer/deployments/bminer-operation-webserver-staging
+  uid: b4bfabe0-de74-45d6-bb8c-9dc98375a215
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: bminer-operation-webserver-staging
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: bminer-operation-webserver-staging
+    spec:
+      containers:
+      - image: 313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/bminer-operation-webserver:bminer-operation-frontend-staging
+        imagePullPolicy: Always
+        name: bminer-operation-webserver-staging
+        ports:
+        - containerPort: 80
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/nginx/conf.d/
+          name: config
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: bminer-operation-webserver-staging
+        name: config
+status:
+  availableReplicas: 1
+  conditions:
+  - lastTransitionTime: "2020-09-02T06:50:50Z"
+    lastUpdateTime: "2021-04-30T03:27:11Z"
+    message: ReplicaSet "bminer-operation-webserver-staging-6957d59b89" has successfully
+      progressed.
+    reason: NewReplicaSetAvailable
+    status: "True"
+    type: Progressing
+  - lastTransitionTime: "2021-05-27T21:24:47Z"
+    lastUpdateTime: "2021-05-27T21:24:47Z"
+    message: Deployment has minimum availability.
+    reason: MinimumReplicasAvailable
+    status: "True"
+    type: Available
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  updatedReplicas: 1

@@ -1,0 +1,20 @@
+1. zone/type: us-west-2a/t3.medium
+2. resources: m1/c2
+3. security:
+    in:
+        4003 - 65535	TCP	    sg-0296f455bab4294df	masters.k8s-prod.aws.prod.alt-chain.net
+        2382 - 4000	    TCP	    sg-0296f455bab4294df	masters.k8s-prod.aws.prod.alt-chain.net
+        全部	        全部	 sg-07b9399000e6c3ab1    masters.k8s-prod.aws.prod.alt-chain.net
+        22	            TCP	    0.0.0.0/0	            masters.k8s-prod.aws.prod.alt-chain.net
+        1 - 65535	    UDP	    sg-0296f455bab4294df	masters.k8s-prod.aws.prod.alt-chain.net
+    out:
+        全部	        全部	 0.0.0.0/0	            masters.k8s-prod.aws.prod.alt-chain.net
+4. storage:
+    vol-0c3dbfdce72bfbd62	/dev/sda1	64	
+    vol-0f21c78037f523e19	/dev/xvdu	20	
+    vol-0b5b5fe48253c248c	/dev/xvdv	20
+5. AMI:
+    ami-07dd19a7900a1f049
+    099720109477/ubuntu/images/hvm-ssd/ubuntu-focal-20.04-amd64-server-20201026
+6. Auto Scaling
+    master-us-west-2a.masters.k8s-prod.aws.prod.alt-chain.net

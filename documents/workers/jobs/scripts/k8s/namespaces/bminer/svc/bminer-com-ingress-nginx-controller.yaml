@@ -1,0 +1,74 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"service.beta.kubernetes.io/aws-load-balancer-backend-protocol":"tcp","service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout":"3600","service.beta.kubernetes.io/aws-load-balancer-ssl-cert":"arn:aws:acm:us-west-2:313557088125:certificate/b3561f6c-9d9c-45f3-a060-3acfb82aaf75","service.beta.kubernetes.io/aws-load-balancer-ssl-ports":"3333,3636,4013,4200,9766,9767,16669"},"labels":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"bminer-com","app.kubernetes.io/managed-by":"Helm","app.kubernetes.io/name":"ingress-nginx","app.kubernetes.io/version":"0.32.0","helm.sh/chart":"ingress-nginx-2.1.0"},"name":"bminer-com-ingress-nginx-controller","namespace":"bminer"},"spec":{"ports":[{"name":"bfc-devfee","port":3333},{"name":"raven-devfee","port":3636},{"name":"ae-devfee","port":4013,"targetPort":9505},{"name":"sero-devfee","port":4200},{"name":"pmeer-devfee","port":9766},{"name":"qitmeer-devfee","port":9767},{"name":"grin-devfee","port":16669}],"selector":{"app.kubernetes.io/component":"controller","app.kubernetes.io/instance":"bminer-com","app.kubernetes.io/name":"ingress-nginx"},"type":"LoadBalancer"}}
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+    service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: "3600"
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:us-west-2:313557088125:certificate/b3561f6c-9d9c-45f3-a060-3acfb82aaf75
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: 3333,3636,4013,4200,9766,9767,9768,9769,16669,18118
+  creationTimestamp: "2020-05-10T12:21:02Z"
+  finalizers:
+  - service.kubernetes.io/load-balancer-cleanup
+  labels:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: bminer-com
+    app.kubernetes.io/managed-by: Helm
+    app.kubernetes.io/name: ingress-nginx
+    app.kubernetes.io/version: 0.32.0
+    helm.sh/chart: ingress-nginx-2.1.0
+  name: bminer-com-ingress-nginx-controller
+  namespace: bminer
+  resourceVersion: "150703517"
+  selfLink: /api/v1/namespaces/bminer/services/bminer-com-ingress-nginx-controller
+  uid: 5be9b6c2-7b40-494a-9949-9f06f0e9b839
+spec:
+  clusterIP: 100.65.33.173
+  externalTrafficPolicy: Cluster
+  ports:
+  - name: bfc-devfee
+    nodePort: 32288
+    port: 3333
+    protocol: TCP
+    targetPort: 3333
+  - name: raven-devfee
+    nodePort: 31381
+    port: 3636
+    protocol: TCP
+    targetPort: 3636
+  - name: ae-devfee
+    nodePort: 31268
+    port: 4013
+    protocol: TCP
+    targetPort: 4013
+  - name: sero-devfee
+    nodePort: 32087
+    port: 4200
+    protocol: TCP
+    targetPort: 4200
+  - name: grin-devfee
+    nodePort: 32078
+    port: 16669
+    protocol: TCP
+    targetPort: 16669
+  - name: etc-devfee
+    nodePort: 32435
+    port: 18118
+    protocol: TCP
+    targetPort: 18118
+  - name: stratum-backend
+    nodePort: 31631
+    port: 32526
+    protocol: TCP
+    targetPort: 32526
+  selector:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: bminer-com
+    app.kubernetes.io/name: ingress-nginx
+  sessionAffinity: None
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - hostname: a5be9b6c27b40494a99499f06f0e9b83-1328453264.us-west-2.elb.amazonaws.com

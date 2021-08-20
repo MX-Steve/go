@@ -1,0 +1,5 @@
+replicaCount: 1
+image:
+  repository: 313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/reporters
+  pullPolicy: Always
+  tag: "platform-flow"

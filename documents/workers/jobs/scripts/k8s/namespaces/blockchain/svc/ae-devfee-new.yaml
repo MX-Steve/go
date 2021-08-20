@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"ae-devfee-new","namespace":"blockchain"},"spec":{"ports":[{"port":4013,"protocol":"TCP","targetPort":9505}],"selector":{"app":"ae-devfee"}}}
+  creationTimestamp: "2020-03-30T07:20:22Z"
+  name: ae-devfee-new
+  namespace: blockchain
+  resourceVersion: "72042207"
+  selfLink: /api/v1/namespaces/blockchain/services/ae-devfee-new
+  uid: 8691677d-c00c-46b7-a20f-1ef3346a88e0
+spec:
+  clusterIP: 100.68.83.253
+  ports:
+  - port: 4013
+    protocol: TCP
+    targetPort: 9505
+  selector:
+    app: ae-devfee
+  sessionAffinity: None
+  type: ClusterIP
+status:
+  loadBalancer: {}

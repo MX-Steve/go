@@ -1,0 +1,21 @@
+apiVersion: v1
+data:
+  clickhouse-tables.conf: |-
+    coin_reward_info
+    miner_speed
+    miner_temperature
+    miner_liveness
+    miner_algorithm_hashrate
+    miner_card_stats
+    miner_card_algorithm_hashrate_new
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"clickhouse-tables.conf":"coin_reward_info\nminer_speed\nminer_temperature\nminer_liveness\nminer_algorithm_hashrate\nminer_card_stats\nminer_card_algorithm_hashrate_new"},"kind":"ConfigMap","metadata":{"annotations":{},"name":"clickhouse-tables-config","namespace":"data"}}
+  creationTimestamp: "2020-10-08T06:08:10Z"
+  name: clickhouse-tables-config
+  namespace: data
+  resourceVersion: "112005815"
+  selfLink: /api/v1/namespaces/data/configmaps/clickhouse-tables-config
+  uid: f1a52669-1f22-482b-8a55-2d388286f1cd

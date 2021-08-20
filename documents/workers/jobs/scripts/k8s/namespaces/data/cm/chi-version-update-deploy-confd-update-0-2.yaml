@@ -1,0 +1,70 @@
+apiVersion: v1
+data:
+  chop-generated-macros.xml: |
+    <yandex>
+        <macros>
+            <installation>version-update</installation>
+            <all-sharded-shard>2</all-sharded-shard>
+            <cluster>update</cluster>
+            <shard>0</shard>
+            <replica>chi-version-update-update-0-2</replica>
+        </macros>
+    </yandex>
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2021-04-02T12:56:44Z"
+  labels:
+    clickhouse.altinity.com/ConfigMap: Host
+    clickhouse.altinity.com/app: chop
+    clickhouse.altinity.com/chi: version-update
+    clickhouse.altinity.com/chiScopeCycleIndex: "0"
+    clickhouse.altinity.com/chiScopeCycleOffset: "2"
+    clickhouse.altinity.com/chiScopeCycleSize: "0"
+    clickhouse.altinity.com/chiScopeIndex: "2"
+    clickhouse.altinity.com/chop: 0.10.0
+    clickhouse.altinity.com/cluster: update
+    clickhouse.altinity.com/clusterScopeCycleIndex: "0"
+    clickhouse.altinity.com/clusterScopeCycleOffset: "2"
+    clickhouse.altinity.com/clusterScopeCycleSize: "0"
+    clickhouse.altinity.com/clusterScopeIndex: "2"
+    clickhouse.altinity.com/namespace: data
+    clickhouse.altinity.com/replica: "2"
+    clickhouse.altinity.com/replicaScopeIndex: "0"
+    clickhouse.altinity.com/shard: "0"
+    clickhouse.altinity.com/shardScopeIndex: "2"
+  managedFields:
+  - apiVersion: v1
+    fieldsType: FieldsV1
+    fieldsV1:
+      f:data:
+        .: {}
+        f:chop-generated-macros.xml: {}
+      f:metadata:
+        f:labels:
+          .: {}
+          f:clickhouse.altinity.com/ConfigMap: {}
+          f:clickhouse.altinity.com/app: {}
+          f:clickhouse.altinity.com/chi: {}
+          f:clickhouse.altinity.com/chiScopeCycleIndex: {}
+          f:clickhouse.altinity.com/chiScopeCycleOffset: {}
+          f:clickhouse.altinity.com/chiScopeCycleSize: {}
+          f:clickhouse.altinity.com/chiScopeIndex: {}
+          f:clickhouse.altinity.com/chop: {}
+          f:clickhouse.altinity.com/cluster: {}
+          f:clickhouse.altinity.com/clusterScopeCycleIndex: {}
+          f:clickhouse.altinity.com/clusterScopeCycleOffset: {}
+          f:clickhouse.altinity.com/clusterScopeCycleSize: {}
+          f:clickhouse.altinity.com/clusterScopeIndex: {}
+          f:clickhouse.altinity.com/namespace: {}
+          f:clickhouse.altinity.com/replica: {}
+          f:clickhouse.altinity.com/replicaScopeIndex: {}
+          f:clickhouse.altinity.com/shard: {}
+          f:clickhouse.altinity.com/shardScopeIndex: {}
+    manager: clickhouse-operator
+    operation: Update
+    time: "2021-04-02T12:56:44Z"
+  name: chi-version-update-deploy-confd-update-0-2
+  namespace: data
+  resourceVersion: "181056042"
+  selfLink: /api/v1/namespaces/data/configmaps/chi-version-update-deploy-confd-update-0-2
+  uid: bd081b01-e079-4bdb-9923-249dbd7e71f2

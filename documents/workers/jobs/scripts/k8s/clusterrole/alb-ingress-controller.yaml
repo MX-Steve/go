@@ -1,0 +1,45 @@
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"rbac.authorization.k8s.io/v1","kind":"ClusterRole","metadata":{"annotations":{},"labels":{"app.kubernetes.io/name":"alb-ingress-controller"},"name":"alb-ingress-controller"},"rules":[{"apiGroups":["","extensions"],"resources":["configmaps","endpoints","events","ingresses","ingresses/status","services","pods/status"],"verbs":["create","get","list","update","watch","patch"]},{"apiGroups":["","extensions"],"resources":["nodes","pods","secrets","services","namespaces"],"verbs":["get","list","watch"]}]}
+  creationTimestamp: "2020-06-16T06:39:03Z"
+  labels:
+    app.kubernetes.io/name: alb-ingress-controller
+  name: alb-ingress-controller
+  resourceVersion: "73696662"
+  selfLink: /apis/rbac.authorization.k8s.io/v1/clusterroles/alb-ingress-controller
+  uid: fc6bf145-f3fc-4141-a506-8ff451fa1cf9
+rules:
+- apiGroups:
+  - ""
+  - extensions
+  resources:
+  - configmaps
+  - endpoints
+  - events
+  - ingresses
+  - ingresses/status
+  - services
+  - pods/status
+  verbs:
+  - create
+  - get
+  - list
+  - update
+  - watch
+  - patch
+- apiGroups:
+  - ""
+  - extensions
+  resources:
+  - nodes
+  - pods
+  - secrets
+  - services
+  - namespaces
+  verbs:
+  - get
+  - list
+  - watch

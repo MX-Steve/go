@@ -1,0 +1,52 @@
+1. drm
+    DRM bridge infrastructure
+2. i2c_algo_bit
+    I2C-Bus bit-banging algorithm
+    算法提供了一种通用操作。对于所有的位模拟 I2c 总线 adapter 适用
+    采用 bit-bangind 算法的总线驱动
+3. amdkcl
+4. amd_iommu_v2
+    AMD PHY driver
+5. amd_sched
+6. amdchash
+7. amdttm
+8. sysimgblt
+    1-bit/8-bit to 1-32 bit color expansion (sys-to-sys)
+9. sysfillrect
+    Generic fill rectangle (sys-to-sys)
+10. syscopyarea
+    syscopyarea
+11. fb_sys_fops
+    Generic file read (fb in system RAM)
+    随机存取存储器
+12. drm_kms_helper
+    DRM KMS helper
+    主要管理系统
+    密钥管理服务 (KMS) 允许在本地网络上激活产品
+13. amdgpu
+    gpu
+        图形处理器
+        GPU 使显卡减少了对 CPU 的依赖，并进行部分原本 CPU 的工作
+    vm_fragment_size=9
+        虚拟内存块大小为 2M
+    vm_update_mode=2
+        虚拟内存使用方式：只用作计算
+    ppfeaturemask
+        all power features enabled
+        调整电压等预备
+14. hwmon
+    sysfs 下子功能，可以收集设备温度等
+    查看内核导出的信息
+
+===========================
+1. pp_od_clk_voltage
+    调整图形卡时钟( the graphics card )和电压
+    GPU 以较低时钟运行
+    pstate:
+        比较低级的节能模式级别,简单就是限制 cpu 的最大频率
+        选项有 p0~p7 甚至更高，p0 就是无任何限制，按照原来的 cpu 最大频率，p7 就是最大限制，也就是最节能级别
+    VRAM:
+        是显存的一种形式，作为影像绘图卡、显卡所使用的 DRAM（内存），属于双埠随机存取内存，可让 RAMDAC 与影像处理同时存取。
+2. pp_dpm_sclk
+    设置 GPU 限制级别 7
+    echo "7" >  /sys/class/drm/card0/device/pp_dpm_sclk

@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  annotations:
+    control-plane.alpha.kubernetes.io/leader: '{"holderIdentity":"altchain-ingress-nginx-ingress-controller-7c968dbb9f-ln2kx","leaseDurationSeconds":30,"acquireTime":"2020-05-21T21:09:19Z","renewTime":"2020-05-21T21:31:20Z","leaderTransitions":1}'
+  creationTimestamp: "2020-05-21T20:39:53Z"
+  name: ingress-controller-leader-nginx
+  namespace: altchain
+  resourceVersion: "66721954"
+  selfLink: /api/v1/namespaces/altchain/configmaps/ingress-controller-leader-nginx
+  uid: c3cafc11-80ea-4576-ab26-f16cd97e1a5c

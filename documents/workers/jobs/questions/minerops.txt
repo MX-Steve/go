@@ -1,0 +1,12 @@
+minerops:
+  1. 后端程序：bminer-operation-staging
+    image: 313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/bminer-operation:latest
+    imageName: bminer-operation
+    Git: git@code.corp.alt-chain.io/source/chord.git
+    Branch: bminer-operation-backend-staging
+
+  2. 前端程序: bminer-operation-webserver-staging
+    image: 313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/bminer-operation-webserver:bminer-operation-frontend-staging
+    imageName: bminer-operation-frontend-staging
+    Git: git@code.corp.alt-chain.io/source/chord.git
+    Branch: bminer-operation-frontend-staging

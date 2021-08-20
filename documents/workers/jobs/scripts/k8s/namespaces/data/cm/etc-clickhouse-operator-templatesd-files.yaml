@@ -1,0 +1,97 @@
+apiVersion: v1
+data:
+  001-templates.json.example: |
+    {
+      "apiVersion": "clickhouse.altinity.com/v1",
+      "kind": "ClickHouseInstallationTemplate",
+      "metadata": {
+        "name": "01-default-volumeclaimtemplate"
+      },
+      "spec": {
+        "templates": {
+          "volumeClaimTemplates": [
+            {
+              "name": "chi-default-volume-claim-template",
+              "spec": {
+                "accessModes": [
+                  "ReadWriteOnce"
+                ],
+                "resources": {
+                  "requests": {
+                    "storage": "2Gi"
+                  }
+                }
+              }
+            }
+          ],
+          "podTemplates": [
+            {
+              "name": "chi-default-oneperhost-pod-template",
+              "distribution": "OnePerHost",
+              "spec": {
+                "containers" : [
+                  {
+                    "name": "clickhouse",
+                    "image": "yandex/clickhouse-server:19.3.7",
+                    "ports": [
+                      {
+                        "name": "http",
+                        "containerPort": 8123
+                      },
+                      {
+                        "name": "client",
+                        "containerPort": 9000
+                      },
+                      {
+                        "name": "interserver",
+                        "containerPort": 9009
+                      }
+                    ]
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  default-pod-template.yaml.example: |
+    apiVersion: "clickhouse.altinity.com/v1"
+    kind: "ClickHouseInstallationTemplate"
+    metadata:
+      name: "default-oneperhost-pod-template"
+    spec:
+      templates:
+        podTemplates:
+          - name: default-oneperhost-pod-template
+            distribution: "OnePerHost"
+  default-storage-template.yaml.example: |
+    apiVersion: "clickhouse.altinity.com/v1"
+    kind: "ClickHouseInstallationTemplate"
+    metadata:
+      name: "default-storage-template-2Gi"
+    spec:
+      templates:
+        volumeClaimTemplates:
+          - name: default-storage-template-2Gi
+            spec:
+              accessModes:
+                - ReadWriteOnce
+              resources:
+                requests:
+                  storage: 2Gi
+  readme: |
+    Templates in this folder are packaged with an operator and available via 'useTemplate'
+kind: ConfigMap
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"v1","data":{"001-templates.json.example":"{\n  \"apiVersion\": \"clickhouse.altinity.com/v1\",\n  \"kind\": \"ClickHouseInstallationTemplate\",\n  \"metadata\": {\n    \"name\": \"01-default-volumeclaimtemplate\"\n  },\n  \"spec\": {\n    \"templates\": {\n      \"volumeClaimTemplates\": [\n        {\n          \"name\": \"chi-default-volume-claim-template\",\n          \"spec\": {\n            \"accessModes\": [\n              \"ReadWriteOnce\"\n            ],\n            \"resources\": {\n              \"requests\": {\n                \"storage\": \"2Gi\"\n              }\n            }\n          }\n        }\n      ],\n      \"podTemplates\": [\n        {\n          \"name\": \"chi-default-oneperhost-pod-template\",\n          \"distribution\": \"OnePerHost\",\n          \"spec\": {\n            \"containers\" : [\n              {\n                \"name\": \"clickhouse\",\n                \"image\": \"yandex/clickhouse-server:19.3.7\",\n                \"ports\": [\n                  {\n                    \"name\": \"http\",\n                    \"containerPort\": 8123\n                  },\n                  {\n                    \"name\": \"client\",\n                    \"containerPort\": 9000\n                  },\n                  {\n                    \"name\": \"interserver\",\n                    \"containerPort\": 9009\n                  }\n                ]\n              }\n            ]\n          }\n        }\n      ]\n    }\n  }\n}\n","default-pod-template.yaml.example":"apiVersion: \"clickhouse.altinity.com/v1\"\nkind: \"ClickHouseInstallationTemplate\"\nmetadata:\n  name: \"default-oneperhost-pod-template\"\nspec:\n  templates:\n    podTemplates:\n      - name: default-oneperhost-pod-template\n        distribution: \"OnePerHost\"\n","default-storage-template.yaml.example":"apiVersion: \"clickhouse.altinity.com/v1\"\nkind: \"ClickHouseInstallationTemplate\"\nmetadata:\n  name: \"default-storage-template-2Gi\"\nspec:\n  templates:\n    volumeClaimTemplates:\n      - name: default-storage-template-2Gi\n        spec:\n          accessModes:\n            - ReadWriteOnce\n          resources:\n            requests:\n              storage: 2Gi\n","readme":"Templates in this folder are packaged with an operator and available via 'useTemplate'\n"},"kind":"ConfigMap","metadata":{"annotations":{},"labels":{"app":"clickhouse-operator"},"name":"etc-clickhouse-operator-templatesd-files","namespace":"data"}}
+  creationTimestamp: "2020-07-30T08:15:34Z"
+  labels:
+    app: clickhouse-operator
+  name: etc-clickhouse-operator-templatesd-files
+  namespace: data
+  resourceVersion: "86125379"
+  selfLink: /api/v1/namespaces/data/configmaps/etc-clickhouse-operator-templatesd-files
+  uid: 6f64ef7e-a2d7-43df-b3f2-6d371563964e

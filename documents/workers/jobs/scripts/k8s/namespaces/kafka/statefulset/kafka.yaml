@@ -1,0 +1,121 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  annotations:
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"StatefulSet","metadata":{"annotations":{},"name":"kafka","namespace":"kafka"},"spec":{"podManagementPolicy":"Parallel","replicas":1,"selector":{"matchLabels":{"app":"kafka"}},"serviceName":"kafka","template":{"metadata":{"labels":{"app":"kafka"}},"spec":{"containers":[{"command":["./bin/kafka-server-start.sh","/etc/kafka/server.properties"],"env":[{"name":"CLASSPATH","value":"/opt/kafka/libs/extensions/*"},{"name":"KAFKA_LOG4J_OPTS","value":"-Dlog4j.configuration=file:/etc/kafka/log4j.properties"},{"name":"KAFKA_HEAP_OPTS","value":"-Xmx4G -Xms4G"},{"name":"JMX_PORT","value":"5555"}],"image":"solsson/kafka:2.3.0@sha256:b59603a8c0645f792fb54e9571500e975206352a021d6a116b110945ca6c3a1d","name":"broker","ports":[{"containerPort":9092,"name":"inside"},{"containerPort":9094,"name":"outside"},{"containerPort":5555,"name":"jmx"}],"readinessProbe":{"tcpSocket":{"port":9092},"timeoutSeconds":1},"resources":{"limits":{"cpu":1,"memory":"4096Mi"},"requests":{"cpu":1,"memory":"4096Mi"}},"volumeMounts":[{"mountPath":"/etc/kafka","name":"configmap"},{"mountPath":"/var/lib/kafka/data","name":"kafka-data"}]}],"terminationGracePeriodSeconds":30,"volumes":[{"configMap":{"name":"broker-config"},"name":"configmap"}]}},"updateStrategy":{"type":"RollingUpdate"},"volumeClaimTemplates":[{"metadata":{"name":"kafka-data"},"spec":{"accessModes":["ReadWriteOnce"],"resources":{"requests":{"storage":"128Gi"}},"storageClassName":"kafka-broker"}}]}}
+  creationTimestamp: "2019-10-17T08:32:25Z"
+  generation: 2
+  name: kafka
+  namespace: kafka
+  resourceVersion: "190788071"
+  selfLink: /apis/apps/v1/namespaces/kafka/statefulsets/kafka
+  uid: a57972e9-f0b8-11e9-b4fb-028b91b570fe
+spec:
+  podManagementPolicy: Parallel
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: kafka
+  serviceName: kafka
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: kafka
+    spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - preference:
+              matchExpressions:
+              - key: kops.k8s.io/instancegroup
+                operator: In
+                values:
+                - online-svc
+            weight: 1
+      containers:
+      - command:
+        - ./bin/kafka-server-start.sh
+        - /etc/kafka/server.properties
+        env:
+        - name: CLASSPATH
+          value: /opt/kafka/libs/extensions/*
+        - name: KAFKA_LOG4J_OPTS
+          value: -Dlog4j.configuration=file:/etc/kafka/log4j.properties
+        - name: KAFKA_HEAP_OPTS
+          value: -Xmx4G -Xms4G
+        - name: JMX_PORT
+          value: "5555"
+        image: solsson/kafka:2.3.0@sha256:b59603a8c0645f792fb54e9571500e975206352a021d6a116b110945ca6c3a1d
+        imagePullPolicy: IfNotPresent
+        name: broker
+        ports:
+        - containerPort: 9092
+          name: inside
+          protocol: TCP
+        - containerPort: 9094
+          name: outside
+          protocol: TCP
+        - containerPort: 5555
+          name: jmx
+          protocol: TCP
+        readinessProbe:
+          failureThreshold: 3
+          periodSeconds: 10
+          successThreshold: 1
+          tcpSocket:
+            port: 9092
+          timeoutSeconds: 1
+        resources:
+          limits:
+            cpu: "1"
+            memory: 4Gi
+          requests:
+            cpu: "1"
+            memory: 4Gi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /etc/kafka
+          name: configmap
+        - mountPath: /var/lib/kafka/data
+          name: kafka-data
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: broker-config
+        name: configmap
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      creationTimestamp: null
+      name: kafka-data
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 128Gi
+      storageClassName: kafka-broker
+      volumeMode: Filesystem
+    status:
+      phase: Pending
+status:
+  collisionCount: 0
+  currentReplicas: 1
+  currentRevision: kafka-7bf8db954
+  observedGeneration: 2
+  readyReplicas: 1
+  replicas: 1
+  updateRevision: kafka-7bf8db954
+  updatedReplicas: 1

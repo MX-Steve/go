@@ -1,0 +1,23 @@
+[[fullnodes]]
+authority="chordpool"
+host="35.183.19.30"
+port=32525
+
+# urc
+[[fullnodes]]
+authority="chordpool"
+host="106.14.205.86"
+port=32525
+
+[miner]
+idle_timeout_ms=3600000
+
+[stratum]
+frontend_id="yul02"
+bind="0.0.0.0"
+port=32526
+
+[backend]
+client_cert="/config/stratum-frontend.crt"
+client_key="/config/stratum-frontend.key"
+ca_cert="/config/ca.crt"

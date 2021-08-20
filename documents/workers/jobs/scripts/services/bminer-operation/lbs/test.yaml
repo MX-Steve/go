@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: Service
+metadata:
+  finalizers:
+  - service.kubernetes.io/load-balancer-cleanup
+  labels:
+    clickhouse.altinity.com/Service: chi
+    clickhouse.altinity.com/app: chop
+    clickhouse.altinity.com/chi: version-update
+    clickhouse.altinity.com/chop: 0.10.0
+    clickhouse.altinity.com/namespace: data
+  name: test
+  namespace: default
+spec:
+  ports:
+  - name: http
+    nodePort: 30111
+    port: 8123
+    protocol: TCP
+    targetPort: http
+  - name: tcp
+    nodePort: 30112
+    port: 9000
+    protocol: TCP
+    targetPort: tcp
+  selector:
+    clickhouse.altinity.com/app: chop
+    clickhouse.altinity.com/chi: version-update
+    clickhouse.altinity.com/namespace: data
+  sessionAffinity: None
+  type: LoadBalancer

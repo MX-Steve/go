@@ -1,0 +1,80 @@
+version: '3'
+services:
+  pxeserver:
+    image: 313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/farm/pxeserver
+    user: "0:0"
+    cap_add:
+      - NET_ADMIN
+    network_mode: host
+    restart: always
+    volumes:
+      - /home/svc/config/dc/icn01/pxeserver:/config
+      - /home/svc/services/pxeserver/data:/data
+      - /home/svc/services/pxeserver/logs:/var/log
+    dns:
+      - 8.8.8.8
+  
+  shepherd:
+    image: 313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/farm/shepherd
+    user: "0:0"
+    restart: always
+    network_mode: host
+    command: ["-conf", "/config/shepherd.json"]
+    volumes:
+      - /home/svc/config/dc/icn01/shepherd/shepherd.json:/config/shepherd.json
+      - /home/svc/config/dc/icn01/pxeserver/dnsmasq.d/nodes.conf:/config/nodes.conf
+      - /home/svc/services/pxeserver/data:/data
+    dns:
+      - 8.8.8.8
+
+  syslog:
+    image: 313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/farm/syslog
+    restart: always
+    cap_add: 
+      - NET_ADMIN
+    network_mode: host
+    command: ["-dc","icn01","-conf","/config/nodes.conf"]
+    volumes:
+      - /home/svc/config/dc/icn01/pxeserver/dnsmasq.d:/config
+      - /etc/hosts:/etc/hosts
+    dns:
+      - 8.8.8.8
+
+  tunnels:
+    image: zhegao/autossh
+    user: "0:0"
+    restart: always
+    network_mode: host
+    command:
+      - autossh
+      - -M
+      - "0"
+      - -o
+      - ExitOnForwardFailure=yes
+      - -o
+      - ServerAliveCountMax=3
+      - -o
+      - ServerAliveInterval=10
+      - -NT
+      - -L
+      - 127.0.0.1:9092:100.70.81.93:9092
+      - -L
+      - 10.0.0.200:8086:100.71.38.14:8086
+      - -L
+      - 127.0.0.1:2379:100.69.106.78:2379
+      - svc@edgegw01-a1.alt-chain.io
+    volumes:
+      - /home/svc/ssh-tunnel/:/root
+    dns:
+      - 8.8.8.8
+
+  etcd-grpc-proxy:
+    image: bitnami/etcd
+    user: "0:0"
+    restart: always
+    network_mode: host
+    command: ["etcd","grpc-proxy","start","--endpoints=127.0.0.1:2379","--listen-addr=10.0.0.200:23790"]
+    environment:
+      - ALLOW_NONE_AUTHENTICATION=yes
+    dns:
+      - 8.8.8.8

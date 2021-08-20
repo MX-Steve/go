@@ -1,0 +1,30 @@
+1. zone/type: us-west-2b/t3.micro
+2. resources: m1/c2
+3. security:
+    group:
+        sg-afa3e7de (launch-wizard-2)
+            in: 
+                SSH	TCP	22	0.0.0.0/0
+            out:
+                所有流量	全部	全部	0.0.0.0/0	–
+                所有流量	全部	全部	::/0
+        sg-005bde1be6b481b6e (grin-wallet-test)
+            in:
+                自定义 TCP	TCP	8888	0.0.0.0/0	–
+                自定义 TCP	TCP	8888	::/0	–
+            out:
+                所有流量	全部	全部	0.0.0.0/0	–
+                所有流量	全部	全部	::/0	–
+        sg-11f0676d (prod-server)
+            in:
+                所有 TCP	TCP	0 - 65535	sg-11f0676d / prod-server	–
+            out:
+                所有流量	全部	全部	0.0.0.0/0	–
+                所有流量	全部	全部	::/0	–
+4. storage:
+    /dev/xvda  : vol-0f7104667990d4e6a: 32G        
+5. AMI:
+    ami-6cd6f714
+    amzn2-ami-hvm-2.0.20180810-x86_64-gp2
+6. Auto Scaling
+    none              

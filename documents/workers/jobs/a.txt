@@ -1,0 +1,62 @@
+[server]
+endpoint = "0.0.0.0:8000"
+aes_key = "AES256Key-32bminer1234567890oper"
+home_url = "https://minerops-staging.corp.alt-chain.io/#/overview"
+token_ttl = 43200
+
+[oauth]
+[oauth.github]
+client_id     = "53404b8f782416ee40e2"
+client_secret = "38a75ff83088904d8babf484c632863c4d170826"
+
+[oauth.wechat]
+client_id     = "wx9a9f815a500aed37"
+client_secret = "be51b8a625c7def3efa7109ca489521b"
+
+[oauth.google]
+client_id     = "847015190399-mi6qcm0rcd371k7qngqo5uh6rcu28eb3.apps.googleusercontent.com"
+client_secret = "D07BbTdS46Tz1TLuVGtelAoJ"
+redirect_uri  = "https://minerops.corp.alt-chain.io/api/auth/callback"
+
+[datasources]
+[datasources.mysql]
+database_uri = "bminer:2WHvybnS5vHsrMJ2@tcp(mariadb.default:3306)/bminer" 
+
+[datasources.clickhouse]
+database_uri = "tcp://clickhouse-miner-stats.data:9000?username=bminer&password=2WHvybnS5vHsrMJ2&database=miner_stats"
+
+[datasources.etcd]
+endpoints="etcd.shepherd:2379"
+[datasources.etcd.uuids]
+"18C6UKAprzSbR6R2FMFxpnak991cgjjuDb"="8c6a7fb2-e9bd-40a6-aedb-ad977983c9a5"
+"19EAtxTncfYRwcyVw3reNZmVdXspyfixoR"="16f5e92b-7c03-4b85-92bf-c62b99ea20ca"
+"1K3xhxvZvKaj7EG4NAfw7rY65ghA4r1Qqr"="22604be5-05b7-40eb-afbc-fe3eac0dd77e"
+"1CCH7ahHUatLuiYdDEbn5n9RwZxNoD6D1n"="3f154da2-4532-4435-abe6-758fc4f7fc85"
+"1MH3hWen4ftgG7H3YrryMVR4oGzS1vquCB"="adbf6827-b962-4dcd-b396-f1b5dc704926"
+"1JRDc4beMDCjjce1S6Xg8ubn5DN84fQNHw"="7086bef2-71db-46b3-8c16-85fed38dae5e"
+"1GnyNrDxA8bKDBDZQhpRhWsr8LPp52s1YK"="76d6c2eb-a9bf-4dc9-86ae-309ccc8512c8"
+"39C4rnYN4FpSE6tcnB7iaWGU3niDJGwvwn"="f02e0814-05b8-4ffd-9cce-b1c8c5346024"
+"1PaNgfUFPTWPCHhXiLxUv9VADWVWqD3ztt"="bfd73ee6-1fcc-46c0-841a-3cc46d7a3046"
+"1MUXRLraQsK6bngmb2StdXuoEDcU7FEs44"="981504c6-54ce-4ec0-ac99-85c00f6c3572"
+
+"2a6H4ahHUDtLuiYdDEbn3n9RwZxNoD2D3n"="551b8d58-35cc-59ed-4e6e-d9c9af09e69d"
+
+004ACB63F8A4FFDFC7741C413E5BFC88FF4D7D65A6
+
+[datasources.athena]
+region="us-west-2"
+database="default" 
+
+Events:  <none>
+
+
+
+1. select HEX(site_key),name,encoded_key from site ;
+004ACB63F8A4FFDFC7741C413E5BFC88FF4D7D65A6 | yul02_p102  | 2a6H4ahHUDtLuiYdDEbn3n9RwZxNoD2D3n
+2. select HEX(mac),HEX(site_key),card_number,card_type from machine_card where worker='p102_s47';
+00E04C400405 | 004ACB63F8A4FFDFC7741C413E5BFC88FF4D7D65A6 |           8 | P102-10G  |
+3. select HEX(mac),HEX(site_key) from machine where worker='p102_s47';
+| 00E04C400405 | 004ACB63F8A4FFDFC7741C413E5BFC88FF4D7D65A6 |
+4. select HEX(site_key),total_machine,total_cards from card_statistics;
+| 004ACB63F8A4FFDFC7741C413E5BFC88FF4D7D65A6 |            48 |         384 |
+以上 mysql 对应的三张表，没啥问题

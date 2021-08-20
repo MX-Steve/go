@@ -1,0 +1,170 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  creationTimestamp: "2020-07-30T22:58:04Z"
+  generation: 9
+  labels:
+    clickhouse.altinity.com/app: chop
+    clickhouse.altinity.com/chi: miner-stats
+    clickhouse.altinity.com/chiScopeCycleIndex: "0"
+    clickhouse.altinity.com/chiScopeCycleOffset: "0"
+    clickhouse.altinity.com/chiScopeCycleSize: "0"
+    clickhouse.altinity.com/chiScopeIndex: "0"
+    clickhouse.altinity.com/chop: 0.10.0
+    clickhouse.altinity.com/cluster: clickhouse
+    clickhouse.altinity.com/clusterScopeCycleIndex: "0"
+    clickhouse.altinity.com/clusterScopeCycleOffset: "0"
+    clickhouse.altinity.com/clusterScopeCycleSize: "0"
+    clickhouse.altinity.com/clusterScopeIndex: "0"
+    clickhouse.altinity.com/namespace: data
+    clickhouse.altinity.com/replica: "0"
+    clickhouse.altinity.com/replicaScopeIndex: "0"
+    clickhouse.altinity.com/settings-version: 0a7caa94547372fc2c6e1456f223719a84c4cc94
+    clickhouse.altinity.com/shard: "0"
+    clickhouse.altinity.com/shardScopeIndex: "0"
+    clickhouse.altinity.com/zookeeper-version: cea9bfc4a19073e068023bb6a2f873b66cd1cb9d
+  name: clickhouse-miner-stats
+  namespace: data
+  resourceVersion: "203818158"
+  selfLink: /apis/apps/v1/namespaces/data/statefulsets/clickhouse-miner-stats
+  uid: 459b5695-bd2f-4430-9cfa-c8a26f67cb3f
+spec:
+  podManagementPolicy: OrderedReady
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      clickhouse.altinity.com/app: chop
+      clickhouse.altinity.com/chi: miner-stats
+      clickhouse.altinity.com/cluster: clickhouse
+      clickhouse.altinity.com/namespace: data
+      clickhouse.altinity.com/replica: "0"
+      clickhouse.altinity.com/shard: "0"
+  serviceName: chi-miner-stats-clickhouse-0-0
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        clickhouse.altinity.com/app: chop
+        clickhouse.altinity.com/chi: miner-stats
+        clickhouse.altinity.com/chiScopeCycleIndex: "0"
+        clickhouse.altinity.com/chiScopeCycleOffset: "0"
+        clickhouse.altinity.com/chiScopeCycleSize: "0"
+        clickhouse.altinity.com/chiScopeIndex: "0"
+        clickhouse.altinity.com/chop: 0.10.0
+        clickhouse.altinity.com/cluster: clickhouse
+        clickhouse.altinity.com/clusterScopeCycleIndex: "0"
+        clickhouse.altinity.com/clusterScopeCycleOffset: "0"
+        clickhouse.altinity.com/clusterScopeCycleSize: "0"
+        clickhouse.altinity.com/clusterScopeIndex: "0"
+        clickhouse.altinity.com/namespace: data
+        clickhouse.altinity.com/replica: "0"
+        clickhouse.altinity.com/replicaScopeIndex: "0"
+        clickhouse.altinity.com/settings-version: 0a7caa94547372fc2c6e1456f223719a84c4cc94
+        clickhouse.altinity.com/shard: "0"
+        clickhouse.altinity.com/shardScopeIndex: "0"
+        clickhouse.altinity.com/zookeeper-version: cea9bfc4a19073e068023bb6a2f873b66cd1cb9d
+      name: pod-template
+    spec:
+      containers:
+      - image: yandex/clickhouse-server:20.9.2.20
+        imagePullPolicy: IfNotPresent
+        name: clickhouse-pod
+        ports:
+        - containerPort: 8123
+          name: http
+          protocol: TCP
+        - containerPort: 9000
+          name: tcp
+          protocol: TCP
+        - containerPort: 9009
+          name: interserver
+          protocol: TCP
+        - containerPort: 9004
+          name: mysql
+          protocol: TCP
+        resources:
+          limits:
+            cpu: "1"
+            memory: 1Gi
+          requests:
+            cpu: "1"
+            memory: 1Gi
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+        volumeMounts:
+        - mountPath: /var/lib/clickhouse
+          name: storage-template
+        - mountPath: /etc/clickhouse-server/config.d/
+          name: chi-miner-stats-common-configd
+        - mountPath: /etc/clickhouse-server/users.d/
+          name: chi-miner-stats-common-usersd
+        - mountPath: /etc/clickhouse-server/conf.d/
+          name: chi-miner-stats-deploy-confd-clickhouse-0-0
+      dnsPolicy: ClusterFirst
+      hostAliases:
+      - hostnames:
+        - chi-miner-stats-clickhouse-0-0
+        ip: 127.0.0.1
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: chi-miner-stats-common-configd
+        name: chi-miner-stats-common-configd
+      - configMap:
+          defaultMode: 420
+          name: chi-miner-stats-common-usersd
+        name: chi-miner-stats-common-usersd
+      - configMap:
+          defaultMode: 420
+          name: chi-miner-stats-deploy-confd-clickhouse-0-0
+        name: chi-miner-stats-deploy-confd-clickhouse-0-0
+  updateStrategy:
+    type: RollingUpdate
+  volumeClaimTemplates:
+  - apiVersion: v1
+    kind: PersistentVolumeClaim
+    metadata:
+      creationTimestamp: null
+      labels:
+        clickhouse.altinity.com/app: chop
+        clickhouse.altinity.com/chi: miner-stats
+        clickhouse.altinity.com/chiScopeCycleIndex: "0"
+        clickhouse.altinity.com/chiScopeCycleOffset: "0"
+        clickhouse.altinity.com/chiScopeCycleSize: "0"
+        clickhouse.altinity.com/chiScopeIndex: "0"
+        clickhouse.altinity.com/chop: 0.10.0
+        clickhouse.altinity.com/cluster: clickhouse
+        clickhouse.altinity.com/clusterScopeCycleIndex: "0"
+        clickhouse.altinity.com/clusterScopeCycleOffset: "0"
+        clickhouse.altinity.com/clusterScopeCycleSize: "0"
+        clickhouse.altinity.com/clusterScopeIndex: "0"
+        clickhouse.altinity.com/namespace: data
+        clickhouse.altinity.com/replica: "0"
+        clickhouse.altinity.com/replicaScopeIndex: "0"
+        clickhouse.altinity.com/shard: "0"
+        clickhouse.altinity.com/shardScopeIndex: "0"
+      name: storage-template
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      resources:
+        requests:
+          storage: 10Gi
+      storageClassName: clickhouse-storage
+      volumeMode: Filesystem
+    status:
+      phase: Pending
+status:
+  collisionCount: 0
+  currentReplicas: 1
+  currentRevision: clickhouse-miner-stats-7b696bd865
+  observedGeneration: 9
+  readyReplicas: 1
+  replicas: 1
+  updateRevision: clickhouse-miner-stats-7b696bd865
+  updatedReplicas: 1

@@ -1,0 +1,21 @@
+20210719~20210725
+20210719:
+  1. cronjob athena-to-clickhouse 五个 cronjob 梳理
+  2. cronjob kafka-ingress 两个 cronjob 梳理
+  3. cronjob weatherdaemon 一个 cronjob 梳理
+  4. pool-stats-reporter-job 梳理
+20210720:
+  1. pool-network-reporter-job 梳理  
+  2. pool-account-reporter-job 梳理  
+  3. mining-pool-worker-reporter 梳理
+  4. mining-pool-reward-reporter 梳理
+  5. mining-hash-rate-reporter 梳理
+  6. pagerduty-reporter 梳理
+  7. pool-payment-job-prod 梳理
+  8. pool-coin-stats-reporter 梳理
+  9. pool-market-stats-reporter 梳理
+  10. etherscan-wallet-transaction-reporter 梳理
+20210721:
+  1. madminer-machine-update-job  
+  2. bee-pool-reporter-job
+  3. clickhouse-to-s3

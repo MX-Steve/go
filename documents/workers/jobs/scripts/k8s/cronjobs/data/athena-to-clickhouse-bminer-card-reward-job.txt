@@ -1,0 +1,18 @@
+with coin_info AS (
+  SELECT 
+    name,
+    avg(reward_per_unit_hashrate) AS reward_per_unit_hashrate,
+    avg(price) AS price 
+  FROM 
+    dwh.fact_algorithm_reward 
+  WHERE 
+    date_diff('hour', from_unixtime(timestamp), current_timestamp) <= 2 GROUP BY  name) 
+SELECT 
+  card,coin,price,
+  speed*reward_per_unit_hashrate AS reward,
+  speed*reward_per_unit_hashrate*price AS reward_in_USD 
+FROM 
+  dwh.lookup_bminer_speed 
+JOIN 
+  coin_info 
+ON lookup_bminer_speed.coin=coin_info.name

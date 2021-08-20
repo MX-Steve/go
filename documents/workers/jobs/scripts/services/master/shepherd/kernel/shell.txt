@@ -1,0 +1,34 @@
+scp root@47.108.195.182:/out/vmlinu* .
+scp root@47.108.195.182:/out/initrd* .
+cp /home/altchainops/li/initrd* /home/svc/services/pxeserver/data/httproot/boot/initrd-asus-z270-p-5.4.0-71-generic.img.xz
+cp /home/altchainops/li/vmlinuz-* /home/svc/services/pxeserver/data/httproot/boot/vmlinuz-5.4.0-71-generic
+
+
+
+
+SCRIPT_DIR=$(cd $(dirname "$BASH_SOURCES") && pwd)
+BASE_IMAGE_NAME=worker-initrd-base:passwd
+OUTPUT=/out
+KERNEL_VERSION=5.3.0-050300-generic
+SKU=asus-z270-p
+docker run -it --rm -v $SCRIPT_DIR/extract-modules:/input -v $OUTPUT/tmp:/output ubuntu:latest
+
+
+docker cp linux-headers-4.17.0-041700-generic_4.17.0-041700.201806041953_amd64.deb f93a863be3ba:/tmp
+docker cp linux-image-unsigned-4.17.0-041700-generic_4.17.0-041700.201806041953_amd64.deb aef597f742a2:/tmp
+docker cp linux-modules-4.17.0-041700-generic_4.17.0-041700.201806041953_amd64.deb aef597f742a2:/tmp
+
+
+
+
+
+docker ps
+DOCKER_INSTANCE=$(docker run -d --rm $BASE_IMAGE_NAME "/bin/busybox" sleep 500)
+mkdir -p $OUTPUT/tmp/initrd
+docker export $DOCKER_INSTANCE|tar x --exclude dev/console -C $OUTPUT/tmp/initrd
+docker stop $DOCKER_INSTANCE
+pushd $OUTPUT/tmp/initrd 
+find . -print0|cpio -o --null -H newc|xz -T0 -9 --check=crc32 > ../../initrd-$SKU-$KERNEL_VERSION.img.xz
+popd
+mv $OUTPUT/tmp/vmlinuz-* $OUTPUT/
+rm -rf $OUTPUT/tmp

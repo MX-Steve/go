@@ -1,0 +1,15 @@
+apiVersion: v1
+data:
+  production.toml: |
+    [server]
+    bind="0.0.0.0:443"
+    ca_cert="/certs/ca.crt"
+    ssl_key_pem="/certs/stratum-backend.key"
+kind: ConfigMap
+metadata:
+  creationTimestamp: "2020-10-10T04:38:11Z"
+  name: stratum-backend
+  namespace: bminer
+  resourceVersion: "121751633"
+  selfLink: /api/v1/namespaces/bminer/configmaps/stratum-backend
+  uid: fbacdad2-34c3-4976-aa64-ef52f0651e24

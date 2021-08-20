@@ -1,0 +1,46 @@
+shepherd.json 
+{
+    "deployments": [
+        {
+            "subnets": ["10.0.0.0/16"],
+            "agent_config": "{\"supervisor\":{\"images\":[{\"uri\":\"http://10.0.0.200/deployments/crater-userland.tar.xz\",\"mountpoint\":\"/\"}],\"deployment\":{\"uri\":\"http://10.0.0.200/deployments/bminer-crater-rx580.tar.xz\",\"id\":\"foo\"}},\"metrics\":{\"inputs\":{\"bminer\":{\"device\":\"http://127.0.0.1:1880/api/v1/status/device\",\"solver\":\"http://127.0.0.1:1880/api/v1/status/solver\"}},\"outputs\":{\"influxdb\":{\"url\":\"http://10.0.0.200:8086\",\"database\":\"farm\"}}}}",
+            "pxe": "#!ipxe\n\ndhcp\n\nset base-url http://10.0.0.200/boot\nkernel ${base-url}/vmlinuz-5.3.0-62-generic initrd=initrd-superdata-5.3.0-62-generic.img.xz pci=noaer\ninitrd ${base-url}/initrd-superdata-5.3.0-62-generic.img.xz\nboot\n",
+            "dc_uuid": "adbf6827-b962-4dcd-b396-f1b5dc704926"
+        }
+    ],
+    "etcdEndpoint":"http://10.0.0.200:23790",
+    "nodesConfig": "/config/nodes.conf"
+}
+
+
+#########################ipxe
+#!ipxe
+
+dhcp
+set base-url http://10.0.0.200/boot
+kernel ${base-url}/vmlinuz-5.3.0-62-generic initrd=initrd-superdata-5.3.0-62-generic.img.xz pci=noaer
+initrd ${base-url}/initrd-superdata-5.3.0-62-generic.img.xz
+boot
+
+
+
+分析：
+ bminer 无须更改,已支持 TCP和ssl。
+ nanopool 支持 ssl,也就是 tls
+ sparkpool 不支持 ssl，新疆目前跑的就是 sparkpool
+结果：
+ 1. 不改动，还是使用之前的 stratum
+ 2. 切换成 nanopool 等其他矿池
+
+
+
+
+CONTAINER ID        IMAGE                                                                   COMMAND                  CREATED             STATUS              PORTS               NAMES
+66de35de4376        313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/farm/shepherd    "/app/shepherd -conf…"   7 months ago        Up 7 weeks                              docker-compose_shepherd_1
+90024345b31d        313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/farm/pxeserver   "/entrypoint.sh"         7 months ago        Up 7 weeks                              docker-compose_pxeserver_1
+130e591c93ab        zhegao/autossh                                                          "autossh -M 0 -o Exi…"   7 months ago        Up 7 weeks                              docker-compose_tunnels_1
+789521f2173a        bitnami/etcd                                                            "/entrypoint.sh etcd…"   7 months ago        Up 7 weeks                              docker-compose_etcd-grpc-proxy_1
+5dad2f9b56e8        313557088125.dkr.ecr.us-west-2.amazonaws.com/alt-chain/farm/syslog      "/app/syslog -dc icn…"   7 months ago        Up 7 weeks                              docker-compose_syslog_1
+
+39c6830f1071        313557088125.dkr.ecr.us-west-2.amazonaws.com/blockchain/stratum-frontend:latest   "/app/stratum-fronte…"   4 months ago        Up 4 months         32525/tcp, 0.0.0.0:32526->32526/tcp   docker-compose_stratum-frontend_1
+8a68ed114299        alpine/socat                                                                      "socat openssl-liste…"   7 months ago        Up 7 months         0.0.0.0:32525->32525/tcp              docker-compose_ssl-proxy_1

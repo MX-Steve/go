@@ -1,0 +1,40 @@
+
+#[[rules.aws-hashrate]]
+#dialect = "influxdb:farm"
+#query = '''SELECT sum("hashrate") FROM ( SELECT mean("hashrate") as hashrate FROM "algorithm" WHERE dc='aws' AND time >= now() - 15m AND algorithm='ethash' GROUP BY hostname,pci_bus_id ORDER BY time LIMIT 15)'''
+#warning_threshold = 15000000.0
+#critical_threshold = 14000000.0
+#service = "urumqi"
+#check_interval = 120
+#counter_threshold = 0.0
+#dc = "aws"
+#disable_auto_resolve = true
+
+#[[rules.aws-livenode]]
+#dialect = "influxdb:farm"
+#query = '''select count(*) from (select mean(hashrate) from algorithm where time > now() - 10m and dc='aws' group by hostname)'''
+#warning_threshold = 3.0
+#critical_threshold = 2.0
+#service = "urumqi"
+#check_interval = 60
+#counter_threshold = 0.0
+#dc = "aws"
+#disable_auto_resolve = true
+
+
+[services]
+
+[[services.urumqi]]
+description = "DC operation in Urumqi"
+route = "pagerduty"
+pagerduty_key = "bc4d0ced80c34cac82f4611d5727bee4"
+
+[alerters]
+
+[datasources]
+
+[[datasources.influxdb]]
+
+[[datasources.influxdb.farm]]
+endpoint="http://influx:8086"
+db="farm"
