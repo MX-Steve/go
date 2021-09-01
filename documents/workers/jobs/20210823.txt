@@ -1,0 +1,172 @@
+20210823～20210829
+1. madminer 拒绝率问题排查, antproxy 代理研究
+2. madminer cronjob 修整，不实用cronjob，使用 deployment
+20210823:
+    1. madminer cronjob 修整，不实用cronjob，使用 deployment
+20210824:
+    1. 更新版本脚本编写
+    2. 收益为0问题排查[athena->clickhouse工具问题，也有可能是链接密码问题]
+    3. madminer 机器掉线处理
+20210825:
+    1. 黑客问题排查
+20210826:
+    1. 新镜像制作
+    2. job修复
+    3. worker节点启动
+
+
+
+
+
+
+
+
+
+
+72 15 49 80
+23 51 56 42
+76 84 56 20 
+09 80 67 35 
+28 59 14 59
+
+
+
+/cow            1.9G  221M  1.7G  12% /
+/cow            1.9G  633M  1.3G  33% /
+/cow            1.9G  462M  1.5G  24% /
+
+
+
+
+udev            1.9G     0  1.9G   0% /dev
+tmpfs           386M   41M  345M  11% /run
+/dev/sdb1        29G  2.7G   27G  10% /cdrom
+/dev/loop0      2.6G  2.6G     0 100% /rofs
+/cow            1.9G  1.9G     0 100% /
+tmpfs           1.9G     0  1.9G   0% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           1.9G     0  1.9G   0% /sys/fs/cgroup
+tmpfs           1.9G     0  1.9G   0% /tmp
+/dev/loop1      256M  256M     0 100% /snap/gnome-3-34-1804/36
+/dev/loop3      384K  384K     0 100% /snap/gnome-characters/550
+/dev/loop2       56M   56M     0 100% /snap/core18/1885
+/dev/loop5      1.0M  1.0M     0 100% /snap/gnome-logs/100
+/dev/loop4      2.3M  2.3M     0 100% /snap/gnome-system-monitor/148
+/dev/loop7       30M   30M     0 100% /snap/snapd/8542
+/dev/loop8      2.5M  2.5M     0 100% /snap/gnome-calculator/748
+/dev/loop6       63M   63M     0 100% /snap/gtk-common-themes/1506
+/dev/loop9       33M   33M     0 100% /snap/snapd/12159
+/dev/loop10      56M   56M     0 100% /snap/core18/2074
+/dev/loop11     384K  384K     0 100% /snap/gnome-characters/708
+/dev/loop12     640K  640K     0 100% /snap/gnome-logs/103
+/dev/loop13     2.5M  2.5M     0 100% /snap/gnome-calculator/884
+/dev/loop14     2.3M  2.3M     0 100% /snap/gnome-system-monitor/157
+/dev/loop15      66M   66M     0 100% /snap/gtk-common-themes/1515
+/dev/loop16     219M  219M     0 100% /snap/gnome-3-34-1804/72
+tmpfs           386M     0  386M   0% /run/user/0
+
+
+
+7943C74F6F944EF3A1E88A49C5D912FA hanli
+
+
+INSERT into config_group_permission values(null,unhex('78FE43890F5040428A331484933EB8A9'),unhex('7943C74F6F944EF3A1E88A49C5D912FA'));
+
+INSERT into config_group_permission values(null,unhex('00C023921F13439884E15861CE33CD4C'),unhex(''));
+INSERT into config_group_permission values(null,unhex('0B95CE8398C6496A9C01274FC2A3469D'),unhex(''));
+INSERT into config_group_permission values(null,unhex('0F1185B422654D20A3A12BF488BCF31E'),unhex(''));
+INSERT into config_group_permission values(null,unhex('116452D704D8463A804EF84B54FAAB1F'),unhex(''));
+INSERT into config_group_permission values(null,unhex('204ABC9E6D6B4E4996E2C49FA5A3B391'),unhex(''));
+INSERT into config_group_permission values(null,unhex('21CD35EAC4DA4780A93BE7AB970DC6B1'),unhex(''));
+INSERT into config_group_permission values(null,unhex('28700C21737D452CB27054F83C36FFBD'),unhex(''));
+INSERT into config_group_permission values(null,unhex('2A9797205CF64A5D9AA6C1A55C21DD4E'),unhex(''));
+INSERT into config_group_permission values(null,unhex('2C8F41E5FE9E41F7BE15CC7F8A38AF77'),unhex(''));
+INSERT into config_group_permission values(null,unhex('2CC866761D85441D8F2E323155868F3A'),unhex(''));
+INSERT into config_group_permission values(null,unhex('346F0A30A26846778A403B0BCF26D850'),unhex(''));
+INSERT into config_group_permission values(null,unhex('358E31A231C04C62BE012FBADCBF7519'),unhex(''));
+INSERT into config_group_permission values(null,unhex('380C592624564F4FA579F10802D3C736'),unhex(''));
+INSERT into config_group_permission values(null,unhex('38F4B0000FAA46B9A8F28FF2AE2B08D4'),unhex(''));
+INSERT into config_group_permission values(null,unhex('3ABEEB05A8304CA5947E0D4B7F1AB449'),unhex(''));
+INSERT into config_group_permission values(null,unhex('3F1B753F236145479EEF8D645A083851'),unhex(''));
+INSERT into config_group_permission values(null,unhex('4947D3AD23684241A222C47528FE25E1'),unhex(''));
+INSERT into config_group_permission values(null,unhex('49B332D9EE5D429CA180EA557AE60750'),unhex(''));
+INSERT into config_group_permission values(null,unhex('51650E7C4B794211BB79AAA2AE99DBED'),unhex(''));
+INSERT into config_group_permission values(null,unhex('5D59333039E04B27975380E8D1BE0C33'),unhex(''));
+INSERT into config_group_permission values(null,unhex('60010FBA51D649F78346ABAC86C9E265'),unhex(''));
+INSERT into config_group_permission values(null,unhex('6066C799FD954E9A90C5ACE6595023CD'),unhex(''));
+INSERT into config_group_permission values(null,unhex('641DCCE1DE3B46E09039ED740F60FFD0'),unhex(''));
+INSERT into config_group_permission values(null,unhex('65126A30378141DA87B2477D4941FB7D'),unhex(''));
+INSERT into config_group_permission values(null,unhex('6C5E66A5669C4B3AA1007227AABC303D'),unhex(''));
+INSERT into config_group_permission values(null,unhex('6D9890E2223E478C902A0EF087582236'),unhex(''));
+INSERT into config_group_permission values(null,unhex('6E956DAD25634280AACDBB85F6346A40'),unhex(''));
+INSERT into config_group_permission values(null,unhex('78FE43890F5040428A331484933EB8A9'),unhex(''));
+INSERT into config_group_permission values(null,unhex('793C0E04043442B7B13758E5EECD30FF'),unhex(''));
+INSERT into config_group_permission values(null,unhex('7E428B269474476EB7722D08D493CC14'),unhex(''));
+INSERT into config_group_permission values(null,unhex('7FB281121F8F422C9333E48E6F3E6648'),unhex(''));
+INSERT into config_group_permission values(null,unhex('8523963637F441DDAD827672078D94C4
+INSERT into config_group_permission values(null,unhex('85A48A03BF5848F5A59D956A64846730
+INSERT into config_group_permission values(null,unhex('871ACBCC83794DC2A081D435FDBD8959
+INSERT into config_group_permission values(null,unhex('8924513D084A47559BF244108C115435
+INSERT into config_group_permission values(null,unhex('8A6F9544598B44ECA67299A3034C78EE
+INSERT into config_group_permission values(null,unhex('8BEE957AF1A94F81B52C394DDE61E32B
+INSERT into config_group_permission values(null,unhex('8CE08A35BCF14CCE9B11961ED3DE1AF8
+INSERT into config_group_permission values(null,unhex('8E7960983571414B8FBC15719F648263
+INSERT into config_group_permission values(null,unhex('8FA4028FB04247FEB54DCF0D321A722B
+INSERT into config_group_permission values(null,unhex('90E67FAD355E4A65A4A0D30B0D192405
+INSERT into config_group_permission values(null,unhex('93CFC6CDAB034156B9D85FB6BC9938A3
+INSERT into config_group_permission values(null,unhex('95591997F1FF4DFE898DF1591ED850E9
+INSERT into config_group_permission values(null,unhex('957EB4300ED1488CA79ADB66BDC85F37
+INSERT into config_group_permission values(null,unhex('9E4052882ECF485188B34555E5BF7EDC
+INSERT into config_group_permission values(null,unhex('A55BBE35E79C4188922380E4F270B52B
+INSERT into config_group_permission values(null,unhex('A9BCA01D963449728AECF934BB126567
+INSERT into config_group_permission values(null,unhex('ABDB984106794478A354485D36408810
+INSERT into config_group_permission values(null,unhex('ACDB7AF336A7425188A0815AF7E331A0
+INSERT into config_group_permission values(null,unhex('AD2B73125AEA4CDABEB5348F0ECD1C14
+INSERT into config_group_permission values(null,unhex('AE7185CEF9DD4DFCBA566FCA2C62FBE6
+INSERT into config_group_permission values(null,unhex('B00D1AD9369346F6994B2EFF4BE79B39
+INSERT into config_group_permission values(null,unhex('B0D3AC5E33F949A98F74965CBD52B0D5
+INSERT into config_group_permission values(null,unhex('B107CD00FA2B4CF09C18C4D9A9D8A3AA
+INSERT into config_group_permission values(null,unhex('B3C276398DC9496F84E304EF0055D6FC
+INSERT into config_group_permission values(null,unhex('B4F00AFC38F246E388DC17FCEA7D3282
+INSERT into config_group_permission values(null,unhex('B606E51875164E62ACE2C980C1657921
+INSERT into config_group_permission values(null,unhex('BB5B629094E54FC09B7BC0BE88A772DD
+INSERT into config_group_permission values(null,unhex('C02F4A7AAD02494984380FCB5DA4EB6A
+INSERT into config_group_permission values(null,unhex('C155D1DB3399402FB98F1462303667D0
+C71A19BED7EC41EAA08C6ED35B9D7FC8
+CDB0929D53E94DA78ADA89A3CD2B8915
+CEB298AEDF3F475AACF959A7B83272C7
+CEC9E53892004F0C99B6BE76424A07AE
+D63A4135E891415E8F0DAABFD0E60456
+D68EB874A6D148B58D590132F213802A
+D9C50693BB3F4B47BF5C845A519BEC55
+DB796A57EB9847E2ADD53992E6CE1D31
+DC335CFAC1CD447AB96C0F3AF6758394
+DCF7E7AAB04449E6BC2F46D433A2EC1C
+DF5D332CE6284A6294902493744B4751
+DFAA923847CB48F69D7641AEEC46BFEF
+E08C5D80084B4AB7A6A36B642E16429F
+E4EB55AFD4D24A21AD39FE702D84F617
+E537CB2468344BB6BAA56C158DA5AC0A
+EDD9C8F605E84BA9B0DD93B86FACA78B
+F043F5D1002340B19689CF600E5AADF5
+F04B85C86DC840BFB50E6EA1ECE94752
+F0C0B32978574906BF2D0405C4DBEEDF
+F35BCC6BB4114C90B12C664DEAC1C31D
+F552305AEDFD4B75AC1EBA88FF83D5D6
+F6F6A4B01504422D9E65E442BB4373CC
+F7D5FCD405C94457AF59154A4C3E3C6A
+F82FE6F911AE4F10A1C85BFEC344DFC8
+FB250089EF8F40AC94AD509350A6A66F
+FCBA93F35CCA4560AE56BDC950561CA9
+
+
+udev            1.9G     0  1.9G   0% /dev
+tmpfs           386M   22M  365M   6% /run
+/dev/sdb1        29G  2.7G   27G  10% /cdrom
+/dev/loop0      2.6G  2.6G     0 100% /rofs
+/cow            1.9G  1.9G     0 100% /
+tmpfs           1.9G     0  1.9G   0% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+tmpfs           1.9G     0  1.9G   0% /sys/fs/cgroup
+tmpfs           1.9G     0  1.9G   0% /tmp
+/dev/loop4      2.5M  2.5M     0 100% /snap/gnome-calculator/748

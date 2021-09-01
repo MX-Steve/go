@@ -15,7 +15,7 @@ type FileLogger struct {
 	logFile     *os.File
 }
 
-// generate struct
+// NewFileLogger: generate struct
 func NewFileLogger(level int, logFilePath, logFileName string) *FileLogger {
 	flObj := &FileLogger{
 		level:       level,

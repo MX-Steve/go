@@ -1,0 +1,9 @@
+20210830~20210905
+20210830:
+    1. madminer iso 制作
+20210831:
+    1. madminer iso 制作
+    2. go 并发并行:goroutine and channel
+    3. aliyun 续费，启动服务，准备移除两台
+20210901:
+    1. 将阿里云另外两台服务移动到 madminer那台继续运行
