@@ -112,6 +112,7 @@ func ex3(ch30 chan int) {
 		}
 	}
 }
+
 func main() {
 	testIt := true
 	if testIt {

@@ -1,0 +1,5 @@
+mode: set
+local/MX-Steve/study/day07/03test/split/split.go:7.45,9.17 2 1
+local/MX-Steve/study/day07/03test/split/split.go:14.2,15.8 2 1
+local/MX-Steve/study/day07/03test/split/split.go:9.17,13.3 3 1
+local/MX-Steve/study/day07/03test/split/split.go:19.30,21.2 1 0
