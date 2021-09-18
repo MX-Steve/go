@@ -25,3 +25,4 @@
 
 
 caveat 告警
+halt 停止

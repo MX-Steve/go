@@ -1,0 +1,14 @@
+20210913:
+    1. nanjing master auto test 问题修复
+        - update 周期性计划任务没有跑导致的
+    2. 离线机器移除madminer
+20210915:
+    1. 邮件汇报日均算力和收益
+    2. 明成项目环境整理
+20210916:
+    1. 日均算力和单位收益功能编写与测试
+20210918:
+    1. ingestion_pbtb_etherscan_transaction_events 处理排查
+
+
+

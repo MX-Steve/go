@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>User index platform</title>
+</head>
+<body>
+    <h1>user bussiness</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>序号</th>
+                <th>编号</th>
+                <th>名称</th>
+                <th>价格</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{range $index, $bu:=.bus}}
+            <tr>
+                <td>{{$index}}</td>
+                <td>{{$bu.Id}}</td>
+                <td>{{$bu.Name}}</td>
+                <td>{{$bu.Price}}</td>
+            </tr>
+            {{end}}
+        </tbody>
+    </table>
+    <hr>
+    <h1>user profile</h1>
+    <ul>
+        <li>name: {{.profile.name}}</li>
+        <li>hobby: {{.profile.hobby}}</li>
+    </ul>
+</body>
+</html>

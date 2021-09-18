@@ -1,6 +1,8 @@
 package split
 
 import (
+	"fmt"
+	"os"
 	"reflect"
 	"testing"
 )
@@ -49,6 +51,7 @@ func TestMutiSepSplit(t *testing.T) {
 		"none":   {"a:b:c", "*", []string{"a:b:c"}},
 		"multi":  {"abcfabcab", "bc", []string{"a", "fa", "ab"}},
 	}
+
 	for name, item := range tests {
 		t.Log(name)
 		// method 1: old
@@ -58,10 +61,56 @@ func TestMutiSepSplit(t *testing.T) {
 		// }
 		// method 2: recommand
 		t.Run(name, func(t *testing.T) {
+			// do sth before testing
+			t.Log("start to test")
+			// do sth after testing
+			defer func() {
+				fmt.Println("finish test.")
+			}()
 			ret := Split(item.str, item.sep)
+			t.Log(ret)
 			if !reflect.DeepEqual(ret, item.want) {
 				t.Fatalf("want:%v,got:%v", ret, item.want)
 			}
 		})
 	}
+}
+
+// go test -v -run xxx
+
+// Benchmark
+func BenchmarkSplit(b *testing.B) {
+	// b.Log("this is a benchmark")
+	for i := 0; i < b.N; i++ {
+		Split("a:b:c", ":")
+	}
+}
+
+// go test -bench=Split
+// go test -bench=Split -cpu=1
+// go test -bench=Split -cpu=1 -benchmem // show memory info
+
+// Performance comparison function
+// parallel
+func BenchmarkSplitParallel(b *testing.B) {
+	b.RunParallel(func(p *testing.PB) {
+		for p.Next() {
+			Split("abcaabcwfsbcaabcas", "bc")
+		}
+	})
+}
+
+func TestMain(m *testing.M) {
+	fmt.Println("write setup cod here...")
+	retCode := m.Run()
+	fmt.Println("write teardown code here...")
+	os.Exit(retCode)
+}
+
+// go test
+
+// example
+func ExampleAdd() {
+	fmt.Println(Add(5, 10))
+	// Output: 15
 }
