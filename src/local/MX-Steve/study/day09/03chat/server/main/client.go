@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"encoding/binary"
 	"encoding/json"
 	"errors"
@@ -21,14 +20,21 @@ func (p *Client) readPackage() (msg Message, err error) {
 		return
 	}
 
-	buffer := bytes.NewBuffer(p.buf[0:4])
-	var packLen uint32
-	err = binary.Read(buffer, binary.BigEndian, &packLen)
+	// buffer := bytes.NewBuffer(p.buf[0:8])
+	// var packLen uint32
+	// err = binary.Read(buffer, binary.BigEndian, &packLen)
+	packLen := binary.BigEndian.Uint32(p.buf[0:4])
+	fmt.Println(packLen)
 	if err != nil {
 		fmt.Println("read package len failed")
 		return
 	}
-	n, _ = p.conn.Read(p.buf[0:packLen])
+	n, err = p.conn.Read(p.buf[0:packLen])
+	// n, err = p.conn.Read(p.buf[0:8192])
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
 	if n != int(packLen) {
 		err = errors.New("read header failed")
 		return
@@ -41,12 +47,13 @@ func (p *Client) readPackage() (msg Message, err error) {
 }
 func (p *Client) writePackage(data []byte) (err error) {
 	packLen := uint32(len(data))
-	buffer := bytes.NewBuffer(p.buf[0:4])
-	err = binary.Write(buffer, binary.BigEndian, &packLen)
-	if err != nil {
-		fmt.Println("write package len failed")
-		return
-	}
+	// buffer := bytes.NewBuffer(p.buf[0:4])
+	binary.BigEndian.PutUint32(p.buf[0:4], packLen)
+	// err = binary.Write(buffer, binary.BigEndian, &packLen)
+	// if err != nil {
+	// 	fmt.Println("write package len failed")
+	// 	return
+	// }
 	_, err = p.conn.Write(p.buf[0:4])
 	if err != nil {
 		fmt.Println("write data failed")
@@ -127,7 +134,7 @@ func (p *Client) login(msg Message) (err error) {
 	defer func() {
 		p.loginResp(err)
 	}()
-	fmt.Printf("recv user login requests, data: %v", msg)
+	fmt.Printf("recv user login requests, data: %v\n", msg)
 	var cmd LoginCmd
 	err = json.Unmarshal([]byte(msg.Data), &cmd)
 	if err != nil {

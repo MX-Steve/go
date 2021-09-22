@@ -27,6 +27,7 @@ func process(conn net.Conn) {
 		conn: conn,
 	}
 	err := client.Process()
+	fmt.Println("in procss")
 	if err != nil {
 		fmt.Println("client process faild, ", err)
 		return
