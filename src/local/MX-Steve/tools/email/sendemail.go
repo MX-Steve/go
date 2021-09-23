@@ -1,8 +1,9 @@
 package email
 
 import (
-	"gopkg.in/gomail.v2"
 	"strconv"
+
+	"gopkg.in/gomail.v2"
 )
 
 /*  邮箱注册码 */
