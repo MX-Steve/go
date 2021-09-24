@@ -1,0 +1,53 @@
+{{define "book/book_list.tmpl"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Manage System</title>
+    <link rel="stylesheet" href="../statics/css/basic.css">
+    <link rel="stylesheet" href="../statics/css/list.css">
+</head>
+
+<body>
+    <div class="head">
+        <a href="/user/login">退出系统</a>
+    </div>
+    <div class="box">
+        <h1 class="title">BMS Book Lists</h1>
+        <div>
+            <a href="/book/new">addNewBook</a>
+        </div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Price</th>
+                    <th>Opt</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .data}}
+                <tr>
+                    <td>{{.Id}}</td>
+                    <td>{{.Title}}</td>
+                    <td>{{.Price}}</td>
+                    <td>
+                        <a href="/book/delete?id={{.Id}}">delete</a>
+                        <a href="/book/modify?id={{.Id}}&title={{.Title}}&price={{.Price}}">modify</a>
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+</body>
+<script>
+
+</script>
+
+</html>
+{{end}}

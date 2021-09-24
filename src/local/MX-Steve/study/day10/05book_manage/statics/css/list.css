@@ -1,0 +1,14 @@
+.box{
+    height: 450px;
+    width: 90%;
+    margin: 35px auto;
+    border: darkslateblue 2px solid;
+    text-align: center;
+}
+.box>.title{
+    text-align: center;
+}
+.box>table {
+    width: 90%;
+    margin: 0 auto;
+}

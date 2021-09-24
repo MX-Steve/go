@@ -1,0 +1,40 @@
+{{define "user/register.html"}}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../statics/css/basic.css">
+    <link rel="stylesheet" href="../statics/css/login.css">
+    <title>Books Manage System</title>
+</head>
+
+<body>
+    <div class="box">
+        <h1 class="title">BMS Register</h1>
+        <form action="" method="POST">
+            <div class="form-div">
+                <label>UserName:
+                    <input type="text" placeholder="input user name" name="username">
+                </label>
+            </div>
+            <div class="form-div">
+                <label>Password:
+                    <input type="password" placeholder="input user password" name="password">
+                </label>
+            </div>
+            <div class="form-div">
+                <input type="submit" value="注册">
+            </div>
+        </form>
+        <div style="text-align: center;">
+            <a href="/user/login">已有账号？去登录</a>
+            <p style="color:red;">{{.msg}}</p>
+        </div>
+    </div>
+</body>
+
+</html>
+{{end}}
