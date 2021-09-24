@@ -7,18 +7,16 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Books Manage System</title>
-    <link rel="stylesheet" href="../statics/css/basic.css">
-    <link rel="stylesheet" href="../statics/css/list.css">
+    <link rel="stylesheet" href="/statics/css/basic.css">
+    <link rel="stylesheet" href="/statics/css/list.css">
 </head>
 
 <body>
-    <div class="head">
-        <a href="/user/login">退出系统</a>
-    </div>
+    {{template "head"}}
     <div class="box">
         <h1 class="title">BMS Book Lists</h1>
         <div>
-            <a href="/book/new">addNewBook</a>
+            <a href="/v1/book/new">addNewBook</a>
         </div>
         <table border="1">
             <thead>
@@ -36,14 +34,15 @@
                     <td>{{.Title}}</td>
                     <td>{{.Price}}</td>
                     <td>
-                        <a href="/book/delete?id={{.Id}}">delete</a>
-                        <a href="/book/modify?id={{.Id}}&title={{.Title}}&price={{.Price}}">modify</a>
+                        <a href="/v1/book/delete?id={{.Id}}">delete</a>
+                        <a href="/v1/book/modify?id={{.Id}}&title={{.Title}}&price={{.Price}}">modify</a>
                     </td>
                 </tr>
                 {{end}}
             </tbody>
         </table>
     </div>
+    {{template "foot"}}
 </body>
 <script>
 

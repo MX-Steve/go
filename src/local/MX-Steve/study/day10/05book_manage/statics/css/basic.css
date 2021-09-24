@@ -17,3 +17,15 @@ a{
 .head>a{
     color: white;
 }
+.foot_box{
+    height: 26px;
+    line-height: 26px;
+    position: fixed;
+    bottom: 0;
+    left:0;
+    right:0;
+    text-align: center;
+    color: darkslategrey;
+    background-color: dimgray;
+    font-size: 14px;
+}
