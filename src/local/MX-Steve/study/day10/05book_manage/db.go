@@ -54,12 +54,20 @@ func deleteBook(id int64) (err error) {
 	return
 }
 
-// delete data
+// modify data
 func modifyBook(id int64, title string, price float64) (err error) {
 	sqlStr := "update book set title=? , price=? where id=?"
 	_, err = db.Exec(sqlStr, title, price, id)
 	if err != nil {
 		return err
+	}
+	return
+}
+func getBookById(id int64) (book Book, err error) {
+	sqlStr := "select id,title,price from book where id=?"
+	err = db.Get(&book, sqlStr, id)
+	if err != nil {
+		return
 	}
 	return
 }

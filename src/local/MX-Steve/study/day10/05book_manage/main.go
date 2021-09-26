@@ -16,15 +16,13 @@ func main() {
 	r := gin.Default()
 	r.LoadHTMLGlob("templates/**/*")
 	r.Static("/statics", "./statics")
-	r.GET("/", userLoginPageHandler)
+	r.GET("/", userLoginHandler)
 	v1 := r.Group("/v1")
 	{
 		v1User := v1.Group("/user")
 		{
-			v1User.GET("/login", userLoginPageHandler)
-			v1User.GET("/register", userRegisterPagePageHandler)
-			v1User.POST("/login", userLoginHandler)
-			v1User.POST("/register", userRegisterHandler)
+			v1User.Any("/login", userLoginHandler)
+			v1User.Any("/register", userRegisterHandler)
 		}
 		v1Book := v1.Group("/book")
 		template.ParseFiles("templates/book/book_list.html", "templates/book/head.html", "templates/book/head.html",
@@ -35,11 +33,9 @@ func main() {
 			"templates/book/foot.html")
 		{
 			v1Book.GET("/list", bookListHandler)
-			v1Book.GET("/new", newBookHandler)
-			v1Book.POST("/new", createBookHandler)
+			v1Book.Any("/new", createBookHandler)
 			v1Book.GET("/delete", deleteBookHandler)
-			v1Book.GET("/modify", modifyBookPageHandler)
-			v1Book.POST("/modify", modifyBookHandler)
+			v1Book.Any("/modify", modifyBookHandler)
 		}
 	}
 	v2 := r.Group("/v2")
