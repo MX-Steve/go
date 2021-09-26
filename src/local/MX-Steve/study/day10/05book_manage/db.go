@@ -25,10 +25,22 @@ func initDB() (err error) {
 
 // query data
 func queryAllBook() (bookList []*Book, err error) {
-	sqlStr := "select id,title,price from book;"
+	// sqlStr := "select id,title,price from book;"
+	sqlStr := "select book.id,book.title,book.price,publisher.province,publisher.city,publisher.name from book join publisher  on book.publisher_id = publisher.id;"
 	err = db.Select(&bookList, sqlStr)
 	if err != nil {
 		fmt.Println("search all books err, ", err)
+		return
+	}
+	return
+}
+
+// query data
+func queryAllPublisher() (publisher []*Publisher, err error) {
+	sqlStr := "select id,province,city,name from publisher;"
+	err = db.Select(&publisher, sqlStr)
+	if err != nil {
+		fmt.Println("search all publisher err, ", err)
 		return
 	}
 	return
@@ -38,6 +50,16 @@ func queryAllBook() (bookList []*Book, err error) {
 func insertBook(title string, price float64) (err error) {
 	sqlStr := "insert into book(title,price) values(?,?)"
 	_, err = db.Exec(sqlStr, title, price)
+	if err != nil {
+		return err
+	}
+	return
+}
+
+// insert data
+func insertPublisher(province, city, name string) (err error) {
+	sqlStr := "insert into publisher(province,city,name) values(?,?,?)"
+	_, err = db.Exec(sqlStr, province, city, name)
 	if err != nil {
 		return err
 	}
@@ -54,10 +76,30 @@ func deleteBook(id int64) (err error) {
 	return
 }
 
+// delete data
+func deletePublisher(id int64) (err error) {
+	sqlStr := "delete from publisher where id=?"
+	_, err = db.Exec(sqlStr, id)
+	if err != nil {
+		return err
+	}
+	return
+}
+
 // modify data
 func modifyBook(id int64, title string, price float64) (err error) {
 	sqlStr := "update book set title=? , price=? where id=?"
 	_, err = db.Exec(sqlStr, title, price, id)
+	if err != nil {
+		return err
+	}
+	return
+}
+
+// modify data
+func modifyPublisher(id int64, province, city, name string) (err error) {
+	sqlStr := "update publisher set province=? , city=?, name=? where id=?"
+	_, err = db.Exec(sqlStr, province, city, name, id)
 	if err != nil {
 		return err
 	}
@@ -71,7 +113,14 @@ func getBookById(id int64) (book Book, err error) {
 	}
 	return
 }
-
+func getPublisherById(id int64) (publisher Publisher, err error) {
+	sqlStr := "select id,province,city,name from publisher where id=?"
+	err = db.Get(&publisher, sqlStr, id)
+	if err != nil {
+		return
+	}
+	return
+}
 func getUser(username string) (ok bool, err error) {
 	sqlStr := "select id from user where username=?"
 	row, err := db.Query(sqlStr, username)

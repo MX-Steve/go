@@ -6,7 +6,17 @@
         </div>
         <div class="head-middle">
             <div class="head-menu">首页</div>
-            <div class="head-menu">服务指南</div>
+            <div class="head-menu guide"  id="guide" onmouseover="over(this)" onmouseleave="leave(this)">
+                服务指南
+                <div class="sub-guide" id="sub-guide">
+                    <div class="menu">
+                        <a href="/v1/book/list">图书列表</a>
+                    </div>
+                    <div class="menu">
+                        <a href="/v1/publisher/list">出版社列表</a>
+                    </div>
+                </div>
+            </div>
             <div class="head-menu">活动信息</div>
             <div class="head-menu">关于图书</div>
         </div>
@@ -15,4 +25,5 @@
         </div>
     </div>
 </div>
+
 {{end}}

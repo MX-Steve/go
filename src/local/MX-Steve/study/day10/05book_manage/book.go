@@ -119,5 +119,4 @@ func modifyBookHandler(c *gin.Context) {
 		}
 		c.HTML(http.StatusOK, "book/modify_book.html", bookObj)
 	}
-
 }

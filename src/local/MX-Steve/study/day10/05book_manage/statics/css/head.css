@@ -41,7 +41,7 @@
     height: 52px;
     line-height: 52px;
     text-align: center;
-    overflow: hidden;
+    /* overflow: hidden; */
     float: left;
 }
 .head>.head-middle>.head-menu:hover{
@@ -61,4 +61,24 @@
     height: 52px;
     line-height: 52px;
     color: rgb(40, 136, 192);
+}
+.guide {
+    position: relative;
+}
+.sub-guide{
+    display: none;
+    position:absolute;
+    top: 0px;left:150px;bottom: 0;
+    width: 200px;
+    background-color: white;
+    border:turquoise 1px solid;
+    z-index: 999;
+}
+.sub-guide>.menu{
+    width: 50%;
+    height: 52px;
+    line-height: 52px;
+    text-align: center;
+    /* overflow: hidden; */
+    float: left;
 }

@@ -1,4 +1,4 @@
-{{define "book/book_list.tmpl"}}
+{{define "publisher/publisher_list.tmpl"}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -17,17 +17,17 @@
     {{template "head"}}
     {{template "left"}}
     <div class="box">
-        <h1 class="title">BMS Book Lists</h1>
+        <h1 class="title">BMS Publisher Lists</h1>
         <div>
-            <a href="/v1/book/new">addNewBook</a>
+            <a href="/v1/publisher/new">addNewPublisher</a>
         </div>
         <table border="1">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Title</th>
-                    <th>Price</th>
-                    <th>Publisher</th>
+                    <th>Province</th>
+                    <th>City</th>
+                    <th>Name</th>
                     <th>Opt</th>
                 </tr>
             </thead>
@@ -35,12 +35,12 @@
                 {{range .data}}
                 <tr>
                     <td>{{.Id}}</td>
-                    <td>{{.Title}}</td>
-                    <td>{{.Price}}</td>
+                    <td>{{.Province}}</td>
+                    <td>{{.City}}</td>
                     <td>{{.Name}}</td>
                     <td>
-                        <a href="/v1/book/delete?id={{.Id}}">delete</a>
-                        <a href="/v1/book/modify?id={{.Id}}">modify</a>
+                        <a href="/v1/publisher/delete?id={{.Id}}">delete</a>
+                        <a href="/v1/publisher/modify?id={{.Id}}">modify</a>
                     </td>
                 </tr>
                 {{end}}

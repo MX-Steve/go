@@ -81,6 +81,14 @@ type UserInfo struct {
 	Password string `form:"password" json:"password" binding:"required"`
 }
 
+func bookDetailHandler(c *gin.Context) {
+	tmpBookId := c.Param("id")
+	if len(tmpBookId) == 0 {
+		c.JSON(http.StatusOK, gin.H{
+			"err": "invalid param",
+		})
+	}
+}
 func main() {
 	router := gin.Default()
 	err := initDb()
@@ -98,5 +106,7 @@ func main() {
 	router.Any("/login2", login2Handler)
 	router.GET("/posts/:year/:month/:day", postHandler)
 	router.GET("/search", searchHandler)
+	router.GET("/book/:id", bookDetailHandler)
 	router.Run(":9090")
+
 }

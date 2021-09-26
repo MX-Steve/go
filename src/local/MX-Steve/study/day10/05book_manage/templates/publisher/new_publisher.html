@@ -1,4 +1,4 @@
-{{define "book/new_book.html"}}
+{{define "publisher/new_publisher.html"}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,16 +18,21 @@
     {{template "head"}}
     {{template "left"}}
     <div class="box">
-        <h1 class="title">BMS Add Book</h1>
+        <h1 class="title">BMS Add Publisher</h1>
         <form action="" method="POST">
             <div class="form-div">
-                <label>书名:
-                    <input type="text" name="title">
+                <label>省名:
+                    <input type="text" name="province">
                 </label>
             </div>
             <div class="form-div">
-                <label>价格:
-                    <input type="text" name="price">
+                <label>市名:
+                    <input type="text" name="city">
+                </label>
+            </div>
+            <div class="form-div">
+                <label>名称:
+                    <input type="text" name="name">
                 </label>
             </div>
             <div class="form-div">

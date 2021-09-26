@@ -1,4 +1,4 @@
-{{define "book/modify_book.html"}}
+{{define "publisher/modify_publisher.html"}}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,7 +18,7 @@
     {{template "head"}}
     {{template "left"}}
     <div class="box">
-        <h1 class="title">BMS Modify Book</h1>
+        <h1 class="title">BMS Modify Publisher</h1>
         <form action="" method="post">
             <div class="form-div" style="display: none;">
                 <label>编号:
@@ -26,13 +26,18 @@
                 </label>
             </div>
             <div class="form-div">
-                <label>书名:
-                    <input type="text" name="title" value="{{.Title}}">
+                <label>省名:
+                    <input type="text" name="province" value="{{.Province}}">
                 </label>
             </div>
             <div class="form-div">
-                <label>价格:
-                    <input type="text" name="price" value="{{.Price}}">
+                <label>市名:
+                    <input type="text" name="city" value="{{.City}}">
+                </label>
+            </div>
+            <div class="form-div">
+                <label>名称:
+                    <input type="text" name="name" value="{{.Name}}">
                 </label>
             </div>
             <div class="form-div">
@@ -45,23 +50,6 @@
 </body>
 <script src="/statics/js/header.js"></script>
 <script>
-
-    // function getQueryVariable(variable) {
-    //     var query = window.location.search.substring(1);
-    //     var vars = query.split("&");
-    //     for (var i = 0; i < vars.length; i++) {
-    //         var pair = vars[i].split("=");
-    //         if (pair[0] == variable) { return pair[1]; }
-    //     }
-    //     return (false);
-    // }
-    // var id = getQueryVariable("id")
-    // var price = getQueryVariable("price")
-    // var title = decodeURI(getQueryVariable("title"))
-    // console.log(id, price, title)
-    // document.getElementById("id").setAttribute("value", id)
-    // document.getElementById("price").setAttribute("value", price)
-    // document.getElementById("title").setAttribute("value", title)
 </script>
 
 </html>
