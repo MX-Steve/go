@@ -1,0 +1,58 @@
+.left_box{
+    position: fixed;
+    width: 15%;
+    top: 100px;
+    left:0px;
+    bottom:26px;
+    border-bottom: rgb(165, 158, 158) 2px solid;
+    box-shadow: 0px 0px 6px 0px rgb(0 0 0 / 30%);
+    background-color: #fff;
+    padding: 15px;
+    box-sizing: border-box;
+    overflow-y:scroll;
+}
+.left_box>.left_contain{
+    width: 99%;
+    height: 1360px;
+}
+.left_box .menu{
+    width: 99%;
+    height: 340px;
+    box-shadow: 0px 8px 10px 0px rgb(0 0 0 / 3%);
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    background: #FFF;
+    transition: all 0.3s ease 0s;
+}
+.left_box .menu:hover{
+    box-shadow: 0px 0px 6px 0px rgb(0 0 0 / 30%);
+}
+.left_box .menu>.pic{
+    width: 100%;
+    height: 144px;
+    margin-top: 32px;
+}
+.left_box .menu>.pic>img{
+    width: 100%;
+    height: 144px;
+}
+.left_box .menu>.msg{
+    width: 100%;
+    margin-top: 12px;
+    text-align: center;
+}
+.left_box .menu>.msg>.num{
+    font-size: 46px;
+    /* font-family: Roboto-Thin, Roboto; */
+    font-weight: 300;
+    color: #0E87E0;
+    line-height: 48px;
+}
+.left_box .menu>.msg>.intr{
+    padding-top: 10px;
+    font-size: 14px;
+    color: #444;
+    line-height: 21px;
+}

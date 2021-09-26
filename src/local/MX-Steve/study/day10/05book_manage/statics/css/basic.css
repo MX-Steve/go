@@ -6,17 +6,7 @@ a{
     color: rgb(0, 153, 255);
     
 }
-.head{
-    text-align: right;
-    height: 35px;
-    line-height: 35px;
-    width: 100%;
-    padding-right: 35px;
-    background-color: rgb(87, 124, 124);
-}
-.head>a{
-    color: white;
-}
+
 .foot_box{
     height: 26px;
     line-height: 26px;

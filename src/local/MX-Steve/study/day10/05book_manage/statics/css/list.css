@@ -1,7 +1,9 @@
 .box{
     height: 450px;
-    width: 90%;
+    width: 75%;
     margin: 35px auto;
+    margin-left: 15%;
+    margin-top: 100px;
     border: darkslateblue 2px solid;
     text-align: center;
 }

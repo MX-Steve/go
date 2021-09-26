@@ -27,11 +27,11 @@ func main() {
 			v1User.POST("/register", userRegisterHandler)
 		}
 		v1Book := v1.Group("/book")
-		template.ParseFiles("templates/book/book_list.html", "templates/book/head.html",
+		template.ParseFiles("templates/book/book_list.html", "templates/book/head.html", "templates/book/head.html",
 			"templates/book/foot.html")
-		template.ParseFiles("templates/book/modify_book.html", "templates/book/head.html",
+		template.ParseFiles("templates/book/modify_book.html", "templates/book/head.html", "templates/book/head.html",
 			"templates/book/foot.html")
-		template.ParseFiles("templates/book/new_book.html", "templates/book/head.html",
+		template.ParseFiles("templates/book/new_book.html", "templates/book/head.html", "templates/book/head.html",
 			"templates/book/foot.html")
 		{
 			v1Book.GET("/list", bookListHandler)

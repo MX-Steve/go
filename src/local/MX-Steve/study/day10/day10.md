@@ -27,5 +27,3 @@ c.XML(http.StatusOK, "login.html", gin.H{
 ```
 # 3. ex: book manager system
 
-
-
