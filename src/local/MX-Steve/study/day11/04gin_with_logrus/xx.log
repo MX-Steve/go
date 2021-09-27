@@ -1,2 +1,0 @@
-{"level":"info","msg":"trying to start server...","time":"2021-09-27T14:25:59+08:00"}
-[GIN] 2021/09/27 - 14:26:12 | 200 |     108.829µs |       127.0.0.1 | GET      "/index"
