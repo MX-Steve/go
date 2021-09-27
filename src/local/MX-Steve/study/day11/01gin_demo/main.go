@@ -2,6 +2,7 @@ package main
 
 import (
 	"net/http"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -87,7 +88,18 @@ func bookDetailHandler(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{
 			"err": "invalid param",
 		})
+		return
 	}
+	bookId, err := strconv.ParseInt(tmpBookId, 10, 64)
+	if err != nil {
+		c.JSON(http.StatusOK, gin.H{
+			"err": "invalid param",
+		})
+		return
+	}
+	c.JSON(http.StatusOK, gin.H{
+		"id": bookId,
+	})
 }
 func main() {
 	router := gin.Default()

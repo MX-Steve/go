@@ -1,0 +1,6 @@
+20210926~20210930
+20210926:
+    1. 在线卡数统计
+    2. 新疆掉线告警处理
+20210927:
+    1. [ Rule: ingestion_pbtb_etherscan_transaction_events ] value 95084.76300001144 is higher than the critical threshold 94001 具体原因查看

@@ -2,7 +2,6 @@ package main
 
 import (
 	"errors"
-	"fmt"
 
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jmoiron/sqlx"
@@ -29,7 +28,7 @@ func queryAllBook() (bookList []*Book, err error) {
 	sqlStr := "select book.id,book.title,book.price,publisher.province,publisher.city,publisher.name from book join publisher  on book.publisher_id = publisher.id;"
 	err = db.Select(&bookList, sqlStr)
 	if err != nil {
-		fmt.Println("search all books err, ", err)
+		log.Warn("search all books err, ", err)
 		return
 	}
 	return
@@ -40,7 +39,7 @@ func queryAllPublisher() (publisher []*Publisher, err error) {
 	sqlStr := "select id,province,city,name from publisher;"
 	err = db.Select(&publisher, sqlStr)
 	if err != nil {
-		fmt.Println("search all publisher err, ", err)
+		log.Error("search all publisher err, ", err)
 		return
 	}
 	return
@@ -136,7 +135,6 @@ func getUser(username string) (ok bool, err error) {
 // user register
 func userRegister(username, password string) (err error) {
 	ok, _ := getUser(username)
-	fmt.Println(ok)
 	if ok {
 		return errors.New("error")
 	}
@@ -153,13 +151,12 @@ func userLogin(username, password string) (err error) {
 	sqlStr := "select id from user where username=? and password=?"
 	rows, err := db.Query(sqlStr, username, password)
 	if err != nil {
-		fmt.Println(err)
+		log.Warn(err)
 		return err
 	}
 	if !rows.Next() {
 		return errors.New("username or password error")
 	}
-	fmt.Println(username, password)
-	fmt.Println(rows.Next())
+	log.Debug(username, password)
 	return
 }

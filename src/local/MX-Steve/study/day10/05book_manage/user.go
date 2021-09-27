@@ -8,6 +8,7 @@ import (
 
 func userLoginHandler(c *gin.Context) {
 	if c.Request.Method == "POST" {
+		toPath := c.DefaultQuery("next", "/v1/book/list")
 		username := c.PostForm("username")
 		password := c.PostForm("password")
 		err := userLogin(username, password)
@@ -18,7 +19,8 @@ func userLoginHandler(c *gin.Context) {
 			})
 			return
 		}
-		c.Redirect(http.StatusMovedPermanently, "/v1/book/list")
+		c.SetCookie("username", username, 3600*24, "/", "127.0.0.1", false, true)
+		c.Redirect(http.StatusMovedPermanently, toPath)
 	} else {
 		c.HTML(http.StatusOK, "user/login.html", nil)
 	}
