@@ -3,6 +3,7 @@ module local
 go 1.17
 
 require (
+	github.com/ClickHouse/clickhouse-go v1.5.1
 	github.com/btcsuite/btcutil v1.0.2
 	github.com/fsnotify/fsnotify v1.5.1
 	github.com/garyburd/redigo v1.6.2
@@ -14,11 +15,10 @@ require (
 	github.com/spf13/viper v1.9.0
 	gopkg.in/gomail.v2 v2.0.0-20160411212932-81ebce5c23df
 	gorm.io/driver/mysql v1.1.2
-	gorm.io/gorm v1.21.15
+	gorm.io/gorm v1.21.16
 )
 
 require (
-	github.com/ClickHouse/clickhouse-go v1.5.0 // indirect
 	github.com/cloudflare/golz4 v0.0.0-20150217214814-ef862a3cdc58 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.13.0 // indirect
@@ -26,7 +26,6 @@ require (
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
-	github.com/influxdata/toml v0.0.0-20180607005434-2a2e3012f7cf // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/jinzhu/now v1.1.2 // indirect
 	github.com/json-iterator/go v1.1.11 // indirect
@@ -36,7 +35,6 @@ require (
 	github.com/mitchellh/mapstructure v1.4.2 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421 // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect
-	github.com/naoina/go-stringutil v0.1.0 // indirect
 	github.com/pelletier/go-toml v1.9.4 // indirect
 	github.com/spf13/afero v1.6.0 // indirect
 	github.com/spf13/cast v1.4.1 // indirect

@@ -3,6 +3,7 @@ package main
 import (
 	"database/sql"
 	"fmt"
+
 	//clickhouse driver
 	_ "github.com/ClickHouse/clickhouse-go"
 	log "github.com/sirupsen/logrus"
