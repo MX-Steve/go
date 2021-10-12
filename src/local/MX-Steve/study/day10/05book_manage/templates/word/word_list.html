@@ -1,0 +1,49 @@
+{{define "word/word_list.tmpl"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Words list</title>
+    <link rel="stylesheet" href="/statics/css/basic.css">
+</head>
+<body>
+    <div class="box">
+        <h1 class="title">BMS Words Lists</h1>
+        <div>
+            <a href="/v1/word/new">addNewWord</a>
+        </div>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ename</th>
+                    <th>cname</th>
+                    <th>splits</th>
+                    <th>memory</th>
+                    <th>example</th>
+                    <th>ops</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{range .data}}
+                <tr>
+                    <td>{{.Id}}</td>
+                    <td>{{.Ename}}</td>
+                    <td>{{.Cname}}</td>
+                    <td>{{.Splits}}</td>
+                    <td>{{.Memory}}</td>
+                    <td>{{.Example}}</td>
+                    <td>
+                        <a href="/v1/word/delete?id={{.Id}}">delete</a>
+                        <a href="/v1/word/modify?id={{.Id}}">modify</a>
+                    </td>
+                </tr>
+                {{end}}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+{{end}}

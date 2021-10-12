@@ -1,0 +1,106 @@
+1. mysql 需要改动秘密的用户
+    - pool 
+    - bminer 
+    - shepherd
+    - miningops
+    - worker 
+2. k8s-secret 需要更改(2/70):
+    - mdump-secret    - default 
+    - machine-stats-checker  - data 
+3. configmap 需要更改(13/125)
+    - pool-payment-job-configs   - data 
+    - pool-network-reporter - data 
+    - pool-account-reporter - data 
+    - madminer-machine-update - data 
+    - conflux-pool-account-reporter  - data 
+    - conflux-network-reporter  - data 
+    - conflux-block-validate  - data
+    - mining-pool    - bminer 
+    - bminer-operation-staging - bminer 
+    - bminer-operation - bminer 
+    - bminer-operation-madminer - bminer 
+    - bminer-backend - bminer 
+    - altchain-pool-stats-reporter-prod-config - bminer 
+4. clickhouse 表更改牵扯
+(1)miner_stats:
+    - user
+    - user_site 
+    - site_info
+    - site_blacklist
+    - site
+    - pool_income_uri
+    - missing_card_machine_blacklist
+    - miner_overview
+    - machine_device_config
+    - machine_card
+    - machine_blacklist
+    - machine
+    - config_group
+    - card_hashrate_blacklist
+    - bminer_performance
+    - bminer_algorithm_info
+(2).conflux_pool
+    - credit
+    - ledger_event
+===========================
+worker: wbuAl4wTAh6pJISQ    d2J1QWw0d1RBaDZwSklTUQ==
+shepherd: 4Y7Fy9UXe3Kqi9ce  NFk3Rnk5VVhlM0txaTljZQ==
+bminer: qzgqb1FFBYyzb77W    cXpncWIxRkZCWXl6Yjc3Vw==
+miningops: Ivaaxfex5YLwqQnl   SXZhYXhmZXg1WUx3cVFubA==
+pool: tOXojJUJCqu0JtYT       dE9Yb2pKVUpDcXUwSnRZVA==
+1. 更改mysql用户密码
+    --- bminer 
+    GRANT USAGE ON *.* TO `bminer`@`%` IDENTIFIED BY PASSWORD 'qzgqb1FFBYyzb77W';
+    GRANT ALL PRIVILEGES ON `bminer`.* TO `bminer`@`%`;
+    --- shepherd
+    GRANT USAGE ON *.* TO `shepherd`@`%` IDENTIFIED BY PASSWORD '4Y7Fy9UXe3Kqi9ce';
+    GRANT ALL PRIVILEGES ON `shepherd`.* TO `shepherd`@`%`;
+    --- worker 
+    GRANT USAGE ON *.* TO `worker`@`%` IDENTIFIED BY PASSWORD 'wbuAl4wTAh6pJISQ';
+    GRANT ALL PRIVILEGES ON `operation_portal`.* TO `worker`@`%`;
+    --- miningops 
+    GRANT USAGE ON *.* TO `miningops`@`%` IDENTIFIED BY PASSWORD 'Ivaaxfex5YLwqQnl';
+    GRANT ALL PRIVILEGES ON `miningops`.* TO `miningops`@`%`;
+    --- pool 
+    GRANT USAGE ON *.* TO `pool`@`%` IDENTIFIED BY PASSWORD 'tOXojJUJCqu0JtYT';
+    GRANT ALL PRIVILEGES ON `conflux_pool`.* TO `pool`@`%`;
+2. k8s-secret 需要更改
+--- machine-stats-checker
+kubectl edit secret machine-stats-checker -n data 更改密码部分[shepherd]
+-> NFk3Rnk5VVhlM0txaTljZQ==
+--- mdump-secret
+kubectl edit secret mdump-secret
+...
+3. configmap 需要更改
+kubectl edit cm pool-payment-job-configs -n data 更改密码部分
+...
+4. clickhouse 表更改牵扯
+use miner_stats;
+drop table user;
+CREATE TABLE miner_stats.user
+(
+    `uuid` String,
+    `name` String,
+    `github_handle` String,
+    `wechat_handle` String,
+    `google_handle` String,
+    `oauth_detail_uuid` String,
+    `authority` Int32,
+    `email` String
+)
+ENGINE = MySQL('100.70.102.59:3306', 'bminer', 'user', 'bminer', 'qzgqb1FFBYyzb77W')
+...
+
+pool-payment-job-configs   - data  -> pool-payment-job-prod
+pool-network-reporter - data -> pool-network-reporter-job
+    - pool-account-reporter - data -> pool-account-reporter-job
+   ***** - madminer-machine-update - data -> madminer-machine-update-devqinglin
+    - conflux-pool-account-reporter  - data 
+    - conflux-network-reporter  - data 
+    - conflux-block-validate  - data
+    ***  - mining-pool    - bminer 
+    - bminer-operation-staging - bminer 
+    - bminer-operation - bminer 
+    - bminer-operation-madminer - bminer 
+    - bminer-backend - bminer 
+    - altchain-pool-stats-reporter-prod-config - altchain_pool 

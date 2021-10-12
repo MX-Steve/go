@@ -1,0 +1,124 @@
+** altchain-pool          altchain-pool-stats-reporter-prod-config                           2      119d
+altchain-pool          kube-root-ca.crt                                                   1      43d
+altchain               altchain-ingress-nginx-ingress-controller                          1      504d
+altchain               altchain-ingress-tcp-services                                      3      504d
+altchain               ingress-controller-leader                                          0      43d
+altchain               ingress-controller-leader-altchain                                 0      504d
+altchain               ingress-controller-leader-nginx                                    0      504d
+altchain               ingress-nginx-1629946369-controller                                0      43d
+altchain               ingress-nginx-tcp-services                                         3      43d
+altchain               kube-root-ca.crt                                                   1      43d
+blockchain             cfx-stratum                                                        3      153d
+blockchain             chord-pool                                                         3      344d
+blockchain             kube-root-ca.crt                                                   1      43d
+blockchain             stratum                                                            1      678d
+** bminer                 bminer-backend                                                     3      715d
+bminer                 bminer-com-ingress-nginx-controller                                0      515d
+bminer                 bminer-com-ingress-nginx-ingress-controller                        6      556d
+bminer                 bminer-com-tcp-services                                            7      557d
+** bminer                 bminer-operation                                                   1      561d
+** bminer                 bminer-operation-madminer                                          1      136d
+** bminer                 bminer-operation-staging                                           1      401d
+bminer                 bminer-operation-webserver                                         1      571d
+bminer                 bminer-operation-webserver-madminer                                1      136d
+bminer                 bminer-operation-webserver-staging                                 1      401d
+bminer                 ingress-controller-leader-alb                                      0      479d
+bminer                 ingress-controller-leader-nginx                                    0      557d
+bminer                 kube-root-ca.crt                                                   1      43d
+** bminer                 mining-pool                                                        1      357d
+bminer                 mining-pool-webserver                                              1      357d
+bminer                 progpow-kernel-cleaner                                             1      483d
+bminer                 stratum-backend                                                    1      363d
+data                   athena-to-clickhouse-algorithm-reward-config                       1      376d
+data                   athena-to-clickhouse-bminer-card-max-reward-config                 1      382d
+data                   athena-to-clickhouse-bminer-card-reward-config                     1      383d
+data                   athena-to-clickhouse-bminer-revenue-config                         1      72d
+data                   athena-to-clickhouse-coin-reward-info-config                       1      396d
+data                   athena-to-clickhouse-miner-pool-reward-config                      1      378d
+data                   bee-pool-reporter                                                  1      189d
+data                   chi-miner-stats-common-configd                                     8      53m
+data                   chi-miner-stats-common-usersd                                      3      53m
+data                   chi-miner-stats-deploy-confd-clickhouse-0-0                        1      53m
+data                   chi-version-update-common-configd                                  7      53m
+data                   chi-version-update-common-usersd                                   3      53m
+data                   chi-version-update-deploy-confd-update-0-0                         1      53m
+data                   chi-version-update-deploy-confd-update-0-1                         1      52m
+data                   chi-version-update-deploy-confd-update-0-2                         1      52m
+data                   clickhouse-tables-config                                           1      365d
+** data                   conflux-block-validate                                             1      229d
+data                   conflux-mined-block-reporter                                       1      339d
+** data                   conflux-network-reporter                                           1      355d
+** data                   conflux-pool-account-reporter                                      1      331d
+data                   conflux-pool-hashrate-reporter-prod-config                         1      351d
+data                   conflux-pool-hashrate15m-reporter-job-config                       1      342d
+data                   conflux-pool-hashrate24h-reporter-job-config                       1      341d
+data                   conflux-pool-stats-reporter-prod-config                            1      356d
+data                   conflux-user-stats-reporter-prod-config                            6      341d
+data                   etc-clickhouse-operator-confd-files                                0      434d
+data                   etc-clickhouse-operator-configd-files                              6      434d
+data                   etc-clickhouse-operator-files                                      1      434d
+data                   etc-clickhouse-operator-templatesd-files                           4      434d
+data                   etc-clickhouse-operator-usersd-files                               2      434d
+data                   etherscan-wallet-transaction-reporter                              1      447d
+data                   flink-miner-algorithm-hashrate-to-clickhouse-job-config            1      427d
+data                   flink-miner-card-algorithm-hashrate-new-to-clickhouse-job-config   1      375d
+data                   flink-miner-card-algorithm-hashrate-to-clickhouse-job-config       1      417d
+data                   flink-miner-card-stats-to-clickhouse-job-config                    1      417d
+data                   flink-miner-liveness-to-clickhouse-job-config                      1      427d
+data                   flink-miner-pool-stats-to-clickhouse-job-config                    1      420d
+data                   flink-miner-speed-to-clickhouse-job-config                         1      434d
+data                   flink-miner-temperature-to-clickhouse-job-config                   1      434d
+data                   flink-pool-overview-config                                         1      338d
+data                   flink-pool-overview-test-config                                    1      336d
+data                   flink-sql-jobs                                                     2      2d20h
+data                   flink-syslog-filter-job-config                                     1      378d
+data                   huobi-pool-reporter                                                1      289d
+data                   kube-root-ca.crt                                                   1      43d
+data                   machine-stats-checker                                              1      484d
+** data                   madminer-machine-update                                            1      118d
+data                   mining-dc-worker-reporter                                          2      374d
+data                   mining-pool-reward-reporter                                        1      484d
+data                   mining-pool-worker-reporter                                        1      484d
+data                   mining-site-revenue-reporter                                       2      20d
+** data                   pool-account-reporter                                              1      303d
+** data                   pool-network-reporter                                              1      304d
+** data                   pool-payment-job-configs                                           1      309d
+data                   pool-stats-reporter                                                1      275d
+data                   site-estimation-reward                                             1      213d
+data                   site-revenue-record                                                1      268d
+data                   site-revenue-record-new                                            1      210d
+data                   weatherdaemon                                                      1      440d
+default                altchain-nginx                                                     1      56d
+default                flink-bminer-overview-job-config                                   1      564d
+default                flink-miner-perf-influxdb-ingestion-job-config                     1      557d
+default                influxdb                                                           1      723d
+default                influxdb-miner-stats                                               1      483d
+default                ingress-controller-leader-alb                                      0      479d
+default                kube-root-ca.crt                                                   1      43d
+default                miningops-operation-portal                                         5      2y12d
+default                platform-nginx                                                     1      83d
+default                telemetry                                                          1      668d
+default                waxen-worm-openvpn                                                 5      2y110d
+kafka                  broker-config                                                      2      722d
+kafka                  kafka                                                              1      723d
+kafka                  kube-root-ca.crt                                                   1      43d
+kafka                  zookeeper                                                          1      723d
+kube-node-lease        kube-root-ca.crt                                                   1      43d
+kube-public            kube-root-ca.crt                                                   1      43d
+kube-system            coredns                                                            1      2y124d
+kube-system            coredns-autoscaler                                                 1      619d
+kube-system            extension-apiserver-authentication                                 6      3y49d
+kube-system            ingress-controller-leader-alb                                      0      544d
+kube-system            kops-controller                                                    1      435d
+kube-system            kops-controller-leader                                             0      435d
+kube-system            kube-dns-autoscaler                                                1      3y49d
+kube-system            kube-root-ca.crt                                                   1      43d
+kube-system            kubernetes-dashboard-settings                                      1      135d
+kube-system            nginx-ingress-controller-config                                    1      2y111d
+kube-system            tcp-services                                                       3      2y122d
+kubernetes-dashboard   kube-root-ca.crt                                                   1      43d
+kubernetes-dashboard   kubernetes-dashboard-settings                                      0      135d
+madminer               kube-root-ca.crt                                                   1      43d
+shepherd               kube-root-ca.crt                                                   1      43d
+sso                    kube-root-ca.crt                                                   1      43d
+sso                    upstream-configs                                                   1      2y127d

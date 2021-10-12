@@ -1,0 +1,48 @@
+{{define "word/new_word.html"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Books Manage System</title>
+    <link rel="stylesheet" href="/statics/css/basic.css">
+</head>
+
+<body>
+    <div class="box">
+        <h1 class="title">BMS Add Word</h1>
+        <form action="" method="POST">
+            <div class="form-div">
+                <label>英文:
+                    <input type="text" name="ename" value="{{.Ename}}">
+                </label>
+            </div>
+            <div class="form-div">
+                <label>中文:
+                    <input type="text" name="cname" value="{{.Cname}}">
+                </label>
+            </div>
+            <div class="form-div">
+                <label>拆分:
+                    <input type="text" name="splits" value="{{.Splits}}">
+                </label>
+            </div>
+            <div class="form-div">
+                <label>记忆:
+                    <input type="text" name="memory" value="{{.Memory}}">
+                </label>
+            </div>
+            <div class="form-div">
+                <label>例句:
+                    <input type="text" name="example" value="{{.Example}}">
+                </label>
+            </div>
+            <div class="form-div">
+                <input type="submit" value="新增">
+            </div>
+        </form>
+    </div>
+</body>
+</html>
+{{end}}

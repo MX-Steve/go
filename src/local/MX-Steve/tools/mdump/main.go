@@ -4,16 +4,18 @@ import (
 	"encoding/base64"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"os"
 	"os/exec"
 	"time"
 
 	"github.com/fsnotify/fsnotify"
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 )
 
-//定义config结构体
+var log = logrus.New()
+
+// Config struct
 type Config struct {
 	UserName  string
 	Password  string
@@ -25,7 +27,7 @@ type Config struct {
 	Pool      string
 }
 
-//json中的嵌套对应结构体的嵌套
+// Host struct
 type Host struct {
 	Address string
 	Port    string
@@ -47,10 +49,9 @@ func getConf() (user string, password string, address string, port string, worke
 		}
 	})
 
-	//直接反序列化为Struct
 	var configjson Config
 	if err := config.Unmarshal(&configjson); err != nil {
-		fmt.Println(err)
+		log.Error(err)
 	}
 	WorkerBytes, err := base64.StdEncoding.DecodeString(configjson.Worker)
 	if err != nil {
@@ -100,35 +101,36 @@ func main() {
 			user = "pool"
 			password = pool
 		}
+		log.Info(user, password)
 		_, backupPath := BackupMySqlDb(address, port, user, password, db, "", "/opt/dbback")
-		fmt.Printf("%s backup finished: %s\n", db, backupPath)
+		log.Info(db, " backup finished.", backupPath)
 		time.Sleep(time.Second * 2)
 	}
 }
 
 /**
  *
- * 备份MySql数据库
- * @param 	host: 			数据库地址: localhost
- * @param 	port:			端口: 3306
- * @param 	user:			用户名: root
- * @param 	password:		密码: root
- * @param 	databaseName:	需要被分的数据库名: test
- * @param 	tableName:		需要备份的表名: user
- * @param 	sqlPath:		备份SQL存储路径: D:/backup/test/
+ * Backup MySql
+ * @param 	host: 			localhost
+ * @param 	port:			3306
+ * @param 	user:			root
+ * @param 	password:		root
+ * @param 	databaseName:	test
+ * @param 	tableName:		user
+ * @param 	sqlPath:
  * @return 	backupPath
  *
  */
 
 func BackupMySqlDb(host, port, user, password, databaseName, tableName, sqlPath string) (error, string) {
-	// 删除3天前的备份
+	// Delete backup 3 days ago
 	currentTime := time.Now()
 	oldTime := currentTime.AddDate(0, 0, -3).Format("2006010215")
 	err := os.RemoveAll(sqlPath + "/" + oldTime)
 	if err != nil {
-		fmt.Println("目录不存在，无法删除")
+		log.Error(err)
 	}
-	// 实现备份
+	// backup
 	var cmd *exec.Cmd
 
 	if tableName == "" {
@@ -139,18 +141,18 @@ func BackupMySqlDb(host, port, user, password, databaseName, tableName, sqlPath 
 
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
-		log.Println(err)
+		log.Warn(err)
 		return err, ""
 	}
 
 	if err := cmd.Start(); err != nil {
-		log.Println(err)
+		log.Warn(err)
 		return err, ""
 	}
 
 	bytes, err := ioutil.ReadAll(stdout)
 	if err != nil {
-		log.Println(err)
+		log.Warn(err)
 		return err, ""
 	}
 	now := time.Now().Format("2006010215")
@@ -166,9 +168,8 @@ func BackupMySqlDb(host, port, user, password, databaseName, tableName, sqlPath 
 		backupPath = sqlPath + databaseName + "_" + tableName + ".sql"
 	}
 	err = ioutil.WriteFile(backupPath, bytes, 0644)
-
 	if err != nil {
-		log.Println(err)
+		log.Warn(err)
 		return err, ""
 	}
 	return nil, backupPath

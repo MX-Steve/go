@@ -1,0 +1,6 @@
+[clickhouse]
+host = "192.168.1.134"
+port = 8123
+user = "default"
+password = "12345"
+database = "dbtest"

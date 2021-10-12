@@ -1,0 +1,13 @@
+{
+    "userName": "root",
+    "password": "d2w0WTVGSk1MZA==",
+    "host": {
+      "address": "mariadb.default.svc.cluster.local",
+      "port": 3306
+    },
+    "worker": "TndZMHUzbDQ1TXJyY0JmUA==",
+    "shepherd": "MnJETkliQWZTOVpuaTV6aw==",
+    "bminer": "MldIdnliblM1dkhzck1KMg==",
+    "miningops": "TlF2SjFleGZRY2JGU3NrZg==",
+    "pool": "Z3V2ZGZ6aGlRZWpQbW9zaQ=="
+}

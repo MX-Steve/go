@@ -34,6 +34,17 @@ func queryAllBook() (bookList []*Book, err error) {
 	return
 }
 
+func queryAllWords() (wordList []*Word, err error) {
+	// sqlStr := "select id,title,price from book;"
+	sqlStr := "select id,ename,cname,splits,memory,example from worlds;"
+	err = db.Select(&wordList, sqlStr)
+	if err != nil {
+		log.Warn("search all words err, ", err)
+		return
+	}
+	return
+}
+
 // query data
 func queryAllPublisher() (publisher []*Publisher, err error) {
 	sqlStr := "select id,province,city,name from publisher;"
@@ -55,6 +66,15 @@ func insertBook(title string, price float64) (err error) {
 	return
 }
 
+func insertWord(ename, cname, splits, memory, example string) (err error) {
+	sqlStr := "insert into worlds(ename, cname, splits, memory, example) values(?,?,?,?,?)"
+	_, err = db.Exec(sqlStr, ename, cname, splits, memory, example)
+	if err != nil {
+		return err
+	}
+	return
+}
+
 // insert data
 func insertPublisher(province, city, name string) (err error) {
 	sqlStr := "insert into publisher(province,city,name) values(?,?,?)"
@@ -68,6 +88,15 @@ func insertPublisher(province, city, name string) (err error) {
 // delete data
 func deleteBook(id int64) (err error) {
 	sqlStr := "delete from book where id=?"
+	_, err = db.Exec(sqlStr, id)
+	if err != nil {
+		return err
+	}
+	return
+}
+
+func deleteWord(id int64) (err error) {
+	sqlStr := "delete from worlds where id=?"
 	_, err = db.Exec(sqlStr, id)
 	if err != nil {
 		return err
@@ -95,6 +124,15 @@ func modifyBook(id int64, title string, price float64) (err error) {
 	return
 }
 
+func modifyWord(id int64, ename, cname, splits, memory, example string) (err error) {
+	sqlStr := "update worlds set ename=? , cname=?, splits=?, memory=?,example=? where id=?"
+	_, err = db.Exec(sqlStr, ename, cname, splits, memory, example, id)
+	if err != nil {
+		return err
+	}
+	return
+}
+
 // modify data
 func modifyPublisher(id int64, province, city, name string) (err error) {
 	sqlStr := "update publisher set province=? , city=?, name=? where id=?"
@@ -112,6 +150,15 @@ func getBookById(id int64) (book Book, err error) {
 	}
 	return
 }
+func getWordById(id int64) (word Word, err error) {
+	sqlStr := "select id,ename,cname,splits,memory,example from worlds where id=?"
+	err = db.Get(&word, sqlStr, id)
+	if err != nil {
+		return
+	}
+	return
+}
+
 func getPublisherById(id int64) (publisher Publisher, err error) {
 	sqlStr := "select id,province,city,name from publisher where id=?"
 	err = db.Get(&publisher, sqlStr, id)

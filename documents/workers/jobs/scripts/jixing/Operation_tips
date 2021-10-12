@@ -59,6 +59,13 @@ dbserver
 
 
 
+worker: wbuAl4wTAh6pJISQ    d2J1QWw0d1RBaDZwSklTUQ==
+shepherd: 4Y7Fy9UXe3Kqi9ce  NFk3Rnk5VVhlM0txaTljZQ==
+bminer: qzgqb1FFBYyzb77W    cXpncWIxRkZCWXl6Yjc3Vw==
+miningops: Ivaaxfex5YLwqQnl   SXZhYXhmZXg1WUx3cVFubA==
+pool: tOXojJUJCqu0JtYT       dE9Yb2pKVUpDcXUwSnRZVA==
+
+
 yul02_p102    234.13104838709677 
 urumqi        688.9778225806451 
 urumqi_1070   367.9704301075269 

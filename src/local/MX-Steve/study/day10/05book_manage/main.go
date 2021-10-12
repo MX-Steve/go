@@ -89,6 +89,14 @@ func main() {
 			v1Publisher.GET("/delete", deletePublisherHandler)
 			v1Publisher.Any("/modify", modifyPublisherHandler)
 		}
+		v1Word := v1.Group("/word")
+		{
+			v1Word.Any("/list", wordListHandler)
+			v1Word.Any("/new", createWordHandler)
+			v1Word.GET("/delete", deleteWordHandler)
+			v1Word.Any("/modify", modifyWordHandler)
+		}
+
 	}
 	v2 := r.Group("/v2")
 	{

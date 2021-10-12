@@ -10,6 +10,15 @@ type Book struct {
 	Publisher
 }
 
+type Word struct {
+	Id      int    `db:"id"`
+	Ename   string `db:"ename"`
+	Cname   string `db:"cname"`
+	Splits  string `db:"splits"`
+	Memory  string `db:"memory"`
+	Example string `db:"example"`
+}
+
 type Publisher struct {
 	Id       int64  `db:"id"`
 	Province string `db:"province"`
