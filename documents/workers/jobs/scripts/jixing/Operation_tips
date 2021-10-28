@@ -24,18 +24,18 @@ Operation Tips:
 4. 新疆电费统计，每月需要查询在线卡数，查询的办法有多种，我直接列出我的查询：
   以半个小时为单位，查询每个site有多少张卡在线
   先查询一个时间段，有多长时间
-  select dateDiff('hour', toDateTime('2021-08-25 12:00:00'), toDateTime('2021-09-25 12:00:00'))*2
+  select dateDiff('hour', toDateTime('2021-09-25 12:00:00'), toDateTime('2021-10-25 12:00:00'))*2
   例如得到904
   再查询这段时间在线情况
   select site.name,online_card from site 
     join (
-    select site_key,sum(online)/1488 as online_card from (
+    select site_key,sum(online)/1440 as online_card from (
     select toStartOfInterval(time, INTERVAL 30 minute) as time,
     site_key,
     count(distinct worker,pci_id) as online 
     from miner_card_stats
-    where time>toDateTime('2021-08-25 12:00:00')
-    and time<=toDateTime('2021-09-25 12:00:00')
+    where time>toDateTime('2021-09-25 12:00:00')
+    and time<=toDateTime('2021-10-25 12:00:00')
     and site_key in (
     unhex('004ACB63F8A4FFDFC7741C413E5BFC88FF4D7D65A6'),
     unhex('004EE205E0A0A6BDC3B08D2FC5E3D557908E55FD75'),
