@@ -1,0 +1,97 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: phabricator
+  labels:
+    app: phabricator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app:  phabricator
+  template:
+    metadata:
+      labels:
+        app: phabricator
+    spec:
+      containers:
+        - name: phabricator
+          image: redpointgames/phabricator
+          imagePullPolicy: Always
+          volumeMounts:
+            - name: data 
+              mountPath: /data
+              subPath: data
+            - name: data 
+              mountPath: /customization
+              subPath: customization
+          env:
+          - name: MYSQL_HOST
+            value: mariadb
+          - name: MYSQL_USER
+            value: phabricator
+          - name: MYSQL_PASS
+            valueFrom:
+              secretKeyRef: 
+                name: phabricator-secret
+                key: MYSQL_PASS
+          - name: MYSQL_PORT
+            value: "3306"
+          - name: PHABRICATOR_HOST_KEYS_PATH
+            value: /data/hostkeys/persisted
+          - name: PHABRICATOR_REPOSITORY_PATH
+            value: /data/repos
+          - name: PHABRICATOR_STORAGE_PATH
+            value: /data/files
+          - name: PHABRICATOR_STORAGE_TYPE
+            value: disk
+          - name: PHABRICATOR_HOST
+            value: code.corp.alt-chain.io
+          - name: PHABRICATOR_CDN
+            value: code.altchaininternal.com
+          - name: ENABLE_APCU
+            value: "true"
+          - name: SSL_TYPE
+            value: external
+          - name: SCRIPT_BEFORE_MIGRATION
+            value: /customization/mailgun.sh
+          ports:
+            - containerPort: 80
+            - containerPort: 22
+      volumes:
+      - name: data 
+        persistentVolumeClaim:
+          claimName: phabricator-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: phabricator-service
+spec:
+  ports:
+    - protocol: TCP
+      port: 10080
+      targetPort: 80
+      nodePort: 30001
+      name: phab-www
+    - port: 10022
+      targetPort: 22
+      nodePort: 30002
+      protocol: TCP
+      name: phab-ssh
+  selector:
+    app: phabricator
+  type: NodePort
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: phabricator-pvc
+  labels:
+    app: phabricator
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 64Gi

@@ -24,49 +24,48 @@ Operation Tips:
 4. 新疆电费统计，每月需要查询在线卡数，查询的办法有多种，我直接列出我的查询：
   以半个小时为单位，查询每个site有多少张卡在线
   先查询一个时间段，有多长时间
-  select dateDiff('hour', toDateTime('2021-09-25 12:00:00'), toDateTime('2021-10-25 12:00:00'))*2
+  select dateDiff('hour', toDateTime('2021-10-29 00:00:00'), toDateTime('2021-11-05 00:00:00'))*2
   例如得到904
   再查询这段时间在线情况
   select site.name,online_card from site 
     join (
-    select site_key,sum(online)/1440 as online_card from (
+    select site_key,sum(online)/336 as online_card from (
     select toStartOfInterval(time, INTERVAL 30 minute) as time,
     site_key,
     count(distinct worker,pci_id) as online 
     from miner_card_stats
-    where time>toDateTime('2021-09-25 12:00:00')
-    and time<=toDateTime('2021-10-25 12:00:00')
+    where time>toDateTime('2021-10-29 00:00:00')
+    and time<=toDateTime('2021-11-05 00:00:00')
     and site_key in (
     unhex('004ACB63F8A4FFDFC7741C413E5BFC88FF4D7D65A6'),
     unhex('004EE205E0A0A6BDC3B08D2FC5E3D557908E55FD75'),
     unhex('005A3EACA372534660BB7DDCF0CECCE6466B45744C'),
-    unhex('00C60198E81CBBA05916463195D69AD7D376E415E3'))
+    unhex('00C60198E81CBBA05916463195D69AD7D376E415E3'),
+    unhex('00BF0EA4A4139A500817FF05FC5C2FA77A8448F017'),
+    unhex('00DE6B6C73376743452CCE66EFAA1CB94F4BBC107B'),
+    unhex('007ACB68F8A4FFDFC7741C413E4BFC94FF4D7D85B1'),
+    unhex('05524764C0F3F80BBEBD051EB39BCB960D4A4117A5')
+    )
     group by time,site_key
     )group by site_key
     ) as o on site.site_key=o.site_key
 
-
-
-
-0x8cB7cCd4C1c43508322A162a8F22759F096bcDc1: 0
-0xc1dd31ADfbF638C4879cb424bd6BeC26F38D4c66: 255.477
-0xB795672716641Af877bFdd682fD961a8dcd4ee98: 0 [无数据]
-0xAC65043b43293e08Acf613C01952E39393055Df2: 0 [无数据]
-
-
-p9bzW5KGIYh9c5IB
-dbserver
-
-
-
-worker: wbuAl4wTAh6pJISQ    d2J1QWw0d1RBaDZwSklTUQ==
-shepherd: 4Y7Fy9UXe3Kqi9ce  NFk3Rnk5VVhlM0txaTljZQ==
-bminer: qzgqb1FFBYyzb77W    cXpncWIxRkZCWXl6Yjc3Vw==
-miningops: Ivaaxfex5YLwqQnl   SXZhYXhmZXg1WUx3cVFubA==
-pool: tOXojJUJCqu0JtYT       dE9Yb2pKVUpDcXUwSnRZVA==
-
-
-yul02_p102    234.13104838709677 
-urumqi        688.9778225806451 
-urumqi_1070   367.9704301075269 
-urumqi_p102   293.02284946236557 
+5. 查看平均算力
+  先查询一个时间段，有多长时间
+  select dateDiff('hour', toDateTime('2021-10-29 00:00:00'), toDateTime('2021-11-05 00:00:00'))
+  再查这段时间平均算力: 168
+  SELECT a.name, b.hashrate
+  FROM (
+    SELECT name, encoded_key
+    FROM site
+    WHERE site_key IN (unhex('004ACB63F8A4FFDFC7741C413E5BFC88FF4D7D65A6'), unhex('004EE205E0A0A6BDC3B08D2FC5E3D557908E55FD75'), unhex('005A3EACA372534660BB7DDCF0CECCE6466B45744C'), unhex('00C60198E81CBBA05916463195D69AD7D376E415E3'), unhex('00BF0EA4A4139A500817FF05FC5C2FA77A8448F017'), unhex('00DE6B6C73376743452CCE66EFAA1CB94F4BBC107B'), unhex('007ACB68F8A4FFDFC7741C413E4BFC94FF4D7D85B1'), unhex('05524764C0F3F80BBEBD051EB39BCB960D4A4117A5'))
+  ) a
+    LEFT JOIN (
+      SELECT site_key, sum(hashrate) / 168 AS hashrate
+      FROM site_hashrate1h_series
+      WHERE timestamp > 1635436800
+        AND timestamp <= 1636041600
+      GROUP BY site_key
+    ) b
+    ON a.encoded_key = b.site_key;
+  

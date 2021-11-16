@@ -38,3 +38,16 @@
 
 这段时间参与开发收获，对go语言有了更多的了解，知道了grpc干啥的了，go和python怎么调用grpc了；
 初步了解了前端react的基础用法，有些代码还是看不太懂，折线图等，还得再细看研究。
+
+
+
+
+
+
+
+
+
+一. cronjob: 
+1. weatherdaemon 
+    - shepherd - master
+2. site-revenue-record-new-job
