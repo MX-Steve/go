@@ -1,0 +1,72 @@
+一. 告警平台相关
+    '以下两部分组成整个告警平台'
+    1. telemetry
+        1. 修改 cm telemetry 进行修改阈值范围与开关
+    2. pagerduty
+        1. 给 jiangjie GlobalAdmin 权限，方便 jiangjie 后期对整体告警平台维护
+二. 在线卡数计算 / 平均算力计算
+    1. 在线卡数计算
+        "以半个小时为单位，查询每个site有多少张卡在线"
+        1). 先查询一个时间段，有多长时间
+            ```
+            select dateDiff('hour', toDateTime('2021-10-29 00:00:00'), toDateTime('2021-11-05 00:00:00'))*2
+            ```
+        2). 例如得到904,再查询这段时间在线情况
+            ```
+            select site.name,online_card from site 
+            join (
+            select site_key,sum(online)/336 as online_card from (
+            select toStartOfInterval(time, INTERVAL 30 minute) as time,
+            site_key,
+            count(distinct worker,pci_id) as online 
+            from miner_card_stats
+            where time>toDateTime('2021-10-29 00:00:00')
+            and time<=toDateTime('2021-11-05 00:00:00')
+            and site_key in (
+            unhex('004ACB63F8A4FFDFC7741C413E5BFC88FF4D7D65A6'),
+            unhex('004EE205E0A0A6BDC3B08D2FC5E3D557908E55FD75'),
+            unhex('005A3EACA372534660BB7DDCF0CECCE6466B45744C'),
+            unhex('00C60198E81CBBA05916463195D69AD7D376E415E3'),
+            unhex('00BF0EA4A4139A500817FF05FC5C2FA77A8448F017'),
+            unhex('00DE6B6C73376743452CCE66EFAA1CB94F4BBC107B'),
+            unhex('007ACB68F8A4FFDFC7741C413E4BFC94FF4D7D85B1'),
+            unhex('05524764C0F3F80BBEBD051EB39BCB960D4A4117A5')
+            )
+            group by time,site_key
+            )group by site_key
+            ) as o on site.site_key=o.site_key
+            ```
+    2. 周平均算力
+        "直接访问接口就行"
+        - http://clover-staging.corp.alt-chain.io/api/pods/v1/724_hash
+        - 后期如果接口迁移或调整，咨询 永亮
+三. 阿里云机器
+    1. 47.108.224.218 / Lihan1234
+        - operation_linux3 服务
+            - madminer 客户机做端口记录的，方便连接到对应机器
+        - docker 
+            - platform-flow: 画数据流程图的，jindong比较了解 
+            - platform-frontend
+                - 我开发的那一个平台集成: http://47.108.224.218:9102/#/
+                - jie@alt-chain.io / 654321
+                - 给了你超级管理员权限，这个可以登陆去看看
+        - mysql: root: 123456
+            - 有上面数据流程图的表
+四. 我名下的几个告警相关
+    1. bminer-dev-alert
+        "bminer/chord 服务相关的告警，很少发生，这几个月都没发生过，如发生，可转 gaozhe"
+    2. telemetry
+        "一般网络问题或者某台k8s机器宕机会触发，也是好几个月没有发生了"
+============================
+数据部分交接
+一. 数据流平台
+    - http://47.108.224.218:9102/
+    - 里面有整合过的数据流，jindong 可以定期去维护查询
+    - Alt-Chain-Total 部分为总数据流，其他为各个分数据流
+二. cronjob 告警部分
+    1. pagerduty 上有一个 service 是供 jindong 接收告警使用
+          - contab 驱动, 脚本/root/pagerduty/cronjob_status.py
+          - 可以更新这个脚本确认哪些job无需监控，哪些需要添加监控
+    2. data job 更新部分可以由 zhe 操作
+    3. 查找 mysql 和 clickhouse 部分你已有权限，连不上的可以咨询 zhe
+    4. athena 部分需要 麦爷或者ziyi授权访问查询 s3 和 athena
