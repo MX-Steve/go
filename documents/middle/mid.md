@@ -12,3 +12,9 @@ $ gox -os "darwin linux"
 $ gox -os "linux/amd64"
 # 生成 linux 平台文件
 ```
+# 2. git 忽略告警
+```bash
+# warning: LF will be replaced by CRLF in src/local/go.mod.
+$ git config core.autocrlf false
+$ git config --get core.autocrlf
+```
