@@ -51,25 +51,4 @@ func (c *clickhouseAgent) GetUserOverview(
 ) (*pb.UserInfoResponse, error) {
 	res := userInfoMock()
 	return res, nil
-	// userId := in.UserId
-	// rows, err := c.conn.Query(getUserInfoQuery(userSql, userId))
-	// if err != nil {
-	// 	return nil, err
-	// }
-	// defer rows.Close()
-	// users := []*pb.UserInfoResponse{}
-	// for rows.Next() {
-	// 	var (
-	// 		name     string
-	// 		password string
-	// 	)
-	// 	if err := rows.Scan(&name, &password); err != nil {
-	// 		continue
-	// 	}
-	// 	u := &pb.UserInfoResponse{
-	// 		Msg: fmt.Sprintf("%s-%s", name, password),
-	// 	}
-	// 	users = append(users, u)
-	// }
-	// return users, nil
 }
