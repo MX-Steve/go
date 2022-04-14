@@ -1,0 +1,12 @@
+.DS_Store
+.cache
+.vscode/
+build
+.idea
+*.sqlite3
+*.pyc
+__pycache__
+.code-comment
+*.egg-info
+*.log
+nohup.out
