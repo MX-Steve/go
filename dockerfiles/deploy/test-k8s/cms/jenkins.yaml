@@ -1,0 +1,9 @@
+apiVersion: v1
+data:
+  JENKINS_HOST: 'http://jenkins.autopush.epverse.net/'
+  JENKINS_PASSWD: Bo2sWxse8%PW
+  JENKINS_USER: wangsen
+kind: ConfigMap
+metadata:
+  name: jenkins
+  namespace: ep-devops

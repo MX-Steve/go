@@ -1,0 +1,12 @@
+dn: uid=readafa,ou=Users,dc=example,dc=org
+ou: Users
+uid: readafa
+sn: readafa
+cn: readafa
+givenName: readafa
+displayName: readafa
+mail: readafa@esgyn.local
+objectClass: person
+objectClass: organizationalPerson
+objectClass: inetOrgPerson
+userpassword: 123456

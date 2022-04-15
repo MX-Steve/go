@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: cmdb-django
+  namespace: ep-devops
+data:
+  DJANGO_SETTINGS_MODULE: "djentry.settings.production"
+  DJANGO_SECRET_KEY: "qe187p7jy6w%hrxdly6t=rq%2izaq@owxtefa=sc(gpnialsa!"
+  CMDB_BACK_PORT: "8081"

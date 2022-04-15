@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  CMDB_BACK_PORT: '8081'
+  ClOUDFLARE_TOKEN: 1225B2Jk7_1WbwV-eAng-ilgn-WQFGyFL7BFPLeB
+  DJANGO_SECRET_KEY: qe187p7jy6w%hrxdly6t=rq%2izaq@owxtefa=sc(gpnialsa!
+  DJANGO_SETTINGS_MODULE: djentry.settings.production
+  ITSMURL: 'http://itsm-backend:8082/approval/v2/process'
+kind: ConfigMap
+metadata:
+  name: cmdb-django
+  namespace: ep-devops

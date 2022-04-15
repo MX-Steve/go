@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  ALICLOUD_ACCESS_KEY: LTAI5tPpKkSYMnnSKpBGd3p2
+  ALICLOUD_SECRET_KEY: G0hugwl6nTlFFALfzxrwucEzBCQO7g
+kind: ConfigMap
+metadata:
+  name: alicloud
+  namespace: ep-devops

@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cmdb-frontend
+  namespace: ep-devops
+spec:
+  selector:
+    matchLabels:
+      app: cmdb-frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cmdb-frontend
+    spec:
+      containers:
+      - name: cmdb-frontend
+        image: prod-harbor-registry.cn-shanghai.cr.aliyuncs.com/prod/cmdb-frontend:v1.0.0 
+        ports:
+        - containerPort: 8080

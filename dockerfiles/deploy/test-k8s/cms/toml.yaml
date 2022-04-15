@@ -1,0 +1,17 @@
+apiVersion: v1
+data:
+  c.toml: |-
+    [clickhouse]
+    host = "127.0.0.1"
+    port = 9000
+    database = "test"
+    [mysql]
+    host = "devops-mysql-svc"
+    user = "root"
+    port = 3306
+    database = "cmdb"
+    password = "YHhg9-5.*"
+kind: ConfigMap
+metadata:
+  name: toml
+  namespace: ep-devops

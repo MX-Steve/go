@@ -1,0 +1,11 @@
+apiVersion: v1
+data:
+  AUTH_LDAP_BIND_DN: 'cn=admin,dc=ecoplants,dc=com'
+  AUTH_LDAP_BIND_PASSWORD: ecoplants!@#
+  AUTH_LDAP_SERVER_URI: 'ldap://prod-ldap-svc.prod-ldap:389'
+  ENABLE: 'True'
+  USER_SEARCH: 'ou=user,dc=ecoplants,dc=com'
+kind: ConfigMap
+metadata:
+  name: ldap
+  namespace: ep-devops

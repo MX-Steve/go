@@ -1,0 +1,132 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cmdb-backend
+  namespace: ep-devops
+spec:
+  selector:
+    matchLabels:
+      app: cmdb-backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cmdb-backend
+    spec:
+      containers:
+      - name: cmdb-backend
+        image: prod-harbor-registry.cn-shanghai.cr.aliyuncs.com/prod/cmdb-backend:v1.0.2
+        imagePullPolicy: IfNotPresent
+
+        ports:
+        - containerPort: 8081
+        env:
+        - name: DJANGO_SETTINGS_MODULE
+          valueFrom:
+            configMapKeyRef:
+              name: cmdb-django
+              key: DJANGO_SETTINGS_MODULE
+        - name: DJANGO_SECRET_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: cmdb-django
+              key: DJANGO_SECRET_KEY
+        - name: CMDB_BACK_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: cmdb-django
+              key: CMDB_BACK_PORT
+        - name: REDIS_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: cmdb-redis
+              key: REDIS_PORT
+        - name: REDIS_PASS
+          valueFrom:
+            configMapKeyRef:
+              name: cmdb-redis
+              key: REDIS_PASS
+        - name: HELLO_APP_ID
+          valueFrom:
+            configMapKeyRef:
+              name: f-approval
+              key: HELLO_APP_ID
+        - name: HELLO_APP_SECRET
+          valueFrom:
+            configMapKeyRef:
+              name: f-approval
+              key: HELLO_APP_SECRET
+        - name: JENKINS_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: jenkins
+              key: JENKINS_HOST
+        - name: JENKINS_USER
+          valueFrom:
+            configMapKeyRef:
+              name: jenkins
+              key: JENKINS_USER
+        - name: JENKINS_PASSWD
+          valueFrom:
+            configMapKeyRef:
+              name: jenkins
+              key: JENKINS_PASSWD
+        - name: CLOVER_MYSQL_DB
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-db
+              key: CLOVER_MYSQL_DB
+        - name: CLOVER_MYSQL_USER
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-db
+              key: CLOVER_MYSQL_USER
+        - name: CLOVER_MYSQL_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-db
+              key: CLOVER_MYSQL_PASSWORD
+        - name: CLOVER_MYSQL_HOST
+          valueFrom:
+            configMapKeyRef:
+              name: mysql-db
+              key: CLOVER_MYSQL_HOST
+        - name: ALICLOUD_ACCESS_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: alicloud
+              key: ALICLOUD_ACCESS_KEY
+        - name: ALICLOUD_SECRET_KEY
+          valueFrom:
+            configMapKeyRef:
+              name: alicloud
+              key: ALICLOUD_SECRET_KEY
+        - name: ENABLE
+          valueFrom:
+            configMapKeyRef:
+              key: ENABLE
+              name: ldap
+        - name: AUTH_LDAP_BIND_DN
+          valueFrom:
+            configMapKeyRef:
+              key: AUTH_LDAP_BIND_DN
+              name: ldap
+        - name: USER_SEARCH
+          valueFrom:
+            configMapKeyRef:
+              key: USER_SEARCH
+              name: ldap
+        - name: AUTH_LDAP_BIND_PASSWORD
+          valueFrom:
+            configMapKeyRef:
+              key: AUTH_LDAP_BIND_PASSWORD
+              name: ldap
+        - name: AUTH_LDAP_SERVER_URI
+          valueFrom:
+            configMapKeyRef:
+              key: AUTH_LDAP_SERVER_URI
+              name: ldap
+      imagePullSecrets:
+        - name: regcred
+
+

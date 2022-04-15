@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: jenkins
+  namespace: ep-devops
+data:
+  JENKINS_HOST: "http://121.43.41.139:8080/"
+  JENKINS_USER: "admin"
+  JENKINS_PASSWD: "root123"

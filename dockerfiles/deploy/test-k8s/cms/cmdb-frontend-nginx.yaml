@@ -1,0 +1,46 @@
+apiVersion: v1
+data:
+  cmdb.conf: |
+    server {
+      listen 8080;
+      server_name localhost;
+      location / {
+        root /usr/share/nginx/html;
+        index index.html index.htm;
+        try_files  $uri $uri/ /index.html;
+      }
+      location ^~ /api/vssh-chat/ {
+        proxy_set_header Host $proxy_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://vssh:8000/api/chat/;
+      }
+      location ^~ /api/approval/ {
+        proxy_set_header Host $proxy_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://itsm-backend:8082/approval/;
+      }
+      location ^~ /api/deploy-server/ {
+        proxy_set_header Host $proxy_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://deploy-server-svc:8082/;
+      }
+    location ^~ /api/rpc-server/ {
+        proxy_set_header Host $proxy_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://deploy-server-svc:16221/;
+      }
+      location ^~ /api/ {
+        proxy_set_header Host $proxy_host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_pass http://cmdb-backend:8081/;
+      }
+    }
+kind: ConfigMap
+metadata:
+  name: cmdb-frontend-nginx
+  namespace: ep-devops

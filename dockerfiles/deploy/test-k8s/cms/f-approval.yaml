@@ -1,0 +1,10 @@
+apiVersion: v1
+data:
+  APPROVAL_INSTANCES_DETAIL: 'http://ep.devops.epverse.net/approvals/use/detail?instance_id='
+  DEPLOY_CHAT_ID: oc_2e915162f6452ffb219dd87adb624568
+  HELLO_APP_ID: cli_a15488ef3829d00e
+  HELLO_APP_SECRET: 8ciJX1U4foZzN9wu9UP5ucVO0j1cG6Qf
+kind: ConfigMap
+metadata:
+  name: f-approval
+  namespace: ep-devops

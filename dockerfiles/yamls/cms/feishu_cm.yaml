@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: f-approval
+  namespace: ep-devops
+data:
+  HELLO_APP_ID: "cli_a1543517eaf9100b"
+  HELLO_APP_SECRET: "hjaC6YU7LF25DQNY3aNkkcjfu6PKD7xr"

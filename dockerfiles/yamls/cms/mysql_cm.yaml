@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: mysql-db
+  namespace: ep-devops
+data:
+  CLOVER_MYSQL_DB: "test"
+  CLOVER_MYSQL_USER: "root"
+  CLOVER_MYSQL_PASSWORD: "YHhg9-5.*"
+  CLOVER_MYSQL_HOST: "mysql8"

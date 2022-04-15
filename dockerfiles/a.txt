@@ -1,0 +1,13 @@
+{
+    "receive_id": "oc_a9c92c257c0811caf8429df6a8fb596d",
+    "content":"{\"title\":\"服务发布失败\",\"elements\":[[{\"tag\":\"text\",\"text\":\"申请人\"},{\"tag\":\"text\",\"text\":\"xxx\"},{\"tag\":\"text\",\"text\":\" \"},{\"tag\":\"text\",\"text\":\"时间：\"},{\"tag\":\"text\",\"text\":\"\\n2022-02-18 16:00:00\"},{\"tag\":\"text\",\"text\":\" \"},{\"tag\":\"text\",\"text\":\"详细地址\"},{\"tag\":\"text\",\"text\":\"\\nhttp://121.43.41.139:8080/job/lihan_dev/12/console\"}],[{\"tag\":\"hr\"}]]}",
+    "msg_type": "interactive"
+}
+curl --location --request POST 'https://open.feishu.cn/open-apis/im/v1/messages?receive_id_type=open_id' \
+--header 'Authorization: Bearer t-835dfabc64a3d481a38985c67efead6616b61c85' \
+--header 'Content-Type: application/json; charset=utf-8' \
+--data-raw '{
+    "receive_id": "ou_b246343084dacedf598d38351c2e6067",
+    "content": "{\"config\":{\"wide_screen_mode\":true},\"header\":{\"title\":{\"tag\":\"plain_text\",\"content\":\"你有一个休假申请待审批\"}},\"elements\":[{\"tag\":\"div\",\"fields\":[{\"is_short\":true,\"text\":{\"tag\":\"lark_md\",\"content\":\"**申请人**\\n王晓磊\"}},{\"is_short\":true,\"text\":{\"tag\":\"lark_md\",\"content\":\"**休假类型：**\\n年假\"}},{\"is_short\":false,\"text\":{\"tag\":\"lark_md\",\"content\":\"\"}},{\"is_short\":false,\"text\":{\"tag\":\"lark_md\",\"content\":\"**时间：**\\n2020-4-8 至 2020-4-10（共3天）\"}},{\"is_short\":false,\"text\":{\"tag\":\"lark_md\",\"content\":\"\"}},{\"is_short\":true,\"text\":{\"tag\":\"lark_md\",\"content\":\"**备注**\\n因家中有急事，需往返老家，故请假\"}}]},{\"tag\":\"hr\"},{\"tag\":\"action\",\"layout\":\"bisected\",\"actions\":[{\"tag\":\"button\",\"text\":{\"tag\":\"plain_text\",\"content\":\"批准\"},\"type\":\"primary\",\"value\":{\"chosen\":\"approve\"}},{\"tag\":\"button\",\"text\":{\"tag\":\"plain_text\",\"content\":\"拒绝\"},\"type\":\"primary\",\"value\":{\"chosen\":\"decline\"}}]}]}",
+    "msg_type": "interactive"
+}'

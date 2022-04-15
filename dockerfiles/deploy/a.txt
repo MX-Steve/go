@@ -1,0 +1,73 @@
+	
+server {
+  listen 8080;
+  server_name localhost;
+  location / {
+    root /usr/share/nginx/html;
+    index index.html index.htm;
+    try_files  $uri $uri/ /index.html;
+  }
+  location ^~ /api/approval/ {
+    proxy_set_header Host $proxy_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_pass http://itsm-backend:8082/approval/;
+  }
+  location ^~ /api/ {
+    proxy_set_header Host $proxy_host;
+    proxy_set_header X-Real-IP $remote_addr;
+    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    proxy_pass http://cmdb-backend:8081/;
+  }
+}
+
+CREATE TABLE `users_user` (
+  `password` varchar(128) NOT NULL,
+  `last_login` datetime(6) DEFAULT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `first_name` varchar(150) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_joined` datetime(6) NOT NULL,
+  `id` char(32) NOT NULL,
+  `roles` varchar(50) NOT NULL,
+  `robot_url` varchar(450) DEFAULT NULL,
+  `robot_secret` varchar(200) DEFAULT NULL,
+  `user_id` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3
+
+CREATE TABLE `users_user` (
+  `password` varchar(128) NOT NULL,
+  `last_login` datetime(6) DEFAULT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `first_name` varchar(150) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_joined` datetime(6) NOT NULL,
+  `id` char(32) NOT NULL,
+  `roles` varchar(50) NOT NULL,
+  `robot_secret` varchar(200) DEFAULT NULL,
+  `robot_url` varchar(450) DEFAULT NULL,
+  `user_id` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+password: {CRYPT}$6$rounds=80000$HC/QaYSa3iR9DcC$1syrVi1g5a14iFML2AgxPz6JYfevOUhWs4w02BZDlqA5OZHvW63LeDixBkjGC954e5GYxkUwPkuvjjebmdlGC0 
+last_login: 2022-02-25 03:56:37.634010 is_superuser: 0 username: lihan first_name: 韩 last_name: 李 
+email: lihan@ecoplants.tech is_staff: 0 is_active: 1 date_joined: 2022-01-28 08:08:13.850314 
+id: 9b11d7abc0c14026a598d1aa3b0c0d79 roles: [1,] 
+robot_url: https://open.feishu.cn/open-apis/bot/v2/hook/57210d66-1c63-49a4-9be4-72db49f21780 
+robot_secret: HUwQMaclGibuYPKguibiyf user_id: 75cbfg6f
+
+curl -XPOST -d {"username":"heyao","password":"epwork3461"} http://127.0.0.1:8081/users/v1/login
+
+insert into users_user values("{CRYPT}$6$rounds=80000$HC/QaYSa3iR9DcC$1syrVi1g5a14iFML2AgxPz6JYfevOUhWs4w02BZDlqA5OZHvW63LeDixBkjGC954e5GYxkUwPkuvjjebmdlGC0","2022-02-25 03:56:37.634010",0,"lihan","han","li","lihan@ecoplants.tech",1,1,"2022-02-25 03:56:37.634010", "9b11d7abc0c14026a598d1aa3b0c0d79","[1,]","","","75cbfg6f");

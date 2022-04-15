@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: deploy-server-svc
+  namespace: ep-devops
+spec:
+  ports:
+    - name: grpc
+      port: 16221
+      protocol: TCP
+      targetPort: 16221
+    - name: http
+      port: 8082
+      protocol: TCP
+      targetPort: 8082
+  selector:
+    app: deploy-server
+  sessionAffinity: None
+  type: ClusterIP
